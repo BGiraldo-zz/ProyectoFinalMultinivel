@@ -1,0 +1,76 @@
+<div class="row" ng-controller="cursosController">
+<div class="img">
+<img alt="" src="https://static.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg" class="img1">
+
+
+</div>
+
+	<div class="col-md-6 ">
+		<div class="row">
+
+			<label>Codigo del representante: {{codigo}}</label>
+			<h4>Productos</h4>
+			<table class="table highlight responsive-table centered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Cantidad</th>
+						<th>Accion</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr ng-repeat="c in cursos">
+						<td>{{$index}}</td>
+						<td>{{c.idAsignatura.nombreAsignatura}}</td>
+						<td>
+							<button class="btn botonComprar" type="submit"
+								name="action" value="Calificar" ng-click="">Calificar								
+							</button>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+	<div class="col-md-6 separar">
+		<div class="row">
+
+			<label></label>
+			<h4>Carrito Compras</h4>
+			<table class="table highlight responsive-table centered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Precio Base</th>
+						<th>Cantidad</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr ng-repeat="c in cursos">
+						<td>{{$index}}</td>
+						<td>{{c.idAsignatura.nombreAsignatura}}</td>
+						<td>
+							<button class="btn waves-effect waves-light" type="submit"
+								name="action" value="Calificar" ng-click="">Calificar								
+							</button>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+	<button class="btn botonComprar" type="submit"
+								name="action" value="Comprar" ng-click="">Comprar								
+							</button>
+</div>

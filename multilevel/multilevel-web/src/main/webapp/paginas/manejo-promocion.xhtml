@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/template.xhtml">
+
+
+	<ui:define name="pageHeader">
+		<h1 style="color: #000000">Manejo Promoción</h1>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<h:body>
+
+			<h:form id="form" prependId="false">
+
+				<h:panelGrid columns="3" id="panelDatos">
+
+                   <h:outputText value="#{msj['catalogo.codigo']}"
+						id="labelCodigo" for="tfCodigo" />
+					<p:inputText value="#{ControladorManejoPromocion.promocion.id}"
+						id="tfCodigo" placeholder="Codigo" />
+					<h:message style="color:Red; margin:8px;" for="tfCodigo" />
+					
+					<h:outputText value="#{msj['catalogo.descuento']}"
+						id="labelDescuento" for="tfDescuento" />
+					<p:inputText value="#{ControladorManejoPromocion.promocion.descuento}"
+						id="tfDescuento" placeholder="Descuento" />
+					<h:message style="color:Red; margin:8px;" for="tfDescuento" />
+					
+					<p:outputLabel for="tfFechaInicial" value="#{msj['catalogo.fechaInicial']}" />
+                    <p:calendar id="tfFechaInicial" value="#{calendarView.date3}" showOn="button" />
+
+                      <br/>
+					<p:outputLabel for="tfFechaFinal" value="#{msj['catalogo.fechaFinal']}" />
+                    <p:calendar id="tfFechaFinal" value="#{calendarView.date3}" showOn="button" />
+
+				</h:panelGrid>
+				
+				<br />
+
+				<h:panelGrid columns="4" id="panelBotones">
+
+					<p:commandButton
+						action="#{ControladorManejoUsuario.registrarUsuario()}"
+						value="#{msj['registrar']}" update="panelDatos" />
+					<p:commandButton
+						action="#{ControladorManejoUsuario.buscarUsuario()}"
+						value="#{msj['buscar']}" />
+					<p:commandButton
+						action="#{ControladorManejoUsuario.editarUsuario()}"
+						value="#{msj['editar']}" />
+					<p:commandButton
+						action="#{ControladorManejoUsuario.removerUsuario()}"
+						value="#{msj['remover']}" />
+
+
+				</h:panelGrid>
+				
+				
+				
+			</h:form>
+			
+			
+			
+		</h:body>
+		
+		
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

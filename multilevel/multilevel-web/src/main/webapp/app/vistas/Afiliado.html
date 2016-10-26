@@ -1,0 +1,82 @@
+<!-- Se define el controlador -->
+<div class="row" ng-controller="cursosController">
+
+<div class="img">
+<img alt="" src="https://static.pexels.com/photos/9635/suit-portrait-preparation-wedding.jpg" class="img2">
+
+
+</div>
+	<div class="col-md-12">
+		<form name="frmTest" id="frmTest" class="form-horizontal" role="form">
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<input type="text" class="" id="nombre" name="nombre"
+						ng-model="formData.user" placeholder="Nombre" />
+				</div>
+			</div>
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<div class="form-group">
+						<label for="s1">Ciudad</label> <select id="s1"
+							class="form-control">
+							<option value="Apple fritter">Armenia</option>
+							<option value="Croissant">Croissant</option>
+							<option value="Donut">Donut</option>
+							<option value="Financier">Financier</option>
+							<option value="Jello">Jello</option>
+							<option value="Madeleine">Madeleine</option>
+							<option value="Pound cake">Pound cake</option>
+							<option value="Pretzel">Pretzel</option>
+							<option value="Sfogliatelle">Sfogliatelle</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<input type="text" class="" id="nombre" name="nombre"
+						ng-model="formData.user" placeholder="Apellido" />
+				</div>
+			</div>
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<input type="password" class="" id="password" name="apellido"
+						ng-model="formData.pass" placeholder="Direccion" />
+				</div>
+			</div>
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<input type="text" class="" id="nombre" name="nombre"
+						ng-model="formData.user" placeholder="Cedula" />
+				</div>
+			</div>
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<input type="password" class="" id="password" name="apellido"
+						ng-model="formData.pass" placeholder="Telefono" />
+				</div>
+			</div>
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<input type="text" class="" id="nombre" name="nombre"
+						ng-model="formData.user" placeholder="Fecha nacimiento" />
+				</div>
+			</div>
+			<div class="default">
+				<div class="col-sm-4 col-sm-offset-4">
+					<input type="password" id="password" name="apellido"
+						ng-model="formData.pass" placeholder="email" />
+				</div>
+			</div>
+
+			<div class="default">
+				<div class="col-sm-offset-5 col-sm-10">
+					<button type="submit" class="btn btn-default tn-raised"
+						ng-click="login()">Registrar Afiliado</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	{{mensaje}}
+</div>
+<!-- fin modulo1Controller -->

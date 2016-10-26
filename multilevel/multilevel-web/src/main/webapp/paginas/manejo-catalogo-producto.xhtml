@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/template.xhtml">
+
+
+	<ui:define name="pageHeader">
+		<h1 style="color: #000000">Manejo Catalogo Producto</h1>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<h:body>
+
+			<h:form id="form" prependId="false">
+
+				<h:panelGrid columns="3" id="panelDatos">
+                   
+                   <h:outputText value="#{msj['catalogo.catalogo']}"
+						id="labelCatalogo" for="comboCatalogo" />
+					<p:selectOneMenu
+						value="#{ControladorManejoCatalogoProducto.entidad.catalogo}"
+						id="comboCatalogo">
+
+                        <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoCatalogoProducto.catalogos}"
+							var="cat" itemLabel="#{cat.nombre}" itemValue="#{cat}" />
+	
+					</p:selectOneMenu>
+					
+					<br/>
+					
+					 <h:outputText value="#{msj['catalogo.producto']}"
+						id="labelProducto" for="comboProducto" />
+					<p:selectOneMenu
+						value="#{ControladorManejoCatalogoProducto.entidad.producto}"
+						id="comboProducto">
+
+                        <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoCatalogoProducto.productos}"
+							var="pro" itemLabel="#{pro.nombre}" itemValue="#{pro}" />
+	
+					</p:selectOneMenu>
+					
+					<br/>
+					
+					<h:outputText value="#{msj['catalogo.cantidadProductos']}"
+						id="labelCantidadProductos" for="tfCantidadProductos" />
+					<p:inputText value="#{ControladorManejoCatalogo.catalogo.cantidadProductos}"
+						id="tfCantidadProductos" placeholder="Cantidad Productos" />
+					<h:message style="color:Red; margin:8px;" for="tfCantidadProductos" />
+				
+                   
+				</h:panelGrid>
+				
+				<br />
+
+				<h:panelGrid columns="4" id="panelBotones">
+
+					<p:commandButton
+						action="#{ControladorManejoCatalogoProducto.registrarCatalogoProducto()}"
+						value="#{msj['registrar']}" update="panelDatos" />
+					<p:commandButton
+						action="#{ControladorManejoCatalogoProducto.buscarCatalogoProducto()}"
+						value="#{msj['buscar']}" />
+					<p:commandButton
+						action="#{ControladorManejoCatalogoProducto.editarCatalogoProducto()}"
+						value="#{msj['editar']}" />
+					<p:commandButton
+						action="#{ControladorManejoCatalogoProducto.removerCatalogoProducto()}"
+						value="#{msj['remover']}" />
+				
+				</h:panelGrid>
+
+			</h:form>
+
+
+		</h:body>
+		
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

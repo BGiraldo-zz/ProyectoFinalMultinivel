@@ -1,0 +1,38 @@
+<div class="row" ng-controller="cursosController">
+
+	<div class="col-md-12">
+		<div class="row">
+
+			<label>Codigo del representante: {{codigo}}</label>
+			<h4>Productos en promocion</h4>
+			<table class="table highlight responsive-table centered">
+				<thead>
+					<tr>
+						<th># Producto</th>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Cantidad</th>
+						<th>Promocion</th>
+						<th>Fecha inicio</th>
+						<th>Fecha final</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr ng-repeat="c in cursos">
+						<td>{{$index}}</td>
+						<td>{{c.idAsignatura.nombreAsignatura}}</td>
+						<td>
+							<button class="btn waves-effect waves-light" type="submit"
+								name="action" value="Calificar" ng-click="">Calificar								
+							</button>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+
+
+	<ui:define name="pageHeader">
+		<h1 style="color: #000000">Manejo Producto</h1>
+	</ui:define>
+
+
+	<ui:define name="body">
+
+		<h:body>
+
+			<h:form id="form" prependId="false">
+			
+				<h:panelGrid columns="3" id="panelDatos">
+				
+					<h:outputText value="#{msj['catalogo.codigo']}"
+						id="labelCodigo" for="tfCodigo"/>
+					<p:inputText
+						value="#{ControladorManejoProducto.producto.id}"
+						id="tfCodigo" placeholder="Codigo" />
+					<h:message style="color:Red; margin:8px;" for="tfCodigo" />
+					
+					<h:outputText value="#{msj['catalogo.nombre']}"
+						id="labelNombre" for="tfNombre"/>
+					<p:inputText
+						value="#{ControladorManejoProducto.producto.nombre}"
+						id="tfNombre" placeholder="Nombre" />
+					<h:message style="color:Red; margin:8px;" for="tfNombre" />
+					
+					<h:outputText value="#{msj['producto.categoria']}"
+						id="labelCategoria" for="comboCategoria" />
+
+					<p:selectOneMenu value="#{ControladorManejoProducto.categoria}"
+						id="comboCategoria" converter="#{categoriaConverter}">
+
+                         <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoProducto.categorias}"
+							var="cat" itemLabel="#{cat.nombre}" itemValue="#{cat}" />
+
+					</p:selectOneMenu>
+	
+					<br/>
+					
+					<h:outputText value="#{msj['producto.promocion']}"
+						id="labelPromocion" for="comboPromocion" />
+
+					<p:selectOneMenu value="#{ControladorManejoProducto.promocion}"
+						id="comboPromocion" converter="#{promocionConverter}">
+
+                         <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoProducto.promociones}"
+							var="prom" itemLabel="#{prom.descuento}" itemValue="#{prom}" />
+
+					</p:selectOneMenu>
+	
+					<br/>
+					
+					<h:outputText value="#{msj['producto.precioVenta']}"
+						id="labelPrecio" for="tfprecio"/>
+					<p:inputText
+						value="#{ControladorManejoProducto.producto.precioVenta}"
+						id="tfPrecio" placeholder="Precio de Venta" />
+					<h:message style="color:Red; margin:8px;" for="tfPrecio" />
+
+					<h:outputText value="#{msj['producto.puntos']}"
+						id="labelPuntos" for="tfPuntos"/>
+					<p:inputText
+						value="#{ControladorManejoProducto.producto.puntos}"
+						id="tfPuntos" placeholder="Puntos de Producto" />
+					<h:message style="color:Red; margin:8px;" for="tfPuntos" />
+
+
+					<h:outputText value="#{msj['producto.contenido']}"
+						id="labelContenido" for="tfContenido"/>
+					<p:inputText
+						value="#{ControladorManejoProducto.producto.contenido}"
+						id="tfContenido" placeholder="Contenido del Producto" />
+					<h:message style="color:Red; margin:8px;" for="tfContenido" />
+
+
+					<h:outputText value="#{msj['producto.LugarFabricacion']}"
+						id="labelLugarFabricacion" for="tfLugarFabricacion"/>
+					<p:inputText
+						value="#{ControladorManejoProducto.producto.lugarFabricacion}"
+						id="tfLugarFabricacion" placeholder="Lugar de Fabricación" />
+					<h:message style="color:Red; margin:8px;" for="tfLugarFabricacion" />
+	
+	
+					<h:outputText value="#{msj['producto.UsoSugerido']}"
+						id="labelUsoSugerido" for="tfUsoSugerido"/>
+					<p:inputText
+						value="#{ControladorManejoProducto.producto.usoSugerido}"
+						id="tfUsoSugerido" placeholder="Uso Sugerido" />
+					<h:message style="color:Red; margin:8px;" for="tfUsoSugerido" />
+                       
+				</h:panelGrid>
+
+				<br />
+
+				<h:panelGrid columns="4" id="panelBotones">
+
+					<p:commandButton
+						action="#{ControladorManejoUsuario.registrarUsuario()}"
+						value="#{msj['registrar']}" update="panelDatos" />
+					<p:commandButton
+						action="#{ControladorManejoUsuario.buscarUsuario()}"
+						value="#{msj['buscar']}" />
+					<p:commandButton
+						action="#{ControladorManejoUsuario.editarUsuario()}"
+						value="#{msj['editar']}" />
+					<p:commandButton
+						action="#{ControladorManejoUsuario.removerUsuario()}"
+						value="#{msj['remover']}" />
+
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</h:body>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

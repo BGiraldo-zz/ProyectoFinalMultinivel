@@ -1,0 +1,36 @@
+<div class="row" ng-controller="cursosController">
+<div class="img">
+<img alt="" src="https://static.pexels.com/photos/167686/pexels-photo-167686.jpeg" class="img2">
+</div>
+	<div class="col-md-12">
+		<div class="row">
+
+			<label>Codigo del representante: {{codigo}}</label>
+			<h4>Seguimiento de los pedidos</h4>
+			<table class="table highlight responsive-table centered">
+				<thead>
+					<tr>
+						<th># Pedido</th>
+						
+						<th>Fecha de pedido</th>
+						<th>Estado</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr ng-repeat="c in cursos">
+						<td>{{$index}}</td>
+						<td>{{c.idAsignatura.nombreAsignatura}}</td>
+						<td>
+							<button class="btn waves-effect waves-light" type="submit"
+								name="action" value="Calificar" ng-click="">Calificar								
+							</button>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+			
+	</div>
+</div>
