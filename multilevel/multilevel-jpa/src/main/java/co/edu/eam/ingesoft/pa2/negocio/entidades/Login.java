@@ -4,14 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
-
-import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoUsuarioENUM;
 
 @Entity
 @Table(name="LOGINS",uniqueConstraints={
@@ -31,21 +27,16 @@ public class Login implements Serializable{
 	@Column(name = "PASS", length = 45, nullable = false)
 	private String pass;
 	
-	@Enumerated(value=EnumType.STRING)
-	@Column(name="TIPO_USUARIO", nullable=false, length=25)
-	private TipoUsuarioENUM tipoUsuario;
 
 	/**
 	 * @param id
 	 * @param nickname
 	 * @param pass
-	 * @param tipoUsuario
 	 */
-	public Login(int id, String nickname, String pass, TipoUsuarioENUM tipoUsuario) {
+	public Login(int id, String nickname, String pass) {
 		this.id = id;
 		this.nickname = nickname;
 		this.pass = pass;
-		this.tipoUsuario = tipoUsuario;
 	}
 
 	/**
@@ -95,21 +86,6 @@ public class Login implements Serializable{
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-
-	/**
-	 * @return the tipoUsuario
-	 */
-	public TipoUsuarioENUM getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	/**
-	 * @param tipoUsuario the tipoUsuario to set
-	 */
-	public void setTipoUsuario(TipoUsuarioENUM tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
-
 	
 	
 }

@@ -5,37 +5,40 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TIPO_PAGOS")
-public class TipoPago implements Serializable{
+@Table(name="DIRECCIONES")
+public class Direccion implements Serializable{
 
 	@Id
-	@Column(name="TIPO_PAGO_ID", length=12, nullable=false)
+	@Column(name="DIRECCION_ID", length=12, nullable=false)
 	private int id;
 	
-	@Column(name="NOMBRE", length=25, nullable=false)
-	private String nombre;
+	@ManyToOne
+	@JoinColumn(name="CIUDAD_ID", nullable=false)
+	private Ciudad ciudad;
 	
 	@Column(name="DESCRIPCION", length=255, nullable=false)
 	private String descripcion;
 
 	/**
 	 * @param id
-	 * @param nombre
+	 * @param ciudad
 	 * @param descripcion
 	 */
-	public TipoPago(int id, String nombre, String descripcion) {
+	public Direccion(int id, Ciudad ciudad, String descripcion) {
 		this.id = id;
-		this.nombre = nombre;
+		this.ciudad = ciudad;
 		this.descripcion = descripcion;
 	}
 
 	/**
 	 * 
 	 */
-	public TipoPago() {
+	public Direccion() {
 	}
 
 	/**
@@ -53,17 +56,17 @@ public class TipoPago implements Serializable{
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the ciudad
 	 */
-	public String getNombre() {
-		return nombre;
+	public Ciudad getCiudad() {
+		return ciudad;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param ciudad the ciudad to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}
 
 	/**

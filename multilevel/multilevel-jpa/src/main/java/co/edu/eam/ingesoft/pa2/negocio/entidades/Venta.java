@@ -5,12 +5,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.MetodoPagoENUM;
 
 @Entity
 @Table(name="VENTAS")
@@ -34,6 +38,10 @@ public class Venta implements Serializable{
 	
 	@Column(name="TOTAL_VENTA", length=12, nullable=false)
 	private double totalVenta;
+	
+	@Enumerated(value=EnumType.STRING)
+	@Column(name="TIPO_PAGO", nullable=false, length=45)
+	private MetodoPagoENUM tipoPago;
 
 	/**
 	 * @param id
@@ -41,13 +49,16 @@ public class Venta implements Serializable{
 	 * @param cliente
 	 * @param fechaVenta
 	 * @param totalVenta
+	 * @param tipoPago
 	 */
-	public Venta(int id, Representante representante, Cliente cliente, Date fechaVenta, double totalVenta) {
+	public Venta(int id, Representante representante, Cliente cliente, Date fechaVenta, double totalVenta,
+			MetodoPagoENUM tipoPago) {
 		this.id = id;
 		this.representante = representante;
 		this.cliente = cliente;
 		this.fechaVenta = fechaVenta;
 		this.totalVenta = totalVenta;
+		this.tipoPago = tipoPago;
 	}
 
 	/**
@@ -126,6 +137,20 @@ public class Venta implements Serializable{
 		this.totalVenta = totalVenta;
 	}
 
+	/**
+	 * @return the tipoPago
+	 */
+	public MetodoPagoENUM getTipoPago() {
+		return tipoPago;
+	}
+
+	/**
+	 * @param tipoPago the tipoPago to set
+	 */
+	public void setTipoPago(MetodoPagoENUM tipoPago) {
+		this.tipoPago = tipoPago;
+	}
 	
 	
+
 }

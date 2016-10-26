@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.EstadoCreditoENUM;
+import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.MetodoPagoENUM;
 
 @Entity
 @Table(name="CREDITOS")
@@ -27,10 +28,6 @@ public class Credito implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="ENTREGA_ID", nullable=false)
 	private Entrega entrega;
-	
-	@ManyToOne
-	@JoinColumn(name="TIPO_PAGO_ID", nullable=false)
-	private TipoPago tipoPago;
 	
 	@Column(name="INTERES", nullable=false, length=3)
 	private int interes;
@@ -59,7 +56,6 @@ public class Credito implements Serializable{
 	/**
 	 * @param id
 	 * @param entrega
-	 * @param tipoPago
 	 * @param interes
 	 * @param costoTotal
 	 * @param meses
@@ -68,11 +64,10 @@ public class Credito implements Serializable{
 	 * @param fechaFinal
 	 * @param estado
 	 */
-	public Credito(int id, Entrega entrega, TipoPago tipoPago, int interes, double costoTotal, int meses, float iva,
-			Date fechaInicial, Date fechaFinal, EstadoCreditoENUM estado) {
+	public Credito(int id, Entrega entrega, int interes, double costoTotal, int meses, float iva, Date fechaInicial,
+			Date fechaFinal, EstadoCreditoENUM estado) {
 		this.id = id;
 		this.entrega = entrega;
-		this.tipoPago = tipoPago;
 		this.interes = interes;
 		this.costoTotal = costoTotal;
 		this.meses = meses;
@@ -114,20 +109,6 @@ public class Credito implements Serializable{
 	 */
 	public void setEntrega(Entrega entrega) {
 		this.entrega = entrega;
-	}
-
-	/**
-	 * @return the tipoPago
-	 */
-	public TipoPago getTipoPago() {
-		return tipoPago;
-	}
-
-	/**
-	 * @param tipoPago the tipoPago to set
-	 */
-	public void setTipoPago(TipoPago tipoPago) {
-		this.tipoPago = tipoPago;
 	}
 
 	/**
@@ -228,7 +209,6 @@ public class Credito implements Serializable{
 		this.estado = estado;
 	}
 
-	
 	
 	
 }

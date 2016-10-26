@@ -10,7 +10,6 @@ import co.edu.eam.ingesoft.pa2.negocio.entidades.CategoriaRepresentante;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Ciudad;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Login;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Representante;
-import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoUsuarioENUM;
 
 @Named("ControladorManejoUsuario")
 @ViewScoped
