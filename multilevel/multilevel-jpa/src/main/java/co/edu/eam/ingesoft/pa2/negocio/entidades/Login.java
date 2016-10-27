@@ -36,10 +36,11 @@ public class Login implements Serializable{
 	 * @param nickname
 	 * @param pass
 	 */
-	public Login(int id, String nickname, String pass) {
+	public Login(int id, String nickname, String pass, String tipousuario) {
 		this.id = id;
 		this.nickname = nickname;
 		this.pass = pass;
+		this.tipoUsuario = tipousuario;
 	}
 
 	/**
@@ -89,6 +90,22 @@ public class Login implements Serializable{
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
+	/**
+	 * @return the tipoUsuario
+	 */
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	/**
+	 * @param tipoUsuario the tipoUsuario to set
+	 */
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+	
+	
 	
 	
 }
