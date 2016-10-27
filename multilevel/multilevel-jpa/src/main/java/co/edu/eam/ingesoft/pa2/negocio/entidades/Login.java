@@ -27,6 +27,9 @@ public class Login implements Serializable{
 	@Column(name = "PASS", length = 45, nullable = false)
 	private String pass;
 	
+	@Column(name="TIPOUSUARIO", nullable=false, length=45)
+	private String tipoUsuario;
+	
 
 	/**
 	 * @param id
