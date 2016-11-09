@@ -30,7 +30,7 @@ public class Venta implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="CLIENTE_ID", nullable=false)
-	private Cliente cliente;
+	private Persona cliente;
 	
 	@Column(name="FECHA_VENTA", nullable=false)
 	@Temporal(value=TemporalType.DATE)
@@ -51,7 +51,7 @@ public class Venta implements Serializable{
 	 * @param totalVenta
 	 * @param tipoPago
 	 */
-	public Venta(int id, Representante representante, Cliente cliente, Date fechaVenta, double totalVenta,
+	public Venta(int id, Representante representante, Persona cliente, Date fechaVenta, double totalVenta,
 			MetodoPagoENUM tipoPago) {
 		this.id = id;
 		this.representante = representante;
@@ -98,14 +98,14 @@ public class Venta implements Serializable{
 	/**
 	 * @return the cliente
 	 */
-	public Cliente getCliente() {
+	public Persona getCliente() {
 		return cliente;
 	}
 
 	/**
 	 * @param cliente the cliente to set
 	 */
-	public void setCliente(Cliente cliente) {
+	public void setCliente(Persona cliente) {
 		this.cliente = cliente;
 	}
 
@@ -150,7 +150,6 @@ public class Venta implements Serializable{
 	public void setTipoPago(MetodoPagoENUM tipoPago) {
 		this.tipoPago = tipoPago;
 	}
-	
-	
 
+	
 }

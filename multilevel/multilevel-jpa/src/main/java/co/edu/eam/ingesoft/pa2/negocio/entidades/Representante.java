@@ -37,6 +37,14 @@ public class Representante extends Persona implements Serializable {
 	@Enumerated(value=EnumType.STRING)
 	@Column(name="ESTADO", length=12, nullable=false)
 	private EstadoRepresentanteENUM estado;
+	
+	@ManyToOne
+	@JoinColumn(name = "AFILIADOR_ID", nullable = true, referencedColumnName="PERSONA_ID")
+	private Representante afiliador;
+
+	@Column(name="FECHA_AFILIACION", nullable = false)
+	@Temporal(value=TemporalType.DATE)
+	private Date fechaAfiliacion;
 
 	/**
 	 * @param id
@@ -53,15 +61,20 @@ public class Representante extends Persona implements Serializable {
 	 * @param sueldoActual
 	 * @param acomuladoTotal
 	 * @param estado
+	 * @param afiliador
+	 * @param fechaAfiliacion
 	 */
 	public Representante(int id, String email, Login login, String nombre, String apellido, Date fechaNacimiento,
 			char genero, String telefono, TipoPersonaENUM tipoUsuario, TipoDocumentoENUM tipoDocumento,
-			CategoriaRepresentante categoria, double sueldoActual, int acomuladoTotal, EstadoRepresentanteENUM estado) {
+			CategoriaRepresentante categoria, double sueldoActual, int acomuladoTotal, EstadoRepresentanteENUM estado,
+			Representante afiliador, Date fechaAfiliacion) {
 		super(id, email, login, nombre, apellido, fechaNacimiento, genero, telefono, tipoUsuario, tipoDocumento);
 		this.categoria = categoria;
 		this.sueldoActual = sueldoActual;
 		this.acomuladoTotal = acomuladoTotal;
 		this.estado = estado;
+		this.afiliador = afiliador;
+		this.fechaAfiliacion = fechaAfiliacion;
 	}
 
 	/**
@@ -80,7 +93,8 @@ public class Representante extends Persona implements Serializable {
 			char genero, String telefono, TipoPersonaENUM tipoUsuario, TipoDocumentoENUM tipoDocumento) {
 		super(id, email, login, nombre, apellido, fechaNacimiento, genero, telefono, tipoUsuario, tipoDocumento);
 	}
-	
+
+
 	public Representante(){
 		
 	}
@@ -141,7 +155,36 @@ public class Representante extends Persona implements Serializable {
 		this.estado = estado;
 	}
 
+	/**
+	 * @return the afiliador
+	 */
+	public Representante getAfiliador() {
+		return afiliador;
+	}
+
+	/**
+	 * @param afiliador the afiliador to set
+	 */
+	public void setAfiliador(Representante afiliador) {
+		this.afiliador = afiliador;
+	}
+
+	/**
+	 * @return the fechaAfiliacion
+	 */
+	public Date getFechaAfiliacion() {
+		return fechaAfiliacion;
+	}
+
+	/**
+	 * @param fechaAfiliacion the fechaAfiliacion to set
+	 */
+	public void setFechaAfiliacion(Date fechaAfiliacion) {
+		this.fechaAfiliacion = fechaAfiliacion;
+	}
+		
 	
-    
 	
+	
+
 }
