@@ -101,6 +101,7 @@
         	<groupId>co.edu.eam.ingesoft.finalproject</groupId>
         	<artifactId>multilevel-jpa</artifactId>
         	<version>0.0.1-SNAPSHOT</version>
+        	<scope>provided</scope>
         </dependency>
     </dependencies>
 
