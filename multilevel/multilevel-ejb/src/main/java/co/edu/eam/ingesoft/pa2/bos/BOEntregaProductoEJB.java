@@ -5,18 +5,18 @@ import javax.ejb.Stateless;
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
-import co.edu.eam.ingesoft.pa2.negocio.entidades.EntregaProducto;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.DetallePedido;
 
 @Stateless
-public class BOEntregaProductoEJB extends EJBGenerico<EntregaProducto> implements InterfaceEJBRemote<EntregaProducto>{
+public class BOEntregaProductoEJB extends EJBGenerico<DetallePedido> implements InterfaceEJBRemote<DetallePedido>{
 
 	@Override
 	public Class getClase() {
-		return EntregaProducto.class;
+		return DetallePedido.class;
 	}
 
 	@Override
-	public void crear(EntregaProducto entidad) {
+	public void crear(DetallePedido entidad) {
 		if (buscar(entidad.getId()) != null) {
 			throw new ExcepcionFuncional("Ya existe una Entrega Producto con este codigo " + entidad.getId());
 		} else {
@@ -26,12 +26,12 @@ public class BOEntregaProductoEJB extends EJBGenerico<EntregaProducto> implement
 	}
 
 	@Override
-	public EntregaProducto buscar(Object pk) {
+	public DetallePedido buscar(Object pk) {
 		return dao.buscar(pk);
 	}
 
 	@Override
-	public void editar(EntregaProducto entidad) {
+	public void editar(DetallePedido entidad) {
 		if (buscar(entidad.getId()) != null) {
 			dao.editar(entidad);
 		} else {
@@ -40,7 +40,7 @@ public class BOEntregaProductoEJB extends EJBGenerico<EntregaProducto> implement
 	}
 
 	@Override
-	public void eliminar(EntregaProducto entidad) {
+	public void eliminar(DetallePedido entidad) {
 		if (buscar(entidad.getId()) != null) {
 			dao.borrar(entidad);
 		} else {

@@ -14,6 +14,9 @@ import javax.persistence.Table;
 public class Inventario implements Serializable{
 
 	@Id
+	@Column(name="INVENTARIO_ID", nullable=false)
+	private int id;
+	
 	@ManyToOne
 	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
 	private Representante representante;

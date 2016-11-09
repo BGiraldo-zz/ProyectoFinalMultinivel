@@ -27,7 +27,7 @@ public class Credito implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="ENTREGA_ID", nullable=false)
-	private Entrega entrega;
+	private Pedido entrega;
 	
 	@Column(name="INTERES", nullable=false, length=3)
 	private int interes;
@@ -64,7 +64,7 @@ public class Credito implements Serializable{
 	 * @param fechaFinal
 	 * @param estado
 	 */
-	public Credito(int id, Entrega entrega, int interes, double costoTotal, int meses, float iva, Date fechaInicial,
+	public Credito(int id, Pedido entrega, int interes, double costoTotal, int meses, float iva, Date fechaInicial,
 			Date fechaFinal, EstadoCreditoENUM estado) {
 		this.id = id;
 		this.entrega = entrega;
@@ -100,14 +100,14 @@ public class Credito implements Serializable{
 	/**
 	 * @return the entrega
 	 */
-	public Entrega getEntrega() {
+	public Pedido getEntrega() {
 		return entrega;
 	}
 
 	/**
 	 * @param entrega the entrega to set
 	 */
-	public void setEntrega(Entrega entrega) {
+	public void setEntrega(Pedido entrega) {
 		this.entrega = entrega;
 	}
 

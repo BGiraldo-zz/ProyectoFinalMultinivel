@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,32 +18,39 @@ import javax.persistence.TemporalType;
 import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.MetodoPagoENUM;
 
 @Entity
-@Table(name="VENTAS")
-public class Venta implements Serializable{
+@Table(name = "VENTAS")
+public class Venta implements Serializable {
 
 	@Id
-	@Column(name="VENTA_ID", length=12, nullable=false)
+	@Column(name = "VENTA_ID", length = 12, nullable = false)
 	private int id;
-	
+
+	@OneToOne
+	@JoinColumn(name = "CREDITO_ID", nullable = true, unique = true)
+	private Credito credito;
+
 	@ManyToOne
-	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
+	@JoinColumn(name = "REPRESENTANTE_ID", nullable = false)
 	private Representante representante;
-	
+
 	@ManyToOne
-	@JoinColumn(name="CLIENTE_ID", nullable=false)
+	@JoinColumn(name = "CLIENTE_ID", nullable = false)
 	private Cliente cliente;
 	
-	@Column(name="FECHA_VENTA", nullable=false)
-	@Temporal(value=TemporalType.DATE)
-	private Date fechaVenta;
 	
-	@Column(name="TOTAL_VENTA", length=12, nullable=false)
-	private double totalVenta;
-	
-	@Enumerated(value=EnumType.STRING)
-	@Column(name="TIPO_PAGO", nullable=false, length=45)
-	private MetodoPagoENUM tipoPago;
 
+	@Column(name = "FECHA_VENTA", nullable = false)
+	@Temporal(value = TemporalType.DATE)
+	private Date fechaVenta;
+
+	@Column(name = "TOTAL_VENTA", length = 12, nullable = false)
+	private double totalVenta;
+
+	@Enumerated(value = EnumType.STRING)
+	@Column(name = "TIPO_PAGO", nullable = false, length = 45)
+	private MetodoPagoENUM tipoPago;
+	
+	
 	/**
 	 * @param id
 	 * @param representante
@@ -51,9 +59,11 @@ public class Venta implements Serializable{
 	 * @param totalVenta
 	 * @param tipoPago
 	 */
-	public Venta(int id, Representante representante, Cliente cliente, Date fechaVenta, double totalVenta,
-			MetodoPagoENUM tipoPago) {
+	public Venta(int id, Credito credito, Representante representante, Cliente cliente, Producto producto,
+			Date fechaVenta, double totalVenta, MetodoPagoENUM tipoPago) {
+		super();
 		this.id = id;
+		this.credito = credito;
 		this.representante = representante;
 		this.cliente = cliente;
 		this.fechaVenta = fechaVenta;
@@ -75,7 +85,8 @@ public class Venta implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -89,7 +100,8 @@ public class Venta implements Serializable{
 	}
 
 	/**
-	 * @param representante the representante to set
+	 * @param representante
+	 *            the representante to set
 	 */
 	public void setRepresentante(Representante representante) {
 		this.representante = representante;
@@ -103,7 +115,8 @@ public class Venta implements Serializable{
 	}
 
 	/**
-	 * @param cliente the cliente to set
+	 * @param cliente
+	 *            the cliente to set
 	 */
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
@@ -117,7 +130,8 @@ public class Venta implements Serializable{
 	}
 
 	/**
-	 * @param fechaVenta the fechaVenta to set
+	 * @param fechaVenta
+	 *            the fechaVenta to set
 	 */
 	public void setFechaVenta(Date fechaVenta) {
 		this.fechaVenta = fechaVenta;
@@ -131,7 +145,8 @@ public class Venta implements Serializable{
 	}
 
 	/**
-	 * @param totalVenta the totalVenta to set
+	 * @param totalVenta
+	 *            the totalVenta to set
 	 */
 	public void setTotalVenta(double totalVenta) {
 		this.totalVenta = totalVenta;
@@ -145,11 +160,27 @@ public class Venta implements Serializable{
 	}
 
 	/**
-	 * @param tipoPago the tipoPago to set
+	 * @param tipoPago
+	 *            the tipoPago to set
 	 */
 	public void setTipoPago(MetodoPagoENUM tipoPago) {
 		this.tipoPago = tipoPago;
 	}
+
+	/**
+	 * @return the credito
+	 */
+	public Credito getCredito() {
+		return credito;
+	}
+
+	/**
+	 * @param credito the credito to set
+	 */
+	public void setCredito(Credito credito) {
+		this.credito = credito;
+	}
+
 	
 	
 

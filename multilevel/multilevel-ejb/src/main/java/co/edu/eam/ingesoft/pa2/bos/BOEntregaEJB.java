@@ -5,17 +5,17 @@ import javax.ejb.Stateless;
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
-import co.edu.eam.ingesoft.pa2.negocio.entidades.Entrega;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.Pedido;
 
 @Stateless
-public class BOEntregaEJB extends EJBGenerico<Entrega> implements InterfaceEJBRemote<Entrega>{
+public class BOEntregaEJB extends EJBGenerico<Pedido> implements InterfaceEJBRemote<Pedido>{
 	@Override
 	public Class getClase() {
-		return Entrega.class;
+		return Pedido.class;
 	}
 
 	@Override
-	public void crear(Entrega entidad) {
+	public void crear(Pedido entidad) {
 		if (buscar(entidad.getId()) != null) {
 			throw new ExcepcionFuncional("Ya existe una Entrega con este codigo " + entidad.getId());
 		} else {
@@ -25,12 +25,12 @@ public class BOEntregaEJB extends EJBGenerico<Entrega> implements InterfaceEJBRe
 	}
 
 	@Override
-	public Entrega buscar(Object pk) {
+	public Pedido buscar(Object pk) {
 		return dao.buscar(pk);
 	}
 
 	@Override
-	public void editar(Entrega entidad) {
+	public void editar(Pedido entidad) {
 		if (buscar(entidad.getId()) != null) {
 			dao.editar(entidad);
 		} else {
@@ -39,7 +39,7 @@ public class BOEntregaEJB extends EJBGenerico<Entrega> implements InterfaceEJBRe
 	}
 
 	@Override
-	public void eliminar(Entrega entidad) {
+	public void eliminar(Pedido entidad) {
 		if (buscar(entidad.getId()) != null) {
 			dao.borrar(entidad);
 		} else {

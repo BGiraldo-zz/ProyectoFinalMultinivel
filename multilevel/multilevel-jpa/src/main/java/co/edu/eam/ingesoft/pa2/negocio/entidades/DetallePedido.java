@@ -10,16 +10,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ENTREGA_PRODUCTOS")
-public class EntregaProducto implements Serializable{
+@Table(name="DETALLE_PEDIDOS")
+public class DetallePedido implements Serializable{
 
 	@Id
-	@Column(name="ENTREGA_PRODUCTO_ID", length=12,nullable=false)
+	@Column(name="DETALLE_PEDIDOS_ID", length=12,nullable=false)
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="ENTREGA_ID", nullable=false)
-	private Entrega entrega;
+	@JoinColumn(name="PEDIDO_ID", nullable=false)
+	private Pedido pedido;
 	
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false )
@@ -42,10 +42,10 @@ public class EntregaProducto implements Serializable{
 	 * @param puntos
 	 * @param precioProducto
 	 */
-	public EntregaProducto(int id, Entrega entrega, Producto producto, int cantidad, int puntos,
+	public DetallePedido(int id, Pedido pedido, Producto producto, int cantidad, int puntos,
 			double precioProducto) {
 		this.id = id;
-		this.entrega = entrega;
+		this.pedido = pedido;
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.puntos = puntos;
@@ -55,7 +55,7 @@ public class EntregaProducto implements Serializable{
 	/**
 	 * 
 	 */
-	public EntregaProducto() {
+	public DetallePedido() {
 	}
 
 	/**
@@ -75,15 +75,15 @@ public class EntregaProducto implements Serializable{
 	/**
 	 * @return the entrega
 	 */
-	public Entrega getEntrega() {
-		return entrega;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
 	/**
 	 * @param entrega the entrega to set
 	 */
-	public void setEntrega(Entrega entrega) {
-		this.entrega = entrega;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	/**

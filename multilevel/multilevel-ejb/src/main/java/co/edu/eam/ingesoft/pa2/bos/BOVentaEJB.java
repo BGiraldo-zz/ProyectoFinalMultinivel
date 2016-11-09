@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
@@ -8,6 +9,7 @@ import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Venta;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Venta;
 
+@LocalBean
 @Stateless
 public class BOVentaEJB extends EJBGenerico<Venta> implements InterfaceEJBRemote<Venta>{
 

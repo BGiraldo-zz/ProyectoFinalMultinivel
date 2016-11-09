@@ -23,9 +23,12 @@ public class DetalleVenta implements Serializable {
 	private Venta venta;
 	
 	@ManyToOne
-    @JoinColumn(name = "REPRESENTANTE_ID", insertable = false, updatable = false, 
-				  referencedColumnName="REPRESENTANTE_ID")
-	private Inventario inventarioRepresentante;
+	@JoinColumn(name = "PRODUCTO_ID", nullable = false)
+	private Producto producto;
+	
+	@ManyToOne
+    @JoinColumn(name = "INVENTARIO_ID", nullable=false)
+	private Inventario inventario;
 
 	@Column(name="CANTIDAD", length=5, nullable=false)
 	private int cantidad;
@@ -40,10 +43,10 @@ public class DetalleVenta implements Serializable {
 	 * @param cantidad
 	 * @param precioCompra
 	 */
-	public DetalleVenta(int id, Venta venta, Inventario inventarioRepresentante, int cantidad, double precioCompra) {
+	public DetalleVenta(int id, Venta venta, Inventario inventario, int cantidad, double precioCompra) {
 		this.id = id;
 		this.venta = venta;
-		this.inventarioRepresentante = inventarioRepresentante;
+		this.inventario = inventario;
 		this.cantidad = cantidad;
 		this.precioCompra = precioCompra;
 	}
@@ -85,15 +88,15 @@ public class DetalleVenta implements Serializable {
 	/**
 	 * @return the inventarioRepresentante
 	 */
-	public Inventario getInventarioRepresentante() {
-		return inventarioRepresentante;
+	public Inventario getInventario() {
+		return inventario;
 	}
 
 	/**
 	 * @param inventarioRepresentante the inventarioRepresentante to set
 	 */
-	public void setInventarioRepresentante(Inventario inventarioRepresentante) {
-		this.inventarioRepresentante = inventarioRepresentante;
+	public void setInventario(Inventario inventario) {
+		this.inventario = inventario;
 	}
 
 	/**

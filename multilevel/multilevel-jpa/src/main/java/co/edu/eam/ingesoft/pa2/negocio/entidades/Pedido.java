@@ -18,16 +18,19 @@ import javax.persistence.TemporalType;
 import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.MetodoPagoENUM;
 
 @Entity
-@Table(name="ENTREGAS")
-public class Entrega implements Serializable{
+@Table(name="PEDIDOS")
+public class Pedido implements Serializable{
 
 	@Id
-	@Column(name="ENTREGA_ID", length=12, nullable=false)
+	@Column(name="PEDIDO_ID", length=12, nullable=false)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name="EMPRESAD_NIF", nullable=false)
-	private EmpresaDistribuidora empDistribuidora;
+	@Column(name="ESTADO", length=2, nullable=false)
+	private char estado;
+	
+	@Column(name="FECHA_PEDIDO",nullable=false)
+	@Temporal(value=TemporalType.DATE)
+	private Date fechaPedido;
 	
 	@Column(name="FECHA_ENTREGA",nullable=false)
 	@Temporal(value=TemporalType.DATE)
@@ -42,6 +45,10 @@ public class Entrega implements Serializable{
 	
 	@Column(name="PUNTOS", length=5, nullable=false)
 	private int puntos;
+	
+	@ManyToOne
+	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
+	private Representante representante;
 
 	/**
 	 * @param id
@@ -51,21 +58,26 @@ public class Entrega implements Serializable{
 	 * @param precio
 	 * @param puntos
 	 */
-	public Entrega(int id, EmpresaDistribuidora empDistribuidora, Date fechaEntrega, MetodoPagoENUM metodoPago,
-			double precio, int puntos) {
+	public Pedido(int id, char estado, Date fechaPedido, Date fechaEntrega, MetodoPagoENUM metodoPago, double precio,
+			int puntos, Representante representante) {
+		super();
 		this.id = id;
-		this.empDistribuidora = empDistribuidora;
+		this.estado = estado;
+		this.fechaPedido = fechaPedido;
 		this.fechaEntrega = fechaEntrega;
 		this.metodoPago = metodoPago;
 		this.precio = precio;
 		this.puntos = puntos;
+		this.representante = representante;
 	}
 
 	/**
 	 * 
 	 */
-	public Entrega() {
+	public Pedido() {
 	}
+
+	
 
 	/**
 	 * @return the id
@@ -79,20 +91,6 @@ public class Entrega implements Serializable{
 	 */
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the empDistribuidora
-	 */
-	public EmpresaDistribuidora getEmpDistribuidora() {
-		return empDistribuidora;
-	}
-
-	/**
-	 * @param empDistribuidora the empDistribuidora to set
-	 */
-	public void setEmpDistribuidora(EmpresaDistribuidora empDistribuidora) {
-		this.empDistribuidora = empDistribuidora;
 	}
 
 	/**
