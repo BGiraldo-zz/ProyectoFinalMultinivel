@@ -26,16 +26,12 @@ public class DetalleVenta implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "PRODUCTO_ID", nullable = false)
 	private Producto producto;
-	
-	@ManyToOne
-    @JoinColumn(name = "INVENTARIO_ID", nullable=false)
-	private Inventario inventario;
 
 	@Column(name="CANTIDAD", length=5, nullable=false)
 	private int cantidad;
 	
-	@Column(name="PRECIO_COMPRA", length=7, nullable=false)
-	private double precioCompra;
+	@Column(name="PRECIO_VENTA", length=7, nullable=false)
+	private double precioVenta;
 
 	/**
 	 * @param venta
@@ -43,11 +39,10 @@ public class DetalleVenta implements Serializable {
 	 * @param cantidad
 	 * @param precioCompra
 	 */
-	public DetalleVenta(Venta venta, Inventario inventario, int cantidad, double precioCompra) {
+	public DetalleVenta(Venta venta, Inventario inventario, int cantidad, double precioVenta) {
 		this.venta = venta;
-		this.inventario = inventario;
 		this.cantidad = cantidad;
-		this.precioCompra = precioCompra;
+		this.precioVenta = precioVenta;
 	}
 
 	/**
@@ -70,19 +65,6 @@ public class DetalleVenta implements Serializable {
 		this.venta = venta;
 	}
 
-	/**
-	 * @return the inventarioRepresentante
-	 */
-	public Inventario getInventario() {
-		return inventario;
-	}
-
-	/**
-	 * @param inventarioRepresentante the inventarioRepresentante to set
-	 */
-	public void setInventario(Inventario inventario) {
-		this.inventario = inventario;
-	}
 
 	/**
 	 * @return the cantidad
@@ -101,15 +83,15 @@ public class DetalleVenta implements Serializable {
 	/**
 	 * @return the precioCompra
 	 */
-	public double getPrecioCompra() {
-		return precioCompra;
+	public double getPrecioVenta() {
+		return precioVenta;
 	}
 
 	/**
 	 * @param precioCompra the precioCompra to set
 	 */
-	public void setPrecioCompra(double precioCompra) {
-		this.precioCompra = precioCompra;
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
 	}
 
 	
