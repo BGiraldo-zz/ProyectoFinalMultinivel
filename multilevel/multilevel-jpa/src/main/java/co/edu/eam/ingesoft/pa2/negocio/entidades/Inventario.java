@@ -5,25 +5,25 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="INVENTARIOS")
+@IdClass(InventarioPK.class)
 public class Inventario implements Serializable{
 
 	@Id
-	@Column(name="INVENTARIO_ID", nullable=false)
-	private int id;
-	
 	@ManyToOne
 	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
 	private Representante representante;
 
+	@Id
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false)
-	private Producto Producto;
+	private Producto producto;
 	
 	@Column(name="CANTIDAD", length=12, nullable=false)
 	private double cantidad;
@@ -40,7 +40,7 @@ public class Inventario implements Serializable{
 	public Inventario(Representante representante, Producto producto,
 			double cantidad, double precioBase) {
 		this.representante = representante;
-		Producto = producto;
+		this.producto = producto;
 		this.cantidad = cantidad;
 		this.precioBase = precioBase;
 	}
@@ -64,20 +64,7 @@ public class Inventario implements Serializable{
 	public void setRepresentante(Representante representante) {
 		this.representante = representante;
 	}
-
-	/**
-	 * @return the producto
-	 */
-	public Producto getProducto() {
-		return Producto;
-	}
-
-	/**
-	 * @param producto the producto to set
-	 */
-	public void setProducto(Producto producto) {
-		Producto = producto;
-	}
+	
 
 	/**
 	 * @return the cantidad

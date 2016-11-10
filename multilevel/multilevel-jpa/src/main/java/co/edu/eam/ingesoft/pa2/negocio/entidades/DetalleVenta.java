@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -12,16 +13,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="DETALLE_VENTAS")
+@IdClass(DetalleVentaPK.class)
 public class DetalleVenta implements Serializable {
 	
+
 	@Id
-	@Column(name="DETALLE_VENTA_ID", length=12, nullable=false)
-	private int id;
-	
 	@ManyToOne
 	@JoinColumn(name="VENTA_ID", nullable=false)
 	private Venta venta;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "PRODUCTO_ID", nullable = false)
 	private Producto producto;
@@ -37,14 +38,12 @@ public class DetalleVenta implements Serializable {
 	private double precioCompra;
 
 	/**
-	 * @param id
 	 * @param venta
 	 * @param inventarioRepresentante
 	 * @param cantidad
 	 * @param precioCompra
 	 */
-	public DetalleVenta(int id, Venta venta, Inventario inventario, int cantidad, double precioCompra) {
-		this.id = id;
+	public DetalleVenta(Venta venta, Inventario inventario, int cantidad, double precioCompra) {
 		this.venta = venta;
 		this.inventario = inventario;
 		this.cantidad = cantidad;
@@ -55,20 +54,6 @@ public class DetalleVenta implements Serializable {
 	 * 
 	 */
 	public DetalleVenta() {
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	/**

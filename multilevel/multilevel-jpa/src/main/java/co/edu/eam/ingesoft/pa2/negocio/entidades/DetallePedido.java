@@ -5,22 +5,22 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="DETALLE_PEDIDOS")
+@IdClass(DetallePedidoPK.class)
 public class DetallePedido implements Serializable{
 
 	@Id
-	@Column(name="DETALLE_PEDIDOS_ID", length=12,nullable=false)
-	private int id;
-	
 	@ManyToOne
 	@JoinColumn(name="PEDIDO_ID", nullable=false)
 	private Pedido pedido;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false )
 	private Producto producto;
@@ -42,9 +42,8 @@ public class DetallePedido implements Serializable{
 	 * @param puntos
 	 * @param precioProducto
 	 */
-	public DetallePedido(int id, Pedido pedido, Producto producto, int cantidad, int puntos,
+	public DetallePedido(Pedido pedido, Producto producto, int cantidad, int puntos,
 			double precioProducto) {
-		this.id = id;
 		this.pedido = pedido;
 		this.producto = producto;
 		this.cantidad = cantidad;
@@ -56,20 +55,6 @@ public class DetallePedido implements Serializable{
 	 * 
 	 */
 	public DetallePedido() {
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	/**
