@@ -33,8 +33,6 @@ public class Login implements Serializable{
 	@Column(name = "PASS", length = 45, nullable = false)
 	private String pass;
 	
-	@Column(name="TIPOUSUARIO", nullable=false, length=45)
-	private String tipoUsuario;
 	
 
 	/**
@@ -46,7 +44,6 @@ public class Login implements Serializable{
 		this.id = id;
 		this.nickname = nickname;
 		this.pass = pass;
-		this.tipoUsuario = tipousuario;
 	}
 
 	/**
@@ -95,20 +92,6 @@ public class Login implements Serializable{
 	 */
 	public void setPass(String pass) {
 		this.pass = pass;
-	}
-
-	/**
-	 * @return the tipoUsuario
-	 */
-	public String getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	/**
-	 * @param tipoUsuario the tipoUsuario to set
-	 */
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
 	}
 	
 	
