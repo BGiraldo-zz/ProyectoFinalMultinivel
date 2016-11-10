@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
@@ -13,8 +15,12 @@ import javax.validation.constraints.Size;
 @Table(name="LOGINS",uniqueConstraints={
 		   @UniqueConstraint(columnNames={"nickname", "pass"})
 		})
+@NamedQueries({@NamedQuery(name=Login.BUSCAR_POR_USER_PASS,
+query="SELECT u FROM Login u WHERE u.nickname = ?1 and u.pass=?2")})
 public class Login implements Serializable{
-
+	
+	public static final String BUSCAR_POR_USER_PASS = "Login.buscarUserPass";
+	
 	@Id
 	@Column(name="LOGIN_ID", nullable=false, length=12)
 	private int id;

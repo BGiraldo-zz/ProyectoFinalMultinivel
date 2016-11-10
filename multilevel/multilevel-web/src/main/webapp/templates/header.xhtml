@@ -10,20 +10,20 @@
 
 		<p:menubar>
 
-			<p:menuitem value="Inicio" url="ventana-administrador.jsf" icon="ui-icon-user"></p:menuitem>
+			<p:menuitem value="Inicio" url="index.jsf" icon="ui-icon-user"></p:menuitem>
 
 			<p:submenu label="Manejar" icon="ui-icon-document">
-			    <p:menuitem value="Menejo De Usuario" url="manejo-usuario.jsf" rendered="#{SesionBean.renderizarMenu(4)}"/>
+			    <p:menuitem value="Manejo De Usuario" url="manejo-usuario.jsf" rendered="#{SesionBean.renderizarMenu(4)}"/>
 			    <p:separator />
 				<p:menuitem value="Manejo De Catalogo" url="manejo-catalogo.jsf" rendered="#{SesionBean.renderizarMenu(1)}"/>
 				<p:separator />
-				<p:menuitem value="Menejo De Catalogo Producto" url="manejo-catalogo-producto.jsf" rendered="#{SesionBean.renderizarMenu(5)}"/>
+				<p:menuitem value="Manejo De Catalogo Producto" url="manejo-catalogo-producto.jsf" rendered="#{SesionBean.renderizarMenu(5)}"/>
 				<p:separator />
-				<p:menuitem value="Menejo De Producto" url="manejo-producto.jsf" rendered="#{SesionBean.renderizarMenu(2)}"/>
+				<p:menuitem value="Manejo De Producto" url="manejo-producto.jsf" rendered="#{SesionBean.renderizarMenu(2)}"/>
 				<p:separator />
-				<p:menuitem value="Menejo De Promocion" url="manejo-promocion.jsf" rendered="#{SesionBean.renderizarMenu(3)}"/>
+				<p:menuitem value="Manejo De Promocion" url="manejo-promocion.jsf" rendered="#{SesionBean.renderizarMenu(3)}"/>
 				<p:separator />
-				<p:menuitem value="Menejo De Pedido" url="manejo-pedido.jsf" rendered="#{SesionBean.renderizarMenu(6)}"/>
+				<p:menuitem value="Manejo De Pedido" url="manejo-pedido.jsf" rendered="#{SesionBean.renderizarMenu(6)}"/>
 			</p:submenu>
 
 			<p:submenu label="Edit" icon="ui-icon-pencil">
