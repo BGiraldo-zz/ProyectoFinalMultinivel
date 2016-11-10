@@ -39,17 +39,22 @@ public class DetalleVenta implements Serializable {
 	 * @param cantidad
 	 * @param precioCompra
 	 */
-	public DetalleVenta(Venta venta, Inventario inventario, int cantidad, double precioVenta) {
+	public DetalleVenta(Venta venta, Producto producto, int cantidad, double precioVenta) {
+		super();
 		this.venta = venta;
+		this.producto = producto;
 		this.cantidad = cantidad;
 		this.precioVenta = precioVenta;
 	}
+	
 
 	/**
 	 * 
 	 */
 	public DetalleVenta() {
 	}
+
+	
 
 	/**
 	 * @return the venta
@@ -64,7 +69,20 @@ public class DetalleVenta implements Serializable {
 	public void setVenta(Venta venta) {
 		this.venta = venta;
 	}
+	
+	/**
+	 * @return the producto
+	 */
+	public Producto getProducto() {
+		return producto;
+	}
 
+	/**
+	 * @param producto the producto to set
+	 */
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
 
 	/**
 	 * @return the cantidad
