@@ -32,7 +32,7 @@ public class Credito implements Serializable{
 	@Column(name="INTERES", nullable=false, length=3)
 	private int interes;
 	
-	@Column(name="COSTO_TOTAL", nullable=false, length=5)
+	@Column(name="COSTO_TOTAL", nullable=true, length=5)
 	private double costoTotal;
 	
 	@Column(name="MESES", length=3, nullable=false)
@@ -42,12 +42,9 @@ public class Credito implements Serializable{
 	private float iva;
 	
 	@Temporal(value=TemporalType.DATE)
-	@Column(name="FECHA_INICIAL", nullable=false)
+	@Column(name="FECHA", nullable=false)
 	private Date fechaInicial;
 	
-	@Temporal(value=TemporalType.DATE)
-	@Column(name="FECHA_FINAL", nullable=false)
-	private Date fechaFinal;
 	
 	@Enumerated(value=EnumType.STRING)
 	@Column(name="ESTADO", nullable=false, length=12)
@@ -64,8 +61,8 @@ public class Credito implements Serializable{
 	 * @param fechaFinal
 	 * @param estado
 	 */
-	public Credito(int id, Pedido entrega, int interes, double costoTotal, int meses, float iva, Date fechaInicial,
-			Date fechaFinal, EstadoCreditoENUM estado) {
+	public Credito(int id, Pedido entrega, int interes, double costoTotal, int meses, float iva, Date fechaInicial, 
+			EstadoCreditoENUM estado) {
 		this.id = id;
 		this.entrega = entrega;
 		this.interes = interes;
@@ -73,7 +70,6 @@ public class Credito implements Serializable{
 		this.meses = meses;
 		this.iva = iva;
 		this.fechaInicial = fechaInicial;
-		this.fechaFinal = fechaFinal;
 		this.estado = estado;
 	}
 
@@ -179,20 +175,6 @@ public class Credito implements Serializable{
 	 */
 	public void setFechaInicial(Date fechaInicial) {
 		this.fechaInicial = fechaInicial;
-	}
-
-	/**
-	 * @return the fechaFinal
-	 */
-	public Date getFechaFinal() {
-		return fechaFinal;
-	}
-
-	/**
-	 * @param fechaFinal the fechaFinal to set
-	 */
-	public void setFechaFinal(Date fechaFinal) {
-		this.fechaFinal = fechaFinal;
 	}
 
 	/**
