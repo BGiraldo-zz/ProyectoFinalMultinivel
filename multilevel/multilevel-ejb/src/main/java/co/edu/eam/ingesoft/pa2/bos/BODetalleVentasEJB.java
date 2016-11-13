@@ -17,8 +17,8 @@ public class BODetalleVentasEJB extends EJBGenerico<DetalleVenta> implements Int
 
 	@Override
 	public void crear(DetalleVenta entidad) {
-		if (buscar(entidad.getId()) != null) {
-			throw new ExcepcionFuncional("Ya existe un Detalle Venta con este codigo " + entidad.getId());
+		if (buscar(entidad.getVenta().getId()) != null) {
+			throw new ExcepcionFuncional("Ya existe un Detalle Venta con este codigo " + entidad.getVenta().getId());
 		} else {
 			dao.crear(entidad);
 		}
@@ -32,19 +32,19 @@ public class BODetalleVentasEJB extends EJBGenerico<DetalleVenta> implements Int
 
 	@Override
 	public void editar(DetalleVenta entidad) {
-		if (buscar(entidad.getId()) != null) {
+		if (buscar(entidad.getVenta().getId()) != null) {
 			dao.editar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe un Detalle Venta con este codigo " + entidad.getId());
+			throw new ExcepcionFuncional("Aùn no existe un Detalle Venta con este codigo " + entidad.getVenta().getId());
 		}
 	}
 
 	@Override
 	public void eliminar(DetalleVenta entidad) {
-		if (buscar(entidad.getId()) != null) {
+		if (buscar(entidad.getVenta().getId()) != null) {
 			dao.borrar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe un Detalle Venta con este codigo " + entidad.getId());
+			throw new ExcepcionFuncional("Aùn no existe un Detalle Venta con este codigo " + entidad.getVenta().getId());
 		}
 	}
 }

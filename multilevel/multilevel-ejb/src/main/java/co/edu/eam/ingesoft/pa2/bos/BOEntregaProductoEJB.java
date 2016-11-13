@@ -17,8 +17,8 @@ public class BOEntregaProductoEJB extends EJBGenerico<DetallePedido> implements 
 
 	@Override
 	public void crear(DetallePedido entidad) {
-		if (buscar(entidad.getId()) != null) {
-			throw new ExcepcionFuncional("Ya existe una Entrega Producto con este codigo " + entidad.getId());
+		if (buscar(entidad.getPedido().getId()) != null) {
+			throw new ExcepcionFuncional("Ya existe una Entrega Producto con este codigo " + entidad.getPedido().getId());
 		} else {
 			dao.crear(entidad);
 		}
@@ -32,19 +32,19 @@ public class BOEntregaProductoEJB extends EJBGenerico<DetallePedido> implements 
 
 	@Override
 	public void editar(DetallePedido entidad) {
-		if (buscar(entidad.getId()) != null) {
+		if (buscar(entidad.getPedido().getId()) != null) {
 			dao.editar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getId());
+			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getPedido().getId());
 		}
 	}
 
 	@Override
 	public void eliminar(DetallePedido entidad) {
-		if (buscar(entidad.getId()) != null) {
+		if (buscar(entidad.getPedido().getId()) != null) {
 			dao.borrar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getId());
+			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getPedido().getId());
 		}
 	}
 }

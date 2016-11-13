@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
@@ -13,8 +15,12 @@ import javax.validation.constraints.Size;
 @Table(name="LOGINS",uniqueConstraints={
 		   @UniqueConstraint(columnNames={"nickname", "pass"})
 		})
+@NamedQueries({@NamedQuery(name=Login.BUSCAR_POR_USER_PASS,
+query="SELECT u FROM Login u WHERE u.nickname = ?1 and u.pass = ?2")})
 public class Login implements Serializable{
-
+	
+	public static final String BUSCAR_POR_USER_PASS = "Login.buscarUserPass";
+	
 	@Id
 	@Column(name="LOGIN_ID", nullable=false, length=12)
 	private int id;
@@ -27,8 +33,6 @@ public class Login implements Serializable{
 	@Column(name = "PASS", length = 45, nullable = false)
 	private String pass;
 	
-	@Column(name="TIPOUSUARIO", nullable=false, length=45)
-	private String tipoUsuario;
 	
 
 	/**
@@ -40,7 +44,6 @@ public class Login implements Serializable{
 		this.id = id;
 		this.nickname = nickname;
 		this.pass = pass;
-		this.tipoUsuario = tipousuario;
 	}
 
 	/**
@@ -89,20 +92,6 @@ public class Login implements Serializable{
 	 */
 	public void setPass(String pass) {
 		this.pass = pass;
-	}
-
-	/**
-	 * @return the tipoUsuario
-	 */
-	public String getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	/**
-	 * @param tipoUsuario the tipoUsuario to set
-	 */
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
 	}
 	
 	

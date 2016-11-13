@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,8 +24,12 @@ import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoPersonaENUM;
 @Entity
 @Table(name="PERSONAS")
 @Inheritance(strategy=InheritanceType.JOINED)
+@NamedQueries({@NamedQuery(name=Persona.BUSCAR_PERSONA_LOGIN,
+query="SELECT pers FROM Persona pers WHERE pers.login.id = ?1")})
 public class Persona implements Serializable {
-
+	
+	public static final String BUSCAR_PERSONA_LOGIN = "Persona.buscarPersonaLogin";
+	
 	@Id
 	@Column(name="PERSONA_ID", length=12, nullable=false)
 	protected int id;

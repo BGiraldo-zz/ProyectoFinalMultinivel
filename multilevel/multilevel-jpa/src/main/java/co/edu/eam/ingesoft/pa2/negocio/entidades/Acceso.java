@@ -11,15 +11,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ACCESOS")
-//@NamedQueries({@NamedQuery(name=Acceso.LISTAR_ACCESOS_ROL,
-//query="SELECT ar.acceso FROM AccesoRol ar WHERE ar.rol.id = ?1")})
+@NamedQueries({@NamedQuery(name=Acceso.BUSCAR_ACCESOS_ROL,
+query="SELECT ar.acceso FROM RolAcceso ar WHERE ar.rol.id = ?1")})
 public class Acceso implements Serializable{
 
 	/*
 	 * Atributos
 	 */
 	
-//	public static final String LISTAR_ACCESOS_ROL = "Acceso.listarAccesosRol";
+	public static final String BUSCAR_ACCESOS_ROL = "Accesos.buscarAccesosRol";
 	
 	@Id
 	@Column(name="ACCESO_ID", length=12, nullable=false)

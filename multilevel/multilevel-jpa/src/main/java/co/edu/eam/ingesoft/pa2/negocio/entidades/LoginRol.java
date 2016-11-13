@@ -14,8 +14,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="LOGIN_ROLES")
 @IdClass(LoginRolPK.class)
+@NamedQueries({@NamedQuery(name=LoginRol.BUSCAR_LOGIN_ROLES,
+query="SELECT lr.rol FROM LoginRol lr WHERE lr.login.id = ?1")})
 public class LoginRol implements Serializable{
 
+	public static final String BUSCAR_LOGIN_ROLES = "LoginRoles.buscarLoginRoles";
+	
 	/*
 	 * Atributos
 	 */
