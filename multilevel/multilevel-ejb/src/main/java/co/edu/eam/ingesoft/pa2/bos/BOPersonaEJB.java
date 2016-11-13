@@ -1,0 +1,54 @@
+package co.edu.eam.ingesoft.pa2.bos;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
+import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.Persona;
+import co.edu.eam.ingesoft.pa2.util.ConstantesNamedQueries;
+
+@Stateless
+@LocalBean
+public class BOPersonaEJB extends EJBGenerico<Persona> implements InterfaceEJBRemote<Persona>{
+
+	@Override
+	public void crear(Persona entidad) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Persona buscar(Object pk) {
+		Persona p = dao.buscar(pk);
+		return p;
+	}
+
+	@Override
+	public void editar(Persona entidad) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(Persona entidad) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Class getClase() {
+		return Persona.class;
+	}
+
+	/**
+	 * Busca una persona por login
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
+	public Persona buscarPersonaLogin(int idLogin){
+		Persona p = dao.ejecutarQuery(Persona.BUSCAR_PERSONA_LOGIN, idLogin);
+		return p;
+	}
+	
+}

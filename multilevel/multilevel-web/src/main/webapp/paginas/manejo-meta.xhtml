@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/template.xhtml">
+
+
+	<ui:define name="pageHeader">
+		<h1 style="color: #000000">Manejo Metas</h1>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<h:body>
+
+			<h:form id="form" prependId="false">
+
+				<h:panelGrid columns="3" id="panelDatos">
+                   
+               <h:outputText value="#{msj['pedido.pedido']}"
+						id="labelPedido" for="comboPedido" />
+					<p:selectOneMenu
+						 value="#{ControladorManejoPedidos.pedido}"
+						id="comboPedido">
+
+                        <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoPedidos.pedidos}"
+							var="pet" itemLabel="#{pet}" itemValue="#{pet}" />
+	
+					</p:selectOneMenu>
+					
+					<br/>
+
+				</h:panelGrid>
+				
+				<br />
+
+				<h:panelGrid columns="4" id="panelBotones">
+
+					<p:commandButton
+						action="#{ControladorManejoPedidos.revisarPedido()}"
+						value="#{msj['pedido.revisar']}" update="panelDatos" />
+					<p:commandButton
+						action="#{ControladorManejoPedidos.aprobarPedido()}"
+						value="#{msj['pedido.aprobar']}" />
+					<p:commandButton
+						action="#{ControladorManejoPedidos.negarPedido()}"
+						value="#{msj['pedido.Negar']}" />
+				
+				</h:panelGrid>
+
+			</h:form>
+
+
+		</h:body>
+		
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>
