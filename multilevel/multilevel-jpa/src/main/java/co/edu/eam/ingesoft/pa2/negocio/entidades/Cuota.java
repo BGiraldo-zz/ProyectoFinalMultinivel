@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.EstadoCuotaENUM;
 
 @Entity
 @Table(name="CUOTAS")
@@ -33,18 +37,25 @@ public class Cuota implements Serializable{
 	@Temporal(value=TemporalType.DATE)
 	@Column(name="FECHA", nullable=false)
 	private Date fecha;
+	
+	@Enumerated(value=EnumType.STRING)
+	@Column(name="ESTADO")
+	private EstadoCuotaENUM estado;
 
 	/**
 	 * @param id
 	 * @param credito
 	 * @param monto
 	 * @param fecha
+	 * @param estado
 	 */
-	public Cuota(int id, Credito credito, double monto, Date fecha) {
+	public Cuota(int id, Credito credito, double monto, Date fecha, EstadoCuotaENUM estado) {
+		super();
 		this.id = id;
 		this.credito = credito;
 		this.monto = monto;
 		this.fecha = fecha;
+		this.estado = estado;
 	}
 
 	/**
@@ -108,6 +119,22 @@ public class Cuota implements Serializable{
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
+	/**
+	 * @return the estado
+	 */
+	public EstadoCuotaENUM getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(EstadoCuotaENUM estado) {
+		this.estado = estado;
+	}
+	
+	
 	
 	
 	
