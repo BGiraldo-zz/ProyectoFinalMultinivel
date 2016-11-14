@@ -22,10 +22,10 @@
 				<h:panelGrid columns="3" id="panelDatos">
                    
                    <h:outputText value="#{msj['catalogo.catalogo']}"
-						id="labelCatalogo" for="comboCatalogo" />
+						id="labelCatalogo" for="comboCatalogo"/>
 					<p:selectOneMenu
 						value="#{ControladorManejoCatalogoProducto.entidad.catalogo}"
-						id="comboCatalogo">
+						id="comboCatalogo" required="true"  converter="#{catalogoConverter}">
 
                         <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
 						<f:selectItems value="#{ControladorManejoCatalogoProducto.catalogos}"
@@ -39,7 +39,7 @@
 						id="labelProducto" for="comboProducto" />
 					<p:selectOneMenu
 						value="#{ControladorManejoCatalogoProducto.entidad.producto}"
-						id="comboProducto">
+						id="comboProducto" converter="#{productoConverter}" required="true">
 
                         <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
 						<f:selectItems value="#{ControladorManejoCatalogoProducto.productos}"
@@ -51,7 +51,7 @@
 					
 					<h:outputText value="#{msj['catalogo.cantidadProductos']}"
 						id="labelCantidadProductos" for="tfCantidadProductos" />
-					<p:inputText value="#{ControladorManejoCatalogo.catalogo.cantidadProductos}"
+					<p:inputText value="#{ControladorManejoCatalogoProducto.entidad.cantidadProducto}"
 						id="tfCantidadProductos" placeholder="Cantidad Productos" />
 					<h:message style="color:Red; margin:8px;" for="tfCantidadProductos" />
 				
@@ -67,13 +67,13 @@
 						value="#{msj['registrar']}" update="panelDatos" />
 					<p:commandButton
 						action="#{ControladorManejoCatalogoProducto.buscarCatalogoProducto()}"
-						value="#{msj['buscar']}" />
+						value="#{msj['buscar']}" update="panelDatos" />
 					<p:commandButton
 						action="#{ControladorManejoCatalogoProducto.editarCatalogoProducto()}"
 						value="#{msj['editar']}" />
 					<p:commandButton
 						action="#{ControladorManejoCatalogoProducto.removerCatalogoProducto()}"
-						value="#{msj['remover']}" />
+						value="#{msj['remover']}" update="panelDatos"/>
 				
 				</h:panelGrid>
 

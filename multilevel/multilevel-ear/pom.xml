@@ -80,7 +80,7 @@
 				<configuration>
 					<filename>${project.artifactId}.ear</filename>
 					<skip>false</skip>
-					<!--  <hostname>localhost</hostname>
+				    <!--<hostname>localhost</hostname>
 					<port>9997</port>
 					<username>user</username>
 					<password>password</password>-->

@@ -1,13 +1,19 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import java.util.List;
+
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.LoginRol;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Rol;
+import co.edu.eam.ingesoft.pa2.util.ConstantesNamedQueries;
 
 @Stateless
+@LocalBean
 public class BORolEJB extends EJBGenerico<Rol> implements InterfaceEJBRemote<Rol>{
 
 	@Override
@@ -27,7 +33,8 @@ public class BORolEJB extends EJBGenerico<Rol> implements InterfaceEJBRemote<Rol
 
 	@Override
 	public Rol buscar(Object pk) {
-		return dao.buscar(pk);
+		Rol r = dao.buscar(pk);
+		return r;
 	}
 
 	@Override
@@ -46,6 +53,15 @@ public class BORolEJB extends EJBGenerico<Rol> implements InterfaceEJBRemote<Rol
 		} else {
 			throw new ExcepcionFuncional("Aùn no existe un Rol con este codigo " + entidad.getId());
 		}
+	}
+	
+	/**
+	 * Busca los roles de un login de un usuario
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
+	public List<Rol> buscarRolesLogin(int idLogin){
+		return dao.ejecutarNamedQuery(LoginRol.BUSCAR_LOGIN_ROLES, idLogin);
 	}
 
 

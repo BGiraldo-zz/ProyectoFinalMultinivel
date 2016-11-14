@@ -24,19 +24,19 @@
                    <h:outputText value="#{msj['catalogo.codigo']}"
 						id="labelCodigo" for="tfCodigo" />
 					<p:inputText value="#{ControladorManejoCatalogo.catalogo.id}"
-						id="tfCodigo" placeholder="Codigo" />
+						id="tfCodigo" placeholder="Codigo" required="true"/>
 					<h:message style="color:Red; margin:8px;" for="tfCodigo" />
 					
 					<h:outputText value="#{msj['catalogo.nombre']}"
 						id="labelNombre" for="tfNombre" />
 					<p:inputText value="#{ControladorManejoCatalogo.catalogo.nombre}"
-						id="tfNombre" placeholder="Nombre" />
+						id="tfNombre" placeholder="Nombre" required="false" />
 					<h:message style="color:Red; margin:8px;" for="tfNombre" />
 					
 					<h:outputText value="#{msj['catalogo.cantidadProductos']}"
 						id="labelCantidadProductos" for="tfCantidadProductos" />
 					<p:inputText value="#{ControladorManejoCatalogo.catalogo.cantidadProductos}"
-						id="tfCantidadProductos" placeholder="Cantidad Productos" />
+						id="tfCantidadProductos" placeholder="Cantidad Productos" required="false"/>
 					<h:message style="color:Red; margin:8px;" for="tfCantidadProductos" />
 
 				</h:panelGrid>
@@ -50,13 +50,13 @@
 						value="#{msj['registrar']}" update="panelCatalogo" />
 					<p:commandButton
 						action="#{ControladorManejoCatalogo.buscarCatalogo()}"
-						value="#{msj['buscar']}" />
+						value="#{msj['buscar']}" update="panelCatalogo"/>
 					<p:commandButton
 						action="#{ControladorManejoCatalogo.editarCatalogo()}"
 						value="#{msj['editar']}" />
 					<p:commandButton
 						action="#{ControladorManejoCatalogo.removerCatalogo()}"
-						value="#{msj['remover']}" />
+						value="#{msj['remover']}" update="panelCatalogo"/>
 				
 				</h:panelGrid>
 

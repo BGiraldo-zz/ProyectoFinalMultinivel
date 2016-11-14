@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,7 +23,11 @@ import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoPersonaENUM;
 
 @Entity
 @Table(name="REPRESENTANTES")
+@NamedQueries({@NamedQuery(name=Representante.LISTAR_REPRESENTANTES,
+query="SELECT r FROM Representante r" )})
 public class Representante extends Persona implements Serializable {
+	
+	public static final String LISTAR_REPRESENTANTES = "Representante.listarRepresentantes";
 	
 	@ManyToOne
 	@JoinColumn(name="CATEGORIA_REPRESENTANTES_ID", nullable=false)
@@ -35,7 +41,7 @@ public class Representante extends Persona implements Serializable {
 	private int acomuladoTotal;
 	
 	@Enumerated(value=EnumType.STRING)
-	@Column(name="ESTADO", length=12, nullable=false)
+	@Column(name="ESTADO", length=15, nullable=false)
 	private EstadoRepresentanteENUM estado;
 	
 	@ManyToOne
@@ -182,8 +188,61 @@ public class Representante extends Persona implements Serializable {
 	public void setFechaAfiliacion(Date fechaAfiliacion) {
 		this.fechaAfiliacion = fechaAfiliacion;
 	}
-		
-	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + acomuladoTotal;
+		result = prime * result + ((afiliador == null) ? 0 : afiliador.hashCode());
+		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result + ((fechaAfiliacion == null) ? 0 : fechaAfiliacion.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(sueldoActual);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Representante other = (Representante) obj;
+		if (acomuladoTotal != other.acomuladoTotal)
+			return false;
+		if (afiliador == null) {
+			if (other.afiliador != null)
+				return false;
+		} else if (!afiliador.equals(other.afiliador))
+			return false;
+		if (categoria == null) {
+			if (other.categoria != null)
+				return false;
+		} else if (!categoria.equals(other.categoria))
+			return false;
+		if (estado != other.estado)
+			return false;
+		if (fechaAfiliacion == null) {
+			if (other.fechaAfiliacion != null)
+				return false;
+		} else if (!fechaAfiliacion.equals(other.fechaAfiliacion))
+			return false;
+		if (Double.doubleToLongBits(sueldoActual) != Double.doubleToLongBits(other.sueldoActual))
+			return false;
+		return true;
+	}
+
 	
 	
 

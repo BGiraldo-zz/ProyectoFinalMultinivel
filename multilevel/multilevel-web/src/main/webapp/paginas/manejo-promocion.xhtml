@@ -24,7 +24,7 @@
                    <h:outputText value="#{msj['catalogo.codigo']}"
 						id="labelCodigo" for="tfCodigo" />
 					<p:inputText value="#{ControladorManejoPromocion.promocion.id}"
-						id="tfCodigo" placeholder="Codigo" />
+						id="tfCodigo" placeholder="Codigo" required="true"/>
 					<h:message style="color:Red; margin:8px;" for="tfCodigo" />
 					
 					<h:outputText value="#{msj['catalogo.descuento']}"
@@ -34,11 +34,13 @@
 					<h:message style="color:Red; margin:8px;" for="tfDescuento" />
 					
 					<p:outputLabel for="tfFechaInicial" value="#{msj['catalogo.fechaInicial']}" />
-                    <p:calendar id="tfFechaInicial" value="#{calendarView.date3}" showOn="button" />
+                    <p:calendar id="tfFechaInicial" value="#{ControladorManejoPromocion.promocion.fechaInicial}" 
+                    showOn="button"  placeholder="Dia/Mes/Ano - 01/01/97"/>
 
                       <br/>
 					<p:outputLabel for="tfFechaFinal" value="#{msj['catalogo.fechaFinal']}" />
-                    <p:calendar id="tfFechaFinal" value="#{calendarView.date3}" showOn="button" />
+                    <p:calendar id="tfFechaFinal" value="#{ControladorManejoPromocion.promocion.fechaFinal}" 
+                    showOn="button" placeholder="Dia/Mes/Ano - 01/01/97"/>
 
 				</h:panelGrid>
 				
@@ -47,17 +49,17 @@
 				<h:panelGrid columns="4" id="panelBotones">
 
 					<p:commandButton
-						action="#{ControladorManejoUsuario.registrarUsuario()}"
+						action="#{ControladorManejoPromocion.registrar()}"
 						value="#{msj['registrar']}" update="panelDatos" />
 					<p:commandButton
-						action="#{ControladorManejoUsuario.buscarUsuario()}"
-						value="#{msj['buscar']}" />
+						action="#{ControladorManejoPromocion.buscar()}"
+						value="#{msj['buscar']}"  update="panelDatos" />
 					<p:commandButton
-						action="#{ControladorManejoUsuario.editarUsuario()}"
+						action="#{ControladorManejoPromocion.editar()}"
 						value="#{msj['editar']}" />
 					<p:commandButton
-						action="#{ControladorManejoUsuario.removerUsuario()}"
-						value="#{msj['remover']}" />
+						action="#{ControladorManejoPromocion.eliminar()}"
+						value="#{msj['remover']}"  update="panelDatos" />
 
 
 				</h:panelGrid>

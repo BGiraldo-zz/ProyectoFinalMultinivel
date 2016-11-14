@@ -21,12 +21,12 @@ public class RolAcceso implements Serializable{
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "ID_ROL", nullable = false, updatable = false, insertable = false)
+	@JoinColumn(name = "ROL_ID", nullable = false, updatable = false, insertable = false)
 	private Rol rol;
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "ID_ACCESO", nullable = false, updatable = false, insertable = false)
+	@JoinColumn(name = "ACCESO_ID", nullable = false, updatable = false, insertable = false)
 	private Acceso acceso;
 	
 	@Column(name="DESCRIPCION" , length = 255 , nullable=true)

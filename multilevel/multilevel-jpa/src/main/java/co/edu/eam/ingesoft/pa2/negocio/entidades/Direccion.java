@@ -7,12 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="DIRECCIONES")
+@NamedQueries({@NamedQuery(name=Direccion.CANTIDAD_DIRECCIONES,
+query = "SELECT count(d.id) FROM Direccion d")})
 public class Direccion implements Serializable{
 
+	public static final String CANTIDAD_DIRECCIONES = "Direccion.cantidadDirecciones";
+	
 	@Id
 	@Column(name="DIRECCION_ID", length=12, nullable=false)
 	private int id;

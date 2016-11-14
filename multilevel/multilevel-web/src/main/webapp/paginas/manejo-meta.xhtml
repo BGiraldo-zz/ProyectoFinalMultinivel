@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/template.xhtml">
+
+
+	<ui:define name="pageHeader">
+		<h1 style="color: #000000">Manejo Metas</h1>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<h:body>
+
+			<h:form id="form" prependId="false">
+
+				<h:panelGrid columns="3" id="panelDatos">
+              
+              <h:outputText value="#{msj['catalogo.codigo']}"
+						id="labelIdentificacion" for="tfIdentificacion" />
+					<p:inputText value="#{ControladorManejoMeta.meta.id}"
+						id="tfIdentificacion" placeholder="Codigo Meta" required="true"/>
+					<h:message style="color:Red; margin:8px;" for="tfIdentificacion" />
+					
+					<h:outputText value="#{msj['meta.tipoMeta']}"
+						id="labelTipoMeta" for="comboTipoMeta" />
+					<p:selectOneMenu
+						value="#{ControladorManejoMeta.meta.tipo}"
+						id="comboTipoMeta" required="false" >
+
+						<f:selectItems value="#{ControladorManejoMeta.tipoMetas}"
+							var="tip" itemLabel="#{tip}" itemValue="#{tip}" />
+					</p:selectOneMenu>
+					<h:message style="color:Red; margin:8px;" for="comboTipoMeta" />
+					
+					
+					<h:outputText value="#{msj['registrarUsuario.nombre']}"
+						id="labelNombre" for="tfNombre" />
+					<p:inputText value="#{ControladorManejoMeta.meta.nombre}"
+						id="tfNombre" placeholder="Nombre" />
+					<h:message style="color:Red; margin:8px;" for="tfNombre" />
+              
+                     <h:outputText value="#{msj['meta.premio']}"
+						id="labelPremio" for="comboPremio" />
+					<p:selectOneMenu
+						value="#{ControladorManejoMeta.meta.premio}"
+						id="comboPremio" required="false" converter="#{premioConverter}" >
+
+						
+						<f:selectItems value="#{ControladorManejoMeta.premios}"
+							var="pre" itemLabel="#{pre.nombre}" itemValue="#{pre}" />
+					</p:selectOneMenu>
+					<h:message style="color:Red; margin:8px;" for="comboPremio" />
+					
+					<h:outputText value="#{msj['meta.cantidad']}" id="labelCantidad"
+						for="tfCantidad" />
+					<p:inputText value="#{ControladorManejoMeta.meta.cantidad}"
+						id="tfCantidad" placeholder="Cantidad" />
+					<h:message style="color:Red; margin:8px;" for="tfCantidad" />
+              
+              
+              
+
+				</h:panelGrid>
+				
+				<br />
+
+
+
+
+
+
+				<h:panelGrid columns="4" id="panelBotones">
+
+						<p:commandButton
+						action="#{ControladorManejoMeta.registrar()}"
+						value="#{msj['registrar']}" update="panelDatos" />
+					<p:commandButton
+						action="#{ControladorManejoMeta.buscar()}"
+						value="#{msj['buscar']}" update="panelDatos" />
+					<p:commandButton
+						action="#{ControladorManejoMeta.editar()}"
+						value="#{msj['editar']}" />
+					<p:commandButton
+						action="#{ControladorManejoMeta.eliminar()}"
+						value="#{msj['remover']}" update="panelDatos" />
+						
+				
+				</h:panelGrid>
+
+			</h:form>
+
+
+		</h:body>
+		
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

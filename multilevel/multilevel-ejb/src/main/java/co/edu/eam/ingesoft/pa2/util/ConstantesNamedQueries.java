@@ -14,12 +14,6 @@ package co.edu.eam.ingesoft.pa2.util;
 public class ConstantesNamedQueries {
 
 	
-
-
-	
-
-	
-
 	private ConstantesNamedQueries() {
 		// TODO Auto-generated constructor stub
 	}

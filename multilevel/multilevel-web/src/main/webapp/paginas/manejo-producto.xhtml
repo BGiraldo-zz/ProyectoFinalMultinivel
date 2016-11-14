@@ -25,7 +25,7 @@
 						id="labelCodigo" for="tfCodigo"/>
 					<p:inputText
 						value="#{ControladorManejoProducto.producto.id}"
-						id="tfCodigo" placeholder="Codigo" />
+						id="tfCodigo" placeholder="Codigo" required="true"/>
 					<h:message style="color:Red; margin:8px;" for="tfCodigo" />
 					
 					<h:outputText value="#{msj['catalogo.nombre']}"
@@ -38,8 +38,8 @@
 					<h:outputText value="#{msj['producto.categoria']}"
 						id="labelCategoria" for="comboCategoria" />
 
-					<p:selectOneMenu value="#{ControladorManejoProducto.categoria}"
-						id="comboCategoria" converter="#{categoriaConverter}">
+					<p:selectOneMenu value="#{ControladorManejoProducto.producto.categoria}"
+						id="comboCategoria" converter="#{categoriaProductoConverter}">
 
                          <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
 						<f:selectItems value="#{ControladorManejoProducto.categorias}"
@@ -52,7 +52,7 @@
 					<h:outputText value="#{msj['producto.promocion']}"
 						id="labelPromocion" for="comboPromocion" />
 
-					<p:selectOneMenu value="#{ControladorManejoProducto.promocion}"
+					<p:selectOneMenu value="#{ControladorManejoProducto.producto.promocion}"
 						id="comboPromocion" converter="#{promocionConverter}">
 
                          <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
@@ -108,17 +108,17 @@
 				<h:panelGrid columns="4" id="panelBotones">
 
 					<p:commandButton
-						action="#{ControladorManejoUsuario.registrarUsuario()}"
+						action="#{ControladorManejoProducto.registrar()}"
 						value="#{msj['registrar']}" update="panelDatos" />
 					<p:commandButton
-						action="#{ControladorManejoUsuario.buscarUsuario()}"
-						value="#{msj['buscar']}" />
+						action="#{ControladorManejoProducto.buscar()}"
+						value="#{msj['buscar']}" update="panelDatos"/>
 					<p:commandButton
-						action="#{ControladorManejoUsuario.editarUsuario()}"
+						action="#{ControladorManejoProducto.editar()}"
 						value="#{msj['editar']}" />
 					<p:commandButton
-						action="#{ControladorManejoUsuario.removerUsuario()}"
-						value="#{msj['remover']}" />
+						action="#{ControladorManejoProducto.remover()}"
+						value="#{msj['remover']}" update="panelDatos"/>
 
 
 				</h:panelGrid>

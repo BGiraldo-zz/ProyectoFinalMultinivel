@@ -41,6 +41,11 @@ public class DAOGenerico {
 	}
 
 
+	/**
+	 * retorna una lista de una consulta
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
 	public <T> List<T> ejecutarNamedQuery(String nombre, Object... parametros) {
 
 		Query query = em.createNamedQuery(nombre);
@@ -52,6 +57,11 @@ public class DAOGenerico {
 
 	}
 
+	/**
+	 * Retorna un objeto de una consulta
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
 	public <T> T ejecutarQuery(String nombre, Object... parametros) {
 
 		Query query = em.createNamedQuery(nombre);

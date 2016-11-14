@@ -7,13 +7,19 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="PERSONA_DIRECCIONES")
 @IdClass(PersonaDireccionPK.class)
+@NamedQueries({@NamedQuery(name=PersonaDireccion.BUSCAR_PERSONA_DIRECCION,
+query="SELECT pd FROM PersonaDireccion pd WHERE pd.persona.id = ?1 AND pd.direccion.id = ?2")})
 public class PersonaDireccion implements Serializable{
 
+	public static final String BUSCAR_PERSONA_DIRECCION = "Persona.BuscarPersonaDireccion";
+	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="PERSONA_ID", nullable=false)
