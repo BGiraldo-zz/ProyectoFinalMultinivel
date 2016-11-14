@@ -25,7 +25,7 @@
 					<h:outputText value="#{msj['registrarUsuario.tipoUsuario']}"
 						id="labelTipo" for="comboTipo" />
 					<p:selectOneMenu value="#{ControladorManejoUsuario.tipeUser}"
-						id="comboTipo">
+						id="comboTipo" required="true">
 
 						<f:selectItem itemValue="s" itemLabel="Seleccione una opción..." />
 						<f:selectItem itemValue="A" itemLabel="Administrador" />
@@ -42,7 +42,7 @@
 					<h:outputText value="#{msj['registrarUsuario.identificacion']}"
 						id="labelIdentificacion" for="tfIdentificacion" />
 					<p:inputText value="#{ControladorManejoUsuario.persona.id}"
-						id="tfIdentificacion" placeholder="Identificacion" />
+						id="tfIdentificacion" placeholder="Identificacion" required="true"/>
 					<h:message style="color:Red; margin:8px;" for="tfIdentificacion" />
 
 					<h:outputText value="#{msj['registrarUsuario.tipoDocumento']}"
@@ -51,7 +51,6 @@
 						value="#{ControladorManejoUsuario.persona.tipoDocumento}"
 						id="comboTipoDocumento" >
 
-						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
 						<f:selectItems value="#{ControladorManejoUsuario.tipoDocumentos}"
 							var="doc" itemLabel="#{doc}" itemValue="#{doc}" />
 
@@ -179,8 +178,7 @@
 						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
 					<p:selectOneMenu value="#{ControladorManejoUsuario.persona.estado}"
 						id="comboEstado" rendered="#{ControladorManejoUsuario.cargarCampos()}">
-
-						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+	
 						<f:selectItems value="#{ControladorManejoUsuario.estados}"
 							var="est" itemLabel="#{est}" itemValue="#{est}" />
 					</p:selectOneMenu>
@@ -228,13 +226,13 @@
 						value="#{msj['registrar']}" update="panelDatos" />
 					<p:commandButton
 						action="#{ControladorManejoUsuario.buscarUsuario()}"
-						value="#{msj['buscar']}" />
+						value="#{msj['buscar']}" update="panelDatos"/>
 					<p:commandButton
 						action="#{ControladorManejoUsuario.editarUsuario()}"
 						value="#{msj['editar']}" />
 					<p:commandButton
 						action="#{ControladorManejoUsuario.removerUsuario()}"
-						value="#{msj['remover']}" />
+						value="#{msj['remover']}" update="panelDatos"/>
 
 
 				</h:panelGrid>

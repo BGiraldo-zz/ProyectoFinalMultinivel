@@ -14,7 +14,7 @@ public class BODireccionEJB extends EJBGenerico<Direccion> implements InterfaceE
 
 	@Override
 	public void crear(Direccion entidad) {
-		if (buscar(entidad.getId()) != null) {
+		if (dao.buscar(entidad.getId()) != null) {
 			throw new ExcepcionFuncional("Ya existe una Direccion con este codigo " + entidad.getId());
 		} else {
 			dao.crear(entidad);
@@ -23,19 +23,22 @@ public class BODireccionEJB extends EJBGenerico<Direccion> implements InterfaceE
 
 	@Override
 	public Direccion buscar(Object pk) {
-		return dao.buscar(pk);
+		Direccion d =  dao.buscar(pk);
+		if(d!=null){
+			return d;
+		}else{
+			throw new ExcepcionFuncional("No existe una Direccion con este codigo " + pk);
+		}
 	}
 
 	@Override
 	public void editar(Direccion entidad) {
-		// TODO Auto-generated method stub
-		
+		dao.editar(entidad);
 	}
 
 	@Override
 	public void eliminar(Direccion entidad) {
-		// TODO Auto-generated method stub
-		
+		dao.borrar(entidad);
 	}
 
 	@Override

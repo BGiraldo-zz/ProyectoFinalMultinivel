@@ -25,10 +25,14 @@ import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoPersonaENUM;
 @Table(name="PERSONAS")
 @Inheritance(strategy=InheritanceType.JOINED)
 @NamedQueries({@NamedQuery(name=Persona.BUSCAR_PERSONA_LOGIN,
-query="SELECT pers FROM Persona pers WHERE pers.login.id = ?1")})
+query="SELECT pers FROM Persona pers WHERE pers.login.id = ?1"),
+	@NamedQuery(name=Persona.BUSCAR_PERSONA_TIPO, 
+	query="SELECT p FROM Persona p WHERE p.id = ?1 AND p.tipoUsuario = ?2")})
 public class Persona implements Serializable {
 	
 	public static final String BUSCAR_PERSONA_LOGIN = "Persona.buscarPersonaLogin";
+	
+	public static final String BUSCAR_PERSONA_TIPO = "Persona.buscarPersonaTipo";
 	
 	@Id
 	@Column(name="PERSONA_ID", length=12, nullable=false)

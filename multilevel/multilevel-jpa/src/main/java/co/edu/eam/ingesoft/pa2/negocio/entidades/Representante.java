@@ -41,7 +41,7 @@ public class Representante extends Persona implements Serializable {
 	private int acomuladoTotal;
 	
 	@Enumerated(value=EnumType.STRING)
-	@Column(name="ESTADO", length=12, nullable=false)
+	@Column(name="ESTADO", length=15, nullable=false)
 	private EstadoRepresentanteENUM estado;
 	
 	@ManyToOne

@@ -122,6 +122,7 @@ public class ControladorManejoUsuario implements Serializable {
 	}
 
 	/**
+	 * Registra un usuario
 	 * 
 	 * @author Brayan Giraldo Correo : giraldo97@outlook.com
 	 */
@@ -158,7 +159,7 @@ public class ControladorManejoUsuario implements Serializable {
 				Messages.addGlobalInfo("Registrado Correctamente");
 				inicializar();
 
-			} else if(tipeUser == 'R'){
+			} else if (tipeUser == 'R') {
 
 				login.setId(persona.getId());
 
@@ -168,7 +169,7 @@ public class ControladorManejoUsuario implements Serializable {
 						persona.getSueldoActual(), persona.getAcomuladoTotal(), persona.getEstado(),
 						persona.getAfiliador(), persona.getFechaAfiliacion());
 
-				int valId = direccionEJB.cantidadDirecciones()+1;
+				int valId = direccionEJB.cantidadDirecciones() + 1;
 				Direccion dir = new Direccion(valId, direccion.getCiudad(), direccion.getDescripcion());
 
 				direccionEJB.crear(dir);
@@ -179,7 +180,7 @@ public class ControladorManejoUsuario implements Serializable {
 				Messages.addGlobalInfo("Registrado Correctamente");
 				inicializar();
 
-			}else{
+			} else {
 				Messages.addGlobalWarn("Seleccione tipo de usuario");
 			}
 		} else {
@@ -187,16 +188,181 @@ public class ControladorManejoUsuario implements Serializable {
 		}
 	}
 
+	/**
+	 * Busca un usuario
+	 * 
+	 * @author Brayan Giraldo Correo : giraldo97@outlook.com
+	 */
 	public void buscarUsuario() {
 
+		if (tipeUser == 'A' || tipeUser == 'C') {
+
+			TipoPersonaENUM tipo;
+			if(tipeUser=='A')
+			tipo = TipoPersonaENUM.ADMINISTRADOR;
+			else
+				tipo = TipoPersonaENUM.CLIENTE;
+			
+			Persona p = personaEJB.buscarPersonaTipo(persona.getId(), tipo);
+			if(p!=null){
+				
+				persona.setTipoDocumento(p.getTipoDocumento());
+				persona.setNombre(p.getNombre());
+				persona.setApellido(p.getApellido());
+				persona.setFechaNacimiento(p.getFechaNacimiento());
+				
+				Login log = p.getLogin();
+				login.setNickname(log.getNickname());
+				login.setPass(log.getPass());
+				
+				persona.setTelefono(p.getTelefono());
+			//	personaDireccion = personaDireccionEJB.buscarPersonaDireccion(p.getId(), p.get)
+				persona.setEmail(p.getEmail());
+				persona.setGenero(p.getGenero());
+				
+				
+			}else{
+				Messages.addGlobalWarn("No existe persona del tipo " + tipo +" con id "+ persona.getId());
+				inicializar();
+			}
+		
+			
+			
+		} else if (tipeUser == 'R') {
+
+			Persona r = personaEJB.buscarPersonaTipo(persona.getId(), TipoPersonaENUM.REPRESENTANTE);
+			if(r!=null){
+				
+				Representante p = (Representante)r;
+				
+				persona.setTipoDocumento(p.getTipoDocumento());
+				persona.setNombre(p.getNombre());
+				persona.setApellido(p.getApellido());
+				persona.setFechaNacimiento(p.getFechaNacimiento());
+
+				Login log = p.getLogin();
+				login.setNickname(log.getNickname());
+				login.setPass(log.getPass());
+
+				persona.setTelefono(p.getTelefono());
+				
+			//	personaDireccion = personaDireccionEJB.buscarPersonaDireccion(p.getId(), p.get)
+				
+				persona.setEmail(p.getEmail());
+				persona.setGenero(p.getGenero());
+				persona.setCategoria(p.getCategoria());
+				persona.setSueldoActual(p.getSueldoActual());
+				persona.setAcomuladoTotal(p.getAcomuladoTotal());
+				persona.setEstado(p.getEstado());
+				persona.setFechaAfiliacion(p.getFechaAfiliacion());
+				persona.setAfiliador(p.getAfiliador());
+				
+				
+			}else{
+				Messages.addGlobalWarn("No existe persona del tipo " + TipoPersonaENUM.REPRESENTANTE +" con id "+ persona.getId());
+				inicializar();
+			}
+			
+			
+		} else {
+			Messages.addGlobalWarn("Seleccione tipo de usuario");
+		}
+
 	}
 
+	/**
+	 * Edita un usuario
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
 	public void editarUsuario() {
 
+		Persona r = personaEJB.buscar(persona.getId());
+		
+		TipoPersonaENUM tipo = null;
+		if(tipeUser=='A')
+		tipo = TipoPersonaENUM.ADMINISTRADOR;
+		else if (tipeUser=='C')
+			tipo = TipoPersonaENUM.CLIENTE;
+		else if (tipeUser=='R')
+			tipo = TipoPersonaENUM.REPRESENTANTE;
+		else
+			Messages.addGlobalWarn("Seleccione tipo de usuario");
+		
+		if(r instanceof Representante){
+			
+			Representante p = (Representante)r;
+			
+			p.setTipoUsuario(tipo);
+			p.setTipoDocumento(persona.getTipoDocumento());
+			p.setNombre(persona.getNombre());
+			p.setApellido(persona.getApellido());
+			p.setFechaNacimiento(persona.getFechaNacimiento());
+			
+			p.getLogin().setNickname(login.getNickname());
+			p.getLogin().setPass(login.getPass());
+			
+			p.setTelefono(persona.getTelefono());
+			
+		//	rDireccion = rDireccionEJB.buscarrDireccion(persona.getId(), persona.get)
+			p.setEmail(persona.getEmail());
+			
+			p.setGenero(persona.getGenero());
+			p.setCategoria(persona.getCategoria());
+			p.setSueldoActual(persona.getSueldoActual());
+			p.setAcomuladoTotal(persona.getAcomuladoTotal());
+			p.setEstado(persona.getEstado());
+			p.setFechaAfiliacion(persona.getFechaAfiliacion());
+			p.setAfiliador(persona.getAfiliador());
+			personaEJB.editar(p);
+			Messages.addGlobalInfo("Editado Correctamente");
+			
+		}else{
+			
+			r.setTipoUsuario(tipo);
+			r.setTipoDocumento(persona.getTipoDocumento());
+			r.setNombre(persona.getNombre());
+			r.setApellido(persona.getApellido());
+			r.setFechaNacimiento(persona.getFechaNacimiento());
+			
+			r.setLogin(login);
+			
+			r.setTelefono(persona.getTelefono());
+			
+		//	rDireccion = rDireccionEJB.buscarrDireccion(persona.getId(), persona.get)
+			
+			r.setEmail(persona.getEmail());
+			r.setGenero(persona.getGenero());
+			personaEJB.editar(r);
+			Messages.addGlobalInfo("Editado Correctamente");
+
+		}
+		
 	}
 
+	/**
+	 * Elimina un usuario
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
 	public void removerUsuario() {
 
+		Persona p = personaEJB.buscar(persona.getId());
+		
+		if(p instanceof Representante){
+			
+			Representante r = (Representante)p;
+			r.setEstado(EstadoRepresentanteENUM.DESHABILITADO);
+			personaEJB.editar(r);
+			Messages.addGlobalInfo("Representante deshabilitado Correctamente");
+			inicializar();
+			
+		}else{
+			personaEJB.eliminar(p);
+			Messages.addGlobalInfo("Eliminado Correctamente");
+			inicializar();
+		}
+		
 	}
 
 	/**

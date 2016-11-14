@@ -25,11 +25,11 @@
 						id="labelPedido" for="comboPedido" />
 					<p:selectOneMenu
 						 value="#{ControladorManejoPedidos.pedido}"
-						id="comboPedido">
+						id="comboPedido" converter="#{pedidoConverter}" required="true">
 
                         <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
 						<f:selectItems value="#{ControladorManejoPedidos.pedidos}"
-							var="pet" itemLabel="#{pet}" itemValue="#{pet}" />
+							var="pet" itemLabel="#{pet.representante} : #{pet.precio}" itemValue="#{pet}" />
 	
 					</p:selectOneMenu>
 					
@@ -46,10 +46,10 @@
 						value="#{msj['pedido.revisar']}" update="panelDatos" />
 					<p:commandButton
 						action="#{ControladorManejoPedidos.aprobarPedido()}"
-						value="#{msj['pedido.aprobar']}" />
+						value="#{msj['pedido.aprobar']}" update="panelDatos"/>
 					<p:commandButton
 						action="#{ControladorManejoPedidos.negarPedido()}"
-						value="#{msj['pedido.Negar']}" />
+						value="#{msj['pedido.Negar']}" update="panelDatos"/>
 				
 				</h:panelGrid>
 

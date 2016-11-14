@@ -7,6 +7,7 @@ import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Persona;
+import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoPersonaENUM;
 import co.edu.eam.ingesoft.pa2.util.ConstantesNamedQueries;
 
 @Stateless
@@ -15,7 +16,7 @@ public class BOPersonaEJB extends EJBGenerico<Persona> implements InterfaceEJBRe
 
 	@Override
 	public void crear(Persona entidad) {
-		if (buscar(entidad.getId()) != null) {
+		if (dao.buscar(entidad.getId()) != null) {
 			throw new ExcepcionFuncional("Ya existe una persona con este codigo " + entidad.getId());
 		} else {
 			dao.crear(entidad);
@@ -25,19 +26,21 @@ public class BOPersonaEJB extends EJBGenerico<Persona> implements InterfaceEJBRe
 	@Override
 	public Persona buscar(Object pk) {
 		Persona p = dao.buscar(pk);
-		return p;
+		if(p!=null){
+			return p;
+		}else{
+			throw new ExcepcionFuncional("No existe una persona con esta Identificación " + pk);
+		}
 	}
 
 	@Override
 	public void editar(Persona entidad) {
-		// TODO Auto-generated method stub
-		
+	 dao.editar(entidad);
 	}
 
 	@Override
 	public void eliminar(Persona entidad) {
-		// TODO Auto-generated method stub
-		
+		dao.borrar(entidad);
 	}
 
 	@Override
@@ -51,8 +54,26 @@ public class BOPersonaEJB extends EJBGenerico<Persona> implements InterfaceEJBRe
 	 * Correo : giraldo97@outlook.com
 	 */
 	public Persona buscarPersonaLogin(int idLogin){
+		try{
 		Persona p = dao.ejecutarQuery(Persona.BUSCAR_PERSONA_LOGIN, idLogin);
 		return p;
+		}catch(Exception e){
+			return null;
+		}
+	}
+	
+	/**
+	 * Busca una persona en su propio tipo
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
+	public Persona buscarPersonaTipo(int idPersona, TipoPersonaENUM tipo){
+		try{
+			Persona p = dao.ejecutarQuery(Persona.BUSCAR_PERSONA_TIPO, idPersona, tipo);
+			return p;
+			}catch(Exception e){
+				return null;
+			}
 	}
 	
 }

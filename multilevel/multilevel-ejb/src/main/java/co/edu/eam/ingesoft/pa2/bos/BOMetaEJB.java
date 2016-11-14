@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
@@ -8,6 +9,7 @@ import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Meta;
 
 @Stateless
+@LocalBean
 public class BOMetaEJB extends EJBGenerico<Meta> implements InterfaceEJBRemote<Meta>{
 
 	@Override
@@ -17,7 +19,7 @@ public class BOMetaEJB extends EJBGenerico<Meta> implements InterfaceEJBRemote<M
 
 	@Override
 	public void crear(Meta entidad) {
-		if (buscar(entidad.getId()) != null) {
+		if (dao.buscar(entidad.getId()) != null) {
 			throw new ExcepcionFuncional("Ya existe una Meta con este codigo " + entidad.getId());
 		} else {
 			dao.crear(entidad);
@@ -27,25 +29,23 @@ public class BOMetaEJB extends EJBGenerico<Meta> implements InterfaceEJBRemote<M
 
 	@Override
 	public Meta buscar(Object pk) {
-		return dao.buscar(pk);
+		Meta m = dao.buscar(pk);
+		if(m!=null){
+			return m;
+		}else{
+			throw new ExcepcionFuncional("Aùn no existe una Meta con este codigo " + pk);
+
+		}
 	}
 
 	@Override
 	public void editar(Meta entidad) {
-		if (buscar(entidad.getId()) != null) {
 			dao.editar(entidad);
-		} else {
-			throw new ExcepcionFuncional("Aùn no existe una Meta con este codigo " + entidad.getId());
-		}
 	}
 
 	@Override
 	public void eliminar(Meta entidad) {
-		if (buscar(entidad.getId()) != null) {
 			dao.borrar(entidad);
-		} else {
-			throw new ExcepcionFuncional("Aùn no existe una Meta con este codigo " + entidad.getId());
-		}
 	}
 
 

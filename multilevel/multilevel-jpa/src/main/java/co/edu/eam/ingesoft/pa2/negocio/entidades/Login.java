@@ -25,11 +25,11 @@ public class Login implements Serializable{
 	@Column(name="LOGIN_ID", nullable=false, length=12)
 	private int id;
 	
-	@Size(min = 3, max = 45, message = "La longitud del nickname es incorrecta")
+	//@Size(min = 3, max = 45, message = "La longitud del nickname es incorrecta")
 	@Column(name = "NICKNAME", length = 45, nullable = false)
 	private String nickname;
 
-	@Size(min = 3, max = 45, message = "La longitud del password es incorrecta")
+	//@Size(min = 3, max = 45, message = "La longitud del password es incorrecta")
 	@Column(name = "PASS", length = 45, nullable = false)
 	private String pass;
 	

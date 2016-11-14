@@ -7,36 +7,39 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
-import co.edu.eam.ingesoft.pa2.bos.BOPedidoEJB;
-import co.edu.eam.ingesoft.pa2.negocio.entidades.Pedido;
+import co.edu.eam.ingesoft.pa2.bos.BOPremioEJB;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.Premio;
 
 @Named
-@FacesConverter(value="pedidoConverter", forClass=PedidoConverter.class)
-public class PedidoConverter implements Converter {
+@FacesConverter(value="premioConverter", forClass=Premio.class)
+public class PremioConverter implements Converter{
 
 	@EJB
-	private BOPedidoEJB pedidoEJB;
+	private BOPremioEJB premioEJB;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		
 		try{
-			Pedido p = pedidoEJB.buscar(Integer.valueOf(value));
+			
+			Premio p = premioEJB.buscar(Integer.valueOf(value));
 			return p;
 			
 		}catch(NumberFormatException nf){
 			return null;
 		}
-
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if(value instanceof Pedido){
-			Pedido p = (Pedido) value;
+		
+		if(value instanceof Premio){
+			Premio p = (Premio)value;
 			return String.valueOf(p.getId());
 		}
+		
 		return null;
 	}
 
+	
+	
 }
