@@ -4,27 +4,27 @@ app.config(function($routeProvider) {
 	$routeProvider.when("/", {
 		controller : "modulo1Controller",
 		controllerAs : "m1",
-		templateUrl : "vistas/form.html"
+		
 	}).when("/cursos", {
-		controller : "cursosController",
+		controller : "inventarioController",
 		controllerAs : "cur",
 		templateUrl : "vistas/cursos.html"
 	}).when("/Compras", {
-		controller : "cursosController",
-		controllerAs : "cur",
+//		controller : "inventarioController",
+//		controllerAs : "cur0",
 		templateUrl : "vistas/Compras.html"
 	})
 	.when("/Promociones", {
-		controller : "cursosController",
-		controllerAs : "cur",
+//		controller : "inventarioController",
+//		controllerAs : "cur1",
 		templateUrl : "vistas/Promociones.html"
 	}).when("/Afiliado", {
-		controller : "cursosController",
-		controllerAs : "cur",
+//		controller : "inventarioController",
+//		controllerAs : "cur2",
 		templateUrl : "vistas/Afiliado.html"
 	}).when("/Pedido", {
-		controller : "cursosController",
-		controllerAs : "cur",
+//		controller : "inventarioController",
+//		controllerAs : "cur3",
 		templateUrl : "vistas/Pedido.html"
 	})
 });

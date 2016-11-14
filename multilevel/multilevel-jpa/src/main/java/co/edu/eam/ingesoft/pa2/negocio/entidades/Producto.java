@@ -28,7 +28,7 @@ public class Producto implements Serializable {
 	@Column(name = "NOMBRE", length = 60, nullable = false)
 	private String nombre;
 	
-	@Column(name="PRECIO_VENTA", length=7, nullable=false)
+	@Column(name="PRECIO", length=7, nullable=false)
 	private double precioVenta;
 	
 	@Column(name="PUNTOS", length=5, nullable=false)

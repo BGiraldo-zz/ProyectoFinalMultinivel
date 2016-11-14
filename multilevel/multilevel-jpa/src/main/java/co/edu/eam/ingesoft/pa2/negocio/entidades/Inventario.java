@@ -8,13 +8,19 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="INVENTARIOS")
 @IdClass(InventarioPK.class)
+@NamedQueries({@NamedQuery(name=Inventario.BUSCAR_INVENTARIO,
+query="SELECT i.producto.id,i.producto.nombre,i.cantidad,i.precioBase FROM Inventario i WHERE i.representante.id = ?1")})
 public class Inventario implements Serializable{
 
+	public static final String BUSCAR_INVENTARIO = "Inventario.buscarInventario";
+	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)

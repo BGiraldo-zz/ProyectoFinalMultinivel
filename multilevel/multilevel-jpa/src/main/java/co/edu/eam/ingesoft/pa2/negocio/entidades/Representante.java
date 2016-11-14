@@ -24,7 +24,7 @@ import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoPersonaENUM;
 public class Representante extends Persona implements Serializable {
 	
 	@ManyToOne
-	@JoinColumn(name="CATEGORIA_REPRESENTANTE_ID", nullable=false)
+	@JoinColumn(name="CATEGORIA_REPRESENTANTES_ID", nullable=false)
 	private CategoriaRepresentante categoria;
 	
 	@Column(name="SUELDO_ACTUAL", length=12, nullable=false)
