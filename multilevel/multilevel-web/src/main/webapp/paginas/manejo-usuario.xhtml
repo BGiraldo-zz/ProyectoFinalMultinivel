@@ -24,15 +24,13 @@
 
 					<h:outputText value="#{msj['registrarUsuario.tipoUsuario']}"
 						id="labelTipo" for="comboTipo" />
-					<p:selectOneMenu
-						value="#{ControladorManejoUsuario.tipeUser}"
+					<p:selectOneMenu value="#{ControladorManejoUsuario.tipeUser}"
 						id="comboTipo">
 
-						<f:selectItem itemValue="s" itemLabel="Seleccione una opción..."/>
-						<f:selectItem itemValue="A" itemLabel="Administrador" 
-						/>
+						<f:selectItem itemValue="s" itemLabel="Seleccione una opción..." />
+						<f:selectItem itemValue="A" itemLabel="Administrador" />
 						<f:selectItem itemValue="R" itemLabel="Representante" />
-						<f:selectItem itemValue="V" itemLabel="Cliente"/>
+						<f:selectItem itemValue="C" itemLabel="Cliente" />
 
 						<f:ajax event="change" render="panelDatos" execute="this"
 							listener="#{ControladorManejoUsuario.cargarCampos()}" />
@@ -42,24 +40,42 @@
 					<br />
 
 					<h:outputText value="#{msj['registrarUsuario.identificacion']}"
-						id="labelIdentificacion" for="tfIdentificacion"/>
-					<p:inputText value="#{ControladorManejoUsuario.representante.id}"
+						id="labelIdentificacion" for="tfIdentificacion" />
+					<p:inputText value="#{ControladorManejoUsuario.persona.id}"
 						id="tfIdentificacion" placeholder="Identificacion" />
 					<h:message style="color:Red; margin:8px;" for="tfIdentificacion" />
 
+					<h:outputText value="#{msj['registrarUsuario.tipoDocumento']}"
+						id="labelTipoDocumento" for="comboTipoDocumento" />
+					<p:selectOneMenu
+						value="#{ControladorManejoUsuario.persona.tipoDocumento}"
+						id="comboTipoDocumento" >
+
+						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoUsuario.tipoDocumentos}"
+							var="doc" itemLabel="#{doc}" itemValue="#{doc}" />
+
+					</p:selectOneMenu>
+                     <br/>
 					<h:outputText value="#{msj['registrarUsuario.nombre']}"
 						id="labelNombre" for="tfNombre" />
-					<p:inputText
-						value="#{ControladorManejoUsuario.representante.nombre}"
+					<p:inputText value="#{ControladorManejoUsuario.persona.nombre}"
 						id="tfNombre" placeholder="Nombre" />
 					<h:message style="color:Red; margin:8px;" for="tfNombre" />
 
 					<h:outputText value="#{msj['registrarUsuario.apellido']}"
 						id="labelApellido" for="tfApellido" />
-					<p:inputText
-						value="#{ControladorManejoUsuario.representante.apellido}"
+					<p:inputText value="#{ControladorManejoUsuario.persona.apellido}"
 						id="tfApellido" placeholder="Apellido" />
 					<h:message style="color:Red; margin:8px;" for="tfApellido" />
+
+					<p:outputLabel for="tfFechaNacimiento"
+						value="#{msj['registrarUsuario.fechaNacimiento']}" />
+					<p:calendar id="tfFechaNacimiento"
+						value="#{ControladorManejoUsuario.persona.fechaNacimiento}"
+						showOn="button" placeholder="Dia/Mes/Año" />
+
+					<br />
 
 					<h:outputText value="#{msj['registrarUsuario.user']}"
 						id="labelUser" for="tfUser" />
@@ -75,74 +91,59 @@
 
 					<h:outputText value="#{msj['registrarUsuario.telefono']}"
 						id="labelTelefono" for="tfTelefono" />
-					<p:inputText
-						value="#{ControladorManejoUsuario.representante.telefono}"
+					<p:inputText value="#{ControladorManejoUsuario.persona.telefono}"
 						id="tfTelefono" placeholder="Telefono" />
 					<h:message style="color:Red; margin:8px;" for="tfTelefono" />
 
 					<h:outputText value="#{msj['registrarUsuario.direccion']}"
 						id="labelDireccion" for="tfDireccion" />
 					<p:inputText
-						value="#{ControladorManejoUsuario.representante.direccion}"
+						value="#{ControladorManejoUsuario.direccion.descripcion}"
 						id="tfDireccion" placeholder="Direccion" />
 					<h:message style="color:Red; margin:8px;" for="tfDireccion" />
 
+					<h:outputText value="#{msj['registrarUsuario.ciudad']}"
+						id="labelCiudad" for="comboCiudad" />
+					<p:selectOneMenu
+						value="#{ControladorManejoUsuario.direccion.ciudad}"
+						id="comboCiudad" converter="#{ciudadConverter}">
+
+						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoUsuario.ciudades}"
+							var="ciu" itemLabel="#{ciu.nombre}" itemValue="#{ciu}" />
+					</p:selectOneMenu>
+					<h:message style="color:Red; margin:8px;" for="comboCiudad" />
+
+
+
 					<h:outputText value="#{msj['registrarUsuario.correo']}"
 						id="labelCorreo" for="tfCorreo" />
-					<p:inputText
-						value="#{ControladorManejoUsuario.representante.email}"
+					<p:inputText value="#{ControladorManejoUsuario.persona.email}"
 						id="tfCorreo" placeholder="Email" />
 					<h:message style="color:Red; margin:8px;" for="tfCorreo" />
 
 					<h:outputText value="#{msj['registrarUsuario.genero']}"
 						id="labelGenero" for="comboGenero" />
-					<p:selectOneMenu
-						value="#{ControladorManejoUsuario.representante.genero}"
-						id="comboGenero" converter="#{generoConverter}">
+					<p:selectOneMenu value="#{ControladorManejoUsuario.persona.genero}"
+						id="comboGenero">
 
 						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
-						<f:selectItem itemValue="b" itemLabel="Masculino" />
-						<f:selectItem itemValue="c" itemLabel="Femenino" />
+						<f:selectItem itemValue="M" itemLabel="Masculino" />
+						<f:selectItem itemValue="F" itemLabel="Femenino" />
 
 					</p:selectOneMenu>
-					<br />
 
-					<p:outputLabel for="tfFechaNacimiento"
-						value="#{msj['registrarUsuario.fechaNacimiento']}" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
-					<p:calendar id="tfFechaNacimiento" value="#{calendarView.date3}"
-						showOn="button" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
-
-					<br />
-
-
-
-					<h:outputText value="#{msj['registrarUsuario.ciudad']}"
-						id="labelCiudad" for="comboCiudad" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
-
-					<p:selectOneMenu
-						value="#{ControladorManejoUsuario.representante.ciudad}"
-						id="comboCiudad" converter="#{ciudadConverter}"
-						rendered="#{ControladorManejoUsuario.cargarCampos()}">
-
-						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
-						<f:selectItems value="#{ControladorManejoUsuario.ciudades}"
-							var="ciu" itemLabel="#{ciu.nombre}" itemValue="#{ciu}" />
-
-					</p:selectOneMenu>
 
 					<br />
 
 					<h:outputText value="#{msj['registrarUsuario.categoria']}"
-						id="labelCategoria" for="comboCategoria" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
+						id="labelCategoria" for="comboCategoria"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
 					<p:selectOneMenu
-						value="#{ControladorManejoUsuario.representante.categoria}"
-						id="comboCategoria" converter="#{categoriaConverter}"
+						value="#{ControladorManejoUsuario.persona.categoria}"
+						id="comboCategoria" converter="#{categoriaRepresentanteConverter}"
 						rendered="#{ControladorManejoUsuario.cargarCampos()}">
-						
+
 						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
 						<f:selectItems value="#{ControladorManejoUsuario.categorias}"
 							var="cat" itemLabel="#{cat.nombre}" itemValue="#{cat}" />
@@ -153,57 +154,68 @@
 
 
 					<h:outputText value="#{msj['registrarUsuario.sueldo']}"
-						id="labelSueldo" for="tfSueldo" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
+						id="labelSueldo" for="tfSueldo"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
 					<p:inputText
-						value="#{ControladorManejoUsuario.representante.sueldoActual}"
-						id="tfSueldo" placeholder="Sueldo Actual" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
-					<h:message style="color:Red; margin:8px;" for="tfSueldo" 
-					rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
+						value="#{ControladorManejoUsuario.persona.sueldoActual}"
+						id="tfSueldo" placeholder="Sueldo Actual"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
+					<h:message style="color:Red; margin:8px;" for="tfSueldo"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
 
-					<h:outputText value="#{msj['registrarUsuario.tipoDocumento']}"
-						id="labelTipoDocumento" for="comboTipoDocumento" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
-					<p:selectOneMenu
-						value="#{ControladorManejoUsuario.representante.tipoDocumento}"
-						id="comboTipoDocumento"
-						rendered="#{ControladorManejoUsuario.cargarCampos()}">
-
-						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
-						<f:selectItem itemValue="b" itemLabel="Cedula de ciudadanía" />
-						<f:selectItem itemValue="c" itemLabel="Cedula de extranjeria" />
-						<f:selectItem itemValue="d" itemLabel="Registro Civil" />
-						<f:selectItem itemValue="e" itemLabel="NIT" />
-
-					</p:selectOneMenu>
-					<br />
 
 					<h:outputText value="#{msj['registrarUsuario.acomuladoTotal']}"
-						id="labelAcomuladoTotal" for="tfAcomuladoTotal" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
+						id="labelAcomuladoTotal" for="tfAcomuladoTotal"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
 					<p:inputText
-						value="#{ControladorManejoUsuario.representante.acomuladoTotal}"
-						id="tfAcomuladoTotal" placeholder="Acomulado Total" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
-					<h:message style="color:Red; margin:8px;" for="tfSueldo" 
-					rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
+						value="#{ControladorManejoUsuario.persona.acomuladoTotal}"
+						id="tfAcomuladoTotal" placeholder="Acomulado Total"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
+					<h:message style="color:Red; margin:8px;" for="tfSueldo"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
 
 					<h:outputText value="#{msj['registrarUsuario.estado']}"
-						id="labelEstado" for="comboEstado" 
-						rendered="#{ControladorManejoUsuario.cargarCampos()}"/>
+						id="labelEstado" for="comboEstado"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
+					<p:selectOneMenu value="#{ControladorManejoUsuario.persona.estado}"
+						id="comboEstado" rendered="#{ControladorManejoUsuario.cargarCampos()}">
+
+						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItems value="#{ControladorManejoUsuario.estados}"
+							var="est" itemLabel="#{est}" itemValue="#{est}" />
+					</p:selectOneMenu>
+
+
+
+					<br />
+
+					<p:outputLabel for="tfFechaAfiliacion"
+						value="#{msj['usuario.fechaAfiliacion']}"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
+					<p:calendar id="tfFechaAfiliacion"
+						value="#{ControladorManejoUsuario.persona.fechaAfiliacion}"
+						showOn="button"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
+					<br />
+
+					<br />
+
+					<h:outputText value="#{msj['usuario.afiliador']}"
+						id="labelAfiliador" for="comboAfiliador"
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
 					<p:selectOneMenu
-						value="#{ControladorManejoUsuario.representante.estado}"
-						id="comboEstado"
+						value="#{ControladorManejoUsuario.persona.afiliador}"
+						id="comboAfiliador" converter="#{afiliadorConverter}"
 						rendered="#{ControladorManejoUsuario.cargarCampos()}">
 
 						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
-						<f:selectItem itemValue="b" itemLabel="Inactivo" />
-						<f:selectItem itemValue="c" itemLabel="Activo" />
-						<f:selectItem itemValue="d" itemLabel="Deshabilitado" />
-						<f:selectItem itemValue="e" itemLabel="Multado" />
+						<f:selectItems value="#{ControladorManejoUsuario.afiliadores}"
+							var="afi" itemLabel="#{afi.nombre} #{afi.apellido}"
+							itemValue="#{afi}" />
 
 					</p:selectOneMenu>
+
+					<br />
 
 				</h:panelGrid>
 

@@ -1,5 +1,8 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import java.util.List;
+
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
@@ -9,6 +12,7 @@ import co.edu.eam.ingesoft.pa2.negocio.entidades.CategoriaRepresentante;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.CategoriaRepresentante;
 
 @Stateless
+@LocalBean
 public class BOCategoriaRepresentanteEJB  extends EJBGenerico<CategoriaRepresentante> implements InterfaceEJBRemote<CategoriaRepresentante>{
 
 	@Override
@@ -49,5 +53,13 @@ public class BOCategoriaRepresentanteEJB  extends EJBGenerico<CategoriaRepresent
 		}
 	}
 
+	/**
+	 * Lista las categorias representante disponibles en la BD
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
+	public List<CategoriaRepresentante> listarCategorias(){
+		return dao.ejecutarNamedQuery(CategoriaRepresentante.LISTAR_CATEGORIA);
+	}
 	
 }

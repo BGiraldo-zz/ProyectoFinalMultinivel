@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-import javax.persistence.PersistenceException;
 
 import org.apache.log4j.Logger;
 import org.omnifaces.util.Faces;

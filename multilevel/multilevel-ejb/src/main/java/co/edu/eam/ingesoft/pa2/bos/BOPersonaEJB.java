@@ -3,6 +3,7 @@ package co.edu.eam.ingesoft.pa2.bos;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Persona;
@@ -14,8 +15,11 @@ public class BOPersonaEJB extends EJBGenerico<Persona> implements InterfaceEJBRe
 
 	@Override
 	public void crear(Persona entidad) {
-		// TODO Auto-generated method stub
-		
+		if (buscar(entidad.getId()) != null) {
+			throw new ExcepcionFuncional("Ya existe una persona con este codigo " + entidad.getId());
+		} else {
+			dao.crear(entidad);
+		}
 	}
 
 	@Override

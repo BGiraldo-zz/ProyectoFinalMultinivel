@@ -1,20 +1,27 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.Catalogo;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.CatalogoProducto;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.Producto;
 
 @Stateless
-public class BOCatalogoProductoEJB extends EJBGenerico<CatalogoProducto> implements InterfaceEJBRemote<CatalogoProducto>{
+@LocalBean
+public class BOCatalogoProductoEJB extends EJBGenerico<CatalogoProducto>
+		implements InterfaceEJBRemote<CatalogoProducto> {
 
-	@Override
-	public Class getClase() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-/*
+	@EJB
+	private BOCatalogoEJB catalogoEJB;
+
+	@EJB
+	private BOProductoEJB productoEJB;
+
 	@Override
 	public Class getClase() {
 		return CatalogoProducto.class;
@@ -22,35 +29,68 @@ public class BOCatalogoProductoEJB extends EJBGenerico<CatalogoProducto> impleme
 
 	@Override
 	public void crear(CatalogoProducto entidad) {
-		if (buscar(entidad.get) != null) {
-			throw new ExcepcionFuncional("Ya existe un Catalogo Producto con este codigo " + entidad.getId());
-		} else {
-			dao.crear(entidad);
+		CatalogoProducto cp = null;
+		CatalogoProducto catPro = new CatalogoProducto();
+		try {
+			cp = dao.ejecutarQuery(CatalogoProducto.BUSCAR_PRODUCTO_CATALOGO, entidad.getCatalogo().getId(),
+					entidad.getProducto().getId());
+		} catch (Exception e) {
+			cp = null;
 		}
 
+		if (cp == null) {
+			Catalogo c = catalogoEJB.buscar(entidad.getCatalogo().getId());
+			Producto p = productoEJB.buscar(entidad.getProducto().getId());
+			catPro.setCantidadProducto(entidad.getCantidadProducto());
+			catPro.setCatalogo(c);
+			catPro.setProducto(p);
+			dao.crear(catPro);
+		} else {
+			Catalogo c = catalogoEJB.buscar(entidad.getCatalogo().getId());
+			Producto p = productoEJB.buscar(entidad.getProducto().getId());
+			catPro.setCantidadProducto(entidad.getCantidadProducto());
+			catPro.setCatalogo(c);
+			catPro.setProducto(p);
+			dao.editar(catPro);
+		}
+
+	}
+
+	/**
+	 * busca un producto en un catalogo
+	 * 
+	 * @author Brayan Giraldo Correo : giraldo97@outlook.com
+	 */
+	public CatalogoProducto buscarCatalogoProducto(int idCat, int idPro) {
+		CatalogoProducto cp = null;
+		try {
+			cp = dao.ejecutarQuery(CatalogoProducto.BUSCAR_PRODUCTO_CATALOGO, idCat, idPro);
+		} catch (Exception e) {
+			cp = null;
+		}
+		if (cp != null) {
+			return cp;
+		} else {
+			throw new ExcepcionFuncional("No se ha encontado este producto en dicho catalogo");
+		}
 	}
 
 	@Override
 	public CatalogoProducto buscar(Object pk) {
-		return dao.buscar(pk);
+		return null;
 	}
 
 	@Override
-	public void editar(CatalogoProducto entidad) {
-		if (buscar(entidad.getId()) != null) {
-			dao.editar(entidad);
-		} else {
-			throw new ExcepcionFuncional("Aùn no existe un Catalogo Producto con este codigo " + entidad.getId());
-		}
+	public void editar(CatalogoProducto e) {
+		CatalogoProducto cp = buscarCatalogoProducto(e.getCatalogo().getId(), e.getProducto().getId());
+		cp.setCantidadProducto(e.getCantidadProducto());
+		dao.editar(cp);
 	}
 
 	@Override
-	public void eliminar(CatalogoProducto entidad) {
-		if (buscar(entidad.getId()) != null) {
-			dao.borrar(entidad);
-		} else {
-			throw new ExcepcionFuncional("Aùn no existe un Catalogo Producto con este codigo " + entidad.getId());
-		}
+	public void eliminar(CatalogoProducto e) {
+		CatalogoProducto cp = buscarCatalogoProducto(e.getCatalogo().getId(), e.getProducto().getId());
+		dao.borrar(cp);
 	}
-*/
+
 }

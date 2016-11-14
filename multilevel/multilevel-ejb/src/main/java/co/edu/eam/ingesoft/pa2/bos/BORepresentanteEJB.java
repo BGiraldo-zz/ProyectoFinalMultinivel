@@ -1,5 +1,8 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import java.util.List;
+
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
@@ -9,6 +12,7 @@ import co.edu.eam.ingesoft.pa2.negocio.entidades.Representante;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Representante;
 
 @Stateless
+@LocalBean
 public class BORepresentanteEJB extends EJBGenerico<Representante> implements InterfaceEJBRemote<Representante> {
 
 	@Override
@@ -47,6 +51,15 @@ public class BORepresentanteEJB extends EJBGenerico<Representante> implements In
 		} else {
 			throw new ExcepcionFuncional("Aùn no existe un Representante con este codigo " + entidad.getId());
 		}
+	}
+	
+	/**
+	 * Lista los representantes disponibles en la BD
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
+	public List<Representante> listarRepresentantes(){
+		return dao.ejecutarNamedQuery(Representante.LISTAR_REPRESENTANTES);
 	}
 
 

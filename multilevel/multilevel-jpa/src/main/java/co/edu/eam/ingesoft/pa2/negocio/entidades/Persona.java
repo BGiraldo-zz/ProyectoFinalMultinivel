@@ -38,7 +38,7 @@ public class Persona implements Serializable {
 	protected  String email;
 	
 	@OneToOne
-	@JoinColumn(name="LOGIN_ID", nullable=false)
+	@JoinColumn(name="LOGIN_ID", nullable=true)
 	protected  Login login;
 
 	@Column(name="NOMBRES", length=60, nullable=false)
@@ -236,7 +236,92 @@ public class Persona implements Serializable {
 	public void setTipoDocumento(TipoDocumentoENUM tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
+	
+	
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return ""+nombre+" "+apellido;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
+		result = prime * result + genero;
+		result = prime * result + id;
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+		result = prime * result + ((tipoDocumento == null) ? 0 : tipoDocumento.hashCode());
+		result = prime * result + ((tipoUsuario == null) ? 0 : tipoUsuario.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		if (apellido == null) {
+			if (other.apellido != null)
+				return false;
+		} else if (!apellido.equals(other.apellido))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (fechaNacimiento == null) {
+			if (other.fechaNacimiento != null)
+				return false;
+		} else if (!fechaNacimiento.equals(other.fechaNacimiento))
+			return false;
+		if (genero != other.genero)
+			return false;
+		if (id != other.id)
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (telefono == null) {
+			if (other.telefono != null)
+				return false;
+		} else if (!telefono.equals(other.telefono))
+			return false;
+		if (tipoDocumento != other.tipoDocumento)
+			return false;
+		if (tipoUsuario != other.tipoUsuario)
+			return false;
+		return true;
+	}
+
+	
+	
 	
 	
 }

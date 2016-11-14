@@ -129,7 +129,7 @@ public class SesionBean implements Serializable {
 	 */
 	public String logout() {
 		Faces.getSession().invalidate();
-		return "login.jsf?faces-redirect=true";
+		return "/login.jsf?faces-redirect=true";
 	}
 	
 	/**
