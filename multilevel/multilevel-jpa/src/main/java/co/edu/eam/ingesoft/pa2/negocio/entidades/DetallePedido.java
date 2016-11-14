@@ -31,7 +31,7 @@ public class DetallePedido implements Serializable{
 	@Column(name="PUNTOS", length=12, nullable=false)
 	private int puntos;
 	
-	@Column(name="PRECIO_PRODUCTO", length=6, nullable=false)
+	@Column(name="PRECIO_PRODUCTO", length=12, nullable=false)
 	private double precioProducto;
 
 	/**

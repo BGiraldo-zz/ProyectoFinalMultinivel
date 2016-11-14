@@ -31,11 +31,11 @@ public class Cuota implements Serializable{
 	@JoinColumn(name="CREDITO_ID", nullable=false)
 	private Credito credito;
 	
-	@Column(name="MONTO", nullable=false, length=12)
+	@Column(name="MONTO", nullable=true, length=12)
 	private double monto;
 	
 	@Temporal(value=TemporalType.DATE)
-	@Column(name="FECHA", nullable=false)
+	@Column(name="FECHA", nullable=true)
 	private Date fecha;
 	
 	@Enumerated(value=EnumType.STRING)

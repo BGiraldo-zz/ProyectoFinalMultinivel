@@ -25,14 +25,10 @@ public class Credito implements Serializable{
 	@Column(name="CREDITO_ID", length =12, nullable=false)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name="ENTREGA_ID", nullable=false)
-	private Pedido entrega;
-	
 	@Column(name="INTERES", nullable=false, length=3)
 	private int interes;
 	
-	@Column(name="COSTO_TOTAL", nullable=true, length=5)
+	@Column(name="COSTO_TOTAL", nullable=true, length=12)
 	private double costoTotal;
 	
 	@Column(name="MESES", length=3, nullable=false)
@@ -42,35 +38,40 @@ public class Credito implements Serializable{
 	private float iva;
 	
 	@Temporal(value=TemporalType.DATE)
-	@Column(name="FECHA", nullable=false)
+	@Column(name="FECHA", nullable=true)
 	private Date fechaInicial;
 	
 	
 	@Enumerated(value=EnumType.STRING)
 	@Column(name="ESTADO", nullable=false, length=12)
 	private EstadoCreditoENUM estado;
+	
+	@ManyToOne
+	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
+	private Representante representante;
 
+	
 	/**
 	 * @param id
-	 * @param entrega
 	 * @param interes
 	 * @param costoTotal
 	 * @param meses
 	 * @param iva
 	 * @param fechaInicial
-	 * @param fechaFinal
 	 * @param estado
+	 * @param representante
 	 */
-	public Credito(int id, Pedido entrega, int interes, double costoTotal, int meses, float iva, Date fechaInicial, 
-			EstadoCreditoENUM estado) {
+	public Credito(int id, int interes, double costoTotal, int meses, float iva, Date fechaInicial,
+			EstadoCreditoENUM estado, Representante representante) {
+		super();
 		this.id = id;
-		this.entrega = entrega;
 		this.interes = interes;
 		this.costoTotal = costoTotal;
 		this.meses = meses;
 		this.iva = iva;
 		this.fechaInicial = fechaInicial;
 		this.estado = estado;
+		this.representante = representante;
 	}
 
 	/**
@@ -91,20 +92,6 @@ public class Credito implements Serializable{
 	 */
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the entrega
-	 */
-	public Pedido getEntrega() {
-		return entrega;
-	}
-
-	/**
-	 * @param entrega the entrega to set
-	 */
-	public void setEntrega(Pedido entrega) {
-		this.entrega = entrega;
 	}
 
 	/**
@@ -190,6 +177,22 @@ public class Credito implements Serializable{
 	public void setEstado(EstadoCreditoENUM estado) {
 		this.estado = estado;
 	}
+
+	/**
+	 * @return the representante
+	 */
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+	/**
+	 * @param representante the representante to set
+	 */
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+	
+	
 
 	
 	
