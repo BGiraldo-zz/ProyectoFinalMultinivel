@@ -41,6 +41,7 @@ public class RepresentanteRest {
 		}
 	}
 //	
+	
 //	@POST
 //	@Path("/editarprecio")
 //	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
