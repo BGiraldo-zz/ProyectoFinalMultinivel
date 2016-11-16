@@ -37,11 +37,11 @@ public class Venta implements Serializable {
 	@JoinColumn(name="CLIENTE_ID", nullable=false)
 	private Persona cliente;
 
-	@Column(name = "FECHA_VENTA", nullable = false)
+	@Column(name = "FECHAVENTA", nullable = false)
 	@Temporal(value = TemporalType.DATE)
 	private Date fechaVenta;
 
-	@Column(name = "TOTAL_VENTA", length = 12, nullable = false)
+	@Column(name = "TOTALVENTA", length = 12, nullable = true)
 	private double totalVenta;
 
 	@Enumerated(value = EnumType.STRING)

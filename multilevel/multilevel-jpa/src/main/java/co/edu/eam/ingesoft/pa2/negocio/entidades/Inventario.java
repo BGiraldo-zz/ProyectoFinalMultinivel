@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="INVENTARIOS")
-@IdClass(InventarioPK.class)
 @NamedQueries({@NamedQuery(name=Inventario.BUSCAR_INVENTARIO,
 query="SELECT i FROM Inventario i WHERE i.representante.id = ?1")})
 public class Inventario implements Serializable{
@@ -22,13 +21,15 @@ public class Inventario implements Serializable{
 	public static final String BUSCAR_INVENTARIO = "Inventario.buscarInventario";
 	
 	@Id
+	@Column(name="INVENTARIO_ID", nullable=false, length=12)
+	private int id;
+	
 	@ManyToOne
 	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
 	private Representante representante;
 
 	
 
-	@Id
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false)
 	private Producto producto;
@@ -36,21 +37,40 @@ public class Inventario implements Serializable{
 	@Column(name="CANTIDAD", length=12, nullable=false)
 	private double cantidad;
 	
-	@Column(name="PRECIO_BASE",nullable=false, length=7)
-	private double precioBase;
-
+	
 	/**
+	 * @param id
 	 * @param representante
 	 * @param producto
 	 * @param cantidad
 	 * @param precioBase
 	 */
-	public Inventario(Representante representante, Producto producto,
-			double cantidad, double precioBase) {
+	public Inventario(int id, Representante representante, Producto producto, double cantidad, double precioBase) {
+		super();
+		this.id = id;
 		this.representante = representante;
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.precioBase = precioBase;
+	}
+
+	@Column(name="PRECIO_BASE",nullable=false, length=10)
+	private double precioBase;
+	
+	
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**
@@ -101,6 +121,21 @@ public class Inventario implements Serializable{
 	public void setPrecioBase(double precioBase) {
 		this.precioBase = precioBase;
 	}
+
+	/**
+	 * @return the producto
+	 */
+	public Producto getProducto() {
+		return producto;
+	}
+
+	/**
+	 * @param producto the producto to set
+	 */
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+	
 	
 	public Producto getProducto() {
 		return producto;
