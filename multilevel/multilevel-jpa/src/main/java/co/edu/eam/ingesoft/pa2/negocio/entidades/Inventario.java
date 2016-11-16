@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name="INVENTARIOS")
 @IdClass(InventarioPK.class)
 @NamedQueries({@NamedQuery(name=Inventario.BUSCAR_INVENTARIO,
-query="SELECT i.producto.id,i.producto.nombre,i.cantidad,i.precioBase FROM Inventario i WHERE i.representante.id = ?1")})
+query="SELECT i FROM Inventario i WHERE i.representante.id = ?1")})
 public class Inventario implements Serializable{
 
 	public static final String BUSCAR_INVENTARIO = "Inventario.buscarInventario";
@@ -25,6 +25,8 @@ public class Inventario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
 	private Representante representante;
+
+	
 
 	@Id
 	@ManyToOne
@@ -100,6 +102,12 @@ public class Inventario implements Serializable{
 		this.precioBase = precioBase;
 	}
 	
-	
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
 	
 }

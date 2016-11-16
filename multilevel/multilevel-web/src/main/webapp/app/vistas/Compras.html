@@ -1,4 +1,4 @@
-<div class="row" >
+<div class="row" ng-controller="comprasController" >
 <div class="img">
 <img alt="" src="https://static.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg" class="img1">
 
@@ -16,16 +16,19 @@
 						<th>#</th>
 						<th>Nombre</th>
 						<th>Precio</th>
-						<th>Cantidad</th>
+						<th>Promocion</th>
 						<th>Accion</th>
 						
 					</tr>
 				</thead>
 				<tbody>
 
-					<tr ng-repeat="c in cursos">
-						<td>{{$index}}</td>
-						<td>{{c.idAsignatura.nombreAsignatura}}</td>
+					<tr ng-repeat="c in productos">
+						<td>{{c.id}}</td>
+						<td>{{c.nombre}}</td>
+						<td>{{c.precioVenta}}</td>
+						<td>{{c.promocion.descuento}}%</td>
+					
 						<td>
 							<button class="btn botonComprar" type="submit"
 								name="action" value="Calificar" ng-click="">Calificar								
@@ -48,19 +51,21 @@
 					<tr>
 						<th>#</th>
 						<th>Nombre</th>
-						<th>Precio Base</th>
+						<th>Precio</th>
 						<th>Cantidad</th>
 						
 					</tr>
 				</thead>
 				<tbody>
 
-					<tr ng-repeat="c in cursos">
-						<td>{{$index}}</td>
-						<td>{{c.idAsignatura.nombreAsignatura}}</td>
+					<tr ng-repeat="g in acomprar">
+						<td>{{g.id}}</td>
+						<td>{{g.nombre}}</td>
+						<td>{{g.precioVenta}}</td>
+						<td>{{g.promocion.descuento}}%</td>
 						<td>
 							<button class="btn waves-effect waves-light" type="submit"
-								name="action" value="Calificar" ng-click="">Calificar								
+								name="action" value="Calificar" >Calificar								
 							</button>
 						</td>
 					</tr>
@@ -71,6 +76,6 @@
 		</div>
 	</div>
 	<button class="btn botonComprar" type="submit"
-								name="action" value="Comprar" ng-click="">Comprar								
+								name="action" value="Comprar">Comprar								
 							</button>
 </div>

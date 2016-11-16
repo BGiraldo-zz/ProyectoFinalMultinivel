@@ -1,14 +1,20 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import java.util.List;
+
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import co.edu.eam.ingesoft.pa2.dto.invDTO;
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Inventario;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.InventarioPK;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Inventario;
 
 @Stateless
+@LocalBean
 public class BOInventarioEJB extends EJBGenerico<Inventario> implements InterfaceEJBRemote<Inventario> {
 
 	@Override
@@ -33,7 +39,10 @@ public class BOInventarioEJB extends EJBGenerico<Inventario> implements Interfac
 
 	@Override
 	public void editar(Inventario entidad) {
-		if (buscar(entidad.getRepresentante().getId()) != null) {
+		InventarioPK pk = new InventarioPK();
+		pk.setRepresentante(entidad.getRepresentante().getId());
+		pk.setProducto(entidad.getProducto().getId());
+		if (buscar(pk) != null) {
 			dao.editar(entidad);
 		} else {
 			throw new ExcepcionFuncional("Aùn no existe un Inventario con este codigo " + entidad.getRepresentante().getId());
@@ -49,5 +58,16 @@ public class BOInventarioEJB extends EJBGenerico<Inventario> implements Interfac
 		}
 	}
 
-	
+
+	public List<Inventario> listarInventario(int ced) {
+		//pass = MD5Util.code(pass);
+		List<Inventario> lista = dao.ejecutarNamedQuery(Inventario.BUSCAR_INVENTARIO,ced);
+		
+		if (!lista.isEmpty()) {
+			return lista;
+		} else {  
+			return null;
+		}
+		
+	}
 }

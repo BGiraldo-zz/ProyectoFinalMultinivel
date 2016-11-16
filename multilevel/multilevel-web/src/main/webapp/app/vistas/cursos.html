@@ -12,19 +12,19 @@
 					<tr>
 						<th># Productos</th>
 						<th>Nombre</th>
-						<th>Precio Base</th>
 						<th>Cantidad</th>
+						<th>Precio Base</th>
 						
 					</tr>
 				</thead>
 				<tbody>
 
-					<tr ng-repeat="(key,value) in listaProductos">
+					<tr ng-repeat="n in listaProductos">
 						
-						<td>{{value[0]}}</td>
-						<td>{{value[1]}}</td>
-						<td>{{value[2]}}</td>
-						<td>{{value[3]}}</td>
+						<td>{{n.producto.id}}</td>
+						<td>{{n.producto.nombre}}</td>
+						<td>{{n.cantidad}}</td>
+						<td>{{n.precioBase}}</td>
 						
 					</tr>
 
@@ -47,7 +47,7 @@
 								name="action1"  ng-click="buscar(formData.id)">Buscar							
 							</button>
 							<button class="btn waves-effect waves-light" type="submit"
-								name="action2"  ng-click="">Editar								
+								name="action2"  ng-click="editar(formData.id,formData.precio)">Editar								
 							</button>
 							</div>
 
