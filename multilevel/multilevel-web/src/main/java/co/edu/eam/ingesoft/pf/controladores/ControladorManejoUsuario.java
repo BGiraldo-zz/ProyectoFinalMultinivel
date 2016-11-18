@@ -201,21 +201,21 @@ public class ControladorManejoUsuario implements Serializable {
 				persona.setNombre(p.getNombre());
 				persona.setApellido(p.getApellido());
 				persona.setFechaNacimiento(p.getFechaNacimiento());
-				
-				Login log = p.getLogin();
-				login.setId(log.getId());
-				login.setNickname(log.getNickname());
-				login.setPass(log.getPass());
-				
+
 				persona.setTelefono(p.getTelefono());
+
+				persona.setEmail(p.getEmail());
+				persona.setGenero(p.getGenero());
 				
 				Direccion dir = p.getDireccion();
 				direccion.setCiudad(dir.getCiudad());
 				direccion.setId(dir.getId());
 				direccion.setDescripcion(dir.getDescripcion());
 				
-				persona.setEmail(p.getEmail());
-				persona.setGenero(p.getGenero());
+				Login log = p.getLogin();
+				login.setId(log.getId());
+				login.setNickname(log.getNickname());
+				login.setPass(log.getPass());
 				
 				
 			}else{
@@ -228,6 +228,7 @@ public class ControladorManejoUsuario implements Serializable {
 		} else if (tipeUser == 'R') {
 
 			Persona r = personaEJB.buscarPersonaTipo(persona.getId(), TipoPersonaENUM.REPRESENTANTE);
+			
 			if(r!=null){
 				
 				Representante p = (Representante)r;
@@ -236,19 +237,19 @@ public class ControladorManejoUsuario implements Serializable {
 				persona.setNombre(p.getNombre());
 				persona.setApellido(p.getApellido());
 				persona.setFechaNacimiento(p.getFechaNacimiento());
-
-				Login log = p.getLogin();
-				login.setId(log.getId());
-				login.setNickname(log.getNickname());
-				login.setPass(log.getPass());
-
-				persona.setTelefono(p.getTelefono());
 				
 				Direccion dir = p.getDireccion();
 				direccion.setCiudad(dir.getCiudad());
 				direccion.setId(dir.getId());
 				direccion.setDescripcion(dir.getDescripcion());
+
+				persona.setTelefono(p.getTelefono());
 				
+				Login log = p.getLogin();
+				login.setId(log.getId());
+				login.setNickname(log.getNickname());
+				login.setPass(log.getPass());
+
 				persona.setEmail(p.getEmail());
 				persona.setGenero(p.getGenero());
 				persona.setCategoria(p.getCategoria());
@@ -257,8 +258,7 @@ public class ControladorManejoUsuario implements Serializable {
 				persona.setEstado(p.getEstado());
 				persona.setFechaAfiliacion(p.getFechaAfiliacion());
 				persona.setAfiliador(p.getAfiliador());
-				
-				
+	
 			}else{
 				Messages.addGlobalWarn("No existe persona del tipo " + TipoPersonaENUM.REPRESENTANTE +" con id "+ persona.getId());
 				inicializar();

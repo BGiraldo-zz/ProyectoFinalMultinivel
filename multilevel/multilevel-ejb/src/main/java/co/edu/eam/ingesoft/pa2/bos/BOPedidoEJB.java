@@ -63,7 +63,8 @@ public class BOPedidoEJB extends EJBGenerico<Pedido> implements InterfaceEJBRemo
 	 * Correo : giraldo97@outlook.com
 	 */
 	public List<Pedido> listarPedidosPendientes(){
-		return dao.ejecutarNamedQuery(Pedido.LISTAR_PEDIDOS_PENDIENTES, 'P' );
+		List<Pedido>  pedidos = dao.ejecutarNamedQuery(Pedido.LISTAR_PEDIDOS_PENDIENTES, 'P' );
+		return pedidos;
 	}
 
 }
