@@ -27,31 +27,22 @@ public class BORepresentanteEJB extends EJBGenerico<Representante> implements In
 
 	@Override
 	public void crear(Representante entidad) {
-	/*	if (personaEJB.buscar(entidad.getId()) != null) {
+		if (dao.buscar(entidad.getId()) != null) {
 			throw new ExcepcionFuncional("Ya existe una persona con este codigo " + entidad.getId());
 		} else {
 			dao.crear(entidad);
 		}
-		*/
-		personaEJB.crear(entidad);
-
+		
 	}
 
 	@Override
 	public Representante buscar(Object pk) {
-		Persona p = personaEJB.buscar(pk);
-		if(p!=null){
-			
-			if(p instanceof Representante){
-				Representante r = (Representante)p;
+				Representante r = dao.buscar(pk);
+				if(r!=null){
 				return r;
 			}else{
-				throw new ExcepcionFuncional("Ya existe una persona con este codigo " + pk);
+				throw new ExcepcionFuncional("No existe una persona con este codigo " + pk);
 			}
-			
-		}else{
-			throw new ExcepcionFuncional("No existe una persona con este codigo " + pk);
-		}
 	}
 
 	@Override

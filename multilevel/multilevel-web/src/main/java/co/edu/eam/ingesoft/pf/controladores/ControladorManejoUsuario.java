@@ -195,6 +195,7 @@ public class ControladorManejoUsuario implements Serializable {
 				tipo = TipoPersonaENUM.CLIENTE;
 			
 			Persona p = personaEJB.buscarPersonaTipo(persona.getId(), tipo);
+			
 			if(p!=null){
 				
 				persona.setTipoDocumento(p.getTipoDocumento());
@@ -277,8 +278,6 @@ public class ControladorManejoUsuario implements Serializable {
 	 * Correo : giraldo97@outlook.com
 	 */
 	public void editarUsuario() {
-
-		Persona r = personaEJB.buscar(persona.getId());
 		
 		TipoPersonaENUM tipo = null;
 		if(tipeUser=='A')
@@ -290,11 +289,13 @@ public class ControladorManejoUsuario implements Serializable {
 		else
 			Messages.addGlobalWarn("Seleccione tipo de usuario");
 		
+		Persona r = personaEJB.buscarPersonaTipo(persona.getId(), tipo);
+		
 		if(r instanceof Representante){
 			
 			Representante p = (Representante)r;
 			
-			p.setTipoUsuario(tipo);
+		//	p.setTipoUsuario(tipo);
 			p.setTipoDocumento(persona.getTipoDocumento());
 			p.setNombre(persona.getNombre());
 			p.setApellido(persona.getApellido());
@@ -326,7 +327,7 @@ public class ControladorManejoUsuario implements Serializable {
 			
 		}else{
 			
-			r.setTipoUsuario(tipo);
+		//	r.setTipoUsuario(tipo);
 			r.setTipoDocumento(persona.getTipoDocumento());
 			r.setNombre(persona.getNombre());
 			r.setApellido(persona.getApellido());
