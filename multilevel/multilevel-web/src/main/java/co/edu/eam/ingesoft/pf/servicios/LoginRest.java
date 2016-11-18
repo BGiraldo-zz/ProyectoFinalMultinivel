@@ -52,7 +52,7 @@ public class LoginRest {
 	 * @return dto con mensaje de error u objeto
 	 */
 	@POST
-	@Path("/verificar")
+	@Path("verificar")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public RespuestaDTO login(@FormParam(value = "usuario") String usuario,

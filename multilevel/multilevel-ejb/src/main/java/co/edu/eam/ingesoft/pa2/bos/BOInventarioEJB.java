@@ -10,7 +10,7 @@ import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
 import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Inventario;
-import co.edu.eam.ingesoft.pa2.negocio.entidades.InventarioPK;
+
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Inventario;
 
 @Stateless
@@ -39,10 +39,8 @@ public class BOInventarioEJB extends EJBGenerico<Inventario> implements Interfac
 
 	@Override
 	public void editar(Inventario entidad) {
-		InventarioPK pk = new InventarioPK();
-		pk.setRepresentante(entidad.getRepresentante().getId());
-		pk.setProducto(entidad.getProducto().getId());
-		if (buscar(pk) != null) {
+		
+		if (buscar(entidad.getId()) != null) {
 			dao.editar(entidad);
 		} else {
 			throw new ExcepcionFuncional("Aùn no existe un Inventario con este codigo " + entidad.getRepresentante().getId());
@@ -63,11 +61,7 @@ public class BOInventarioEJB extends EJBGenerico<Inventario> implements Interfac
 		//pass = MD5Util.code(pass);
 		List<Inventario> lista = dao.ejecutarNamedQuery(Inventario.BUSCAR_INVENTARIO,ced);
 		
-		if (!lista.isEmpty()) {
-			return lista;
-		} else {  
-			return null;
-		}
+		return lista;
 		
 	}
 }

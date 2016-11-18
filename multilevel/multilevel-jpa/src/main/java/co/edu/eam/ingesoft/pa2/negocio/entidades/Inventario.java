@@ -27,15 +27,19 @@ public class Inventario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
 	private Representante representante;
-
 	
-
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false)
 	private Producto producto;
-	
+
 	@Column(name="CANTIDAD", length=12, nullable=false)
 	private double cantidad;
+	
+	@Column(name="PRECIO_BASE",nullable=true, length=10)
+	private double precioBase;
+
+	
+	
 	
 	
 	/**
@@ -54,8 +58,11 @@ public class Inventario implements Serializable{
 		this.precioBase = precioBase;
 	}
 
-	@Column(name="PRECIO_BASE",nullable=false, length=10)
-	private double precioBase;
+	/**
+	 * 
+	 */
+	public Inventario() {
+	}
 	
 	
 
@@ -73,11 +80,7 @@ public class Inventario implements Serializable{
 		this.id = id;
 	}
 
-	/**
-	 * 
-	 */
-	public Inventario() {
-	}
+	
 
 	/**
 	 * @return the representante
@@ -136,13 +139,5 @@ public class Inventario implements Serializable{
 		this.producto = producto;
 	}
 	
-	
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
 	
 }
