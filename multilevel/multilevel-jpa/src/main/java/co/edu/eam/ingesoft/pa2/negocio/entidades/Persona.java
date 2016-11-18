@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -68,6 +69,10 @@ public class Persona implements Serializable {
 	@Enumerated(value=EnumType.STRING)
 	@Column(name="TIPO_DOCUMENTO", length=45, nullable=false)
 	protected  TipoDocumentoENUM tipoDocumento;
+	
+	@ManyToOne
+	@JoinColumn(name="DIRECCION_ID", nullable=false)
+	protected Direccion direccion;
 
 	/**
 	 * @param id
@@ -80,9 +85,10 @@ public class Persona implements Serializable {
 	 * @param telefono
 	 * @param tipoUsuario
 	 * @param tipoDocumento
+	 * @param direccion
 	 */
 	public Persona(int id, String email, Login login, String nombre, String apellido, Date fechaNacimiento, char genero,
-			String telefono, TipoPersonaENUM tipoUsuario, TipoDocumentoENUM tipoDocumento) {
+			String telefono, TipoPersonaENUM tipoUsuario, TipoDocumentoENUM tipoDocumento, Direccion direccion) {
 		this.id = id;
 		this.email = email;
 		this.login = login;
@@ -93,6 +99,7 @@ public class Persona implements Serializable {
 		this.telefono = telefono;
 		this.tipoUsuario = tipoUsuario;
 		this.tipoDocumento = tipoDocumento;
+		this.direccion = direccion;
 	}
 
 	/**
@@ -240,6 +247,20 @@ public class Persona implements Serializable {
 	public void setTipoDocumento(TipoDocumentoENUM tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
+
+	/**
+	 * @return the direccion
+	 */
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	/**
+	 * @param direccion the direccion to set
+	 */
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
 	
 	
 
@@ -248,7 +269,7 @@ public class Persona implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return ""+nombre+" "+apellido;
+		return nombre+" "+apellido;
 	}
 
 	/* (non-Javadoc)
@@ -259,6 +280,7 @@ public class Persona implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
+		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
 		result = prime * result + genero;
@@ -287,6 +309,11 @@ public class Persona implements Serializable {
 			if (other.apellido != null)
 				return false;
 		} else if (!apellido.equals(other.apellido))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -324,7 +351,6 @@ public class Persona implements Serializable {
 		return true;
 	}
 
-	
 	
 	
 	

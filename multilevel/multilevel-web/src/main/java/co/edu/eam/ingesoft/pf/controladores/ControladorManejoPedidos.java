@@ -35,8 +35,15 @@ public class ControladorManejoPedidos implements Serializable {
 	}
 
 	public void revisarPedido() {
-      
-			
+    	Pedido p = pedidoEJB.buscar(pedido.getId());
+		pedido.setEstado(p.getEstado());
+		pedido.setFechaEntrega(p.getFechaEntrega());
+		pedido.setFechaPedido(p.getFechaPedido());
+		pedido.setId(p.getId());
+		pedido.setMetodoPago(p.getMetodoPago());
+		pedido.setPrecio(p.getPrecio());
+		pedido.setPuntos(p.getPuntos());
+		pedido.setRepresentante(p.getRepresentante());	
 	}
 
 	/**
@@ -64,7 +71,7 @@ public class ControladorManejoPedidos implements Serializable {
 		Messages.addGlobalInfo("El pedido ha sido Negado correctamente");
 		inicializar();
 	}
-
+	
 	/**
 	 * @return the pedido
 	 */

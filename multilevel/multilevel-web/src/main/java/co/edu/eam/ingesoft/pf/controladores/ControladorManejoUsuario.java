@@ -15,7 +15,6 @@ import co.edu.eam.ingesoft.pa2.bos.BOCategoriaRepresentanteEJB;
 import co.edu.eam.ingesoft.pa2.bos.BOCiudadEJB;
 import co.edu.eam.ingesoft.pa2.bos.BODireccionEJB;
 import co.edu.eam.ingesoft.pa2.bos.BOLoginEJB;
-import co.edu.eam.ingesoft.pa2.bos.BOPersonaDireccionEJB;
 import co.edu.eam.ingesoft.pa2.bos.BOPersonaEJB;
 import co.edu.eam.ingesoft.pa2.bos.BORepresentanteEJB;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.CategoriaRepresentante;
@@ -23,7 +22,6 @@ import co.edu.eam.ingesoft.pa2.negocio.entidades.Ciudad;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Direccion;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Login;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Persona;
-import co.edu.eam.ingesoft.pa2.negocio.entidades.PersonaDireccion;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Representante;
 import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.EstadoRepresentanteENUM;
 import co.edu.eam.ingesoft.pa2.negocio.enumeraciones.TipoDocumentoENUM;
@@ -61,9 +59,6 @@ public class ControladorManejoUsuario implements Serializable {
 
 	@EJB
 	private BODireccionEJB direccionEJB;
-
-	@EJB
-	private BOPersonaDireccionEJB personaDireccionEJB;
 
 	private List<EstadoRepresentanteENUM> estados;
 
@@ -127,8 +122,8 @@ public class ControladorManejoUsuario implements Serializable {
 	 * @author Brayan Giraldo Correo : giraldo97@outlook.com
 	 */
 	public void registrarUsuario() {
-
-		Persona person = personaEJB.buscar(persona.getId());
+		
+		Persona person = personaEJB.buscarPersonaExist(persona.getId());
 
 		if (person == null) {
 
@@ -143,19 +138,17 @@ public class ControladorManejoUsuario implements Serializable {
 
 				login.setId(persona.getId());
 
-				person = new Persona(persona.getId(), persona.getEmail(), login, persona.getNombre(),
-						persona.getApellido(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(),
-						typer, persona.getTipoDocumento());
-
 				int valId = direccionEJB.cantidadDirecciones() + 1;
 
 				Direccion dir = new Direccion(valId, direccion.getCiudad(), direccion.getDescripcion());
+				
+				person = new Persona(persona.getId(), persona.getEmail(), login, persona.getNombre(),
+						persona.getApellido(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(),
+						typer, persona.getTipoDocumento(),dir);
 
 				direccionEJB.crear(dir);
 				loginEJB.crear(login);
 				personaEJB.crear(person);
-				PersonaDireccion personaDir = new PersonaDireccion(person, dir);
-				personaDireccionEJB.crear(personaDir);
 				Messages.addGlobalInfo("Registrado Correctamente");
 				inicializar();
 
@@ -163,20 +156,18 @@ public class ControladorManejoUsuario implements Serializable {
 
 				login.setId(persona.getId());
 
-				person = new Representante(persona.getId(), persona.getEmail(), login, persona.getNombre(),
-						persona.getApellido(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(),
-						TipoPersonaENUM.REPRESENTANTE, persona.getTipoDocumento(), persona.getCategoria(),
-						persona.getSueldoActual(), persona.getAcomuladoTotal(), persona.getEstado(),
-						persona.getAfiliador(), persona.getFechaAfiliacion());
-
 				int valId = direccionEJB.cantidadDirecciones() + 1;
 				Direccion dir = new Direccion(valId, direccion.getCiudad(), direccion.getDescripcion());
+				
+				person = new Representante(persona.getId(), persona.getEmail(), login, persona.getNombre(),
+						persona.getApellido(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(),
+						TipoPersonaENUM.REPRESENTANTE, persona.getTipoDocumento(),dir, persona.getCategoria(),
+						persona.getSueldoActual(), persona.getAcomuladoTotal(), persona.getEstado(),
+						persona.getAfiliador(), persona.getFechaAfiliacion());
 
 				direccionEJB.crear(dir);
 				loginEJB.crear(login);
 				representanteEJB.crear((Representante) person);
-				PersonaDireccion personaDir = new PersonaDireccion(person, dir);
-				personaDireccionEJB.crear(personaDir);
 				Messages.addGlobalInfo("Registrado Correctamente");
 				inicializar();
 
@@ -212,11 +203,17 @@ public class ControladorManejoUsuario implements Serializable {
 				persona.setFechaNacimiento(p.getFechaNacimiento());
 				
 				Login log = p.getLogin();
+				login.setId(log.getId());
 				login.setNickname(log.getNickname());
 				login.setPass(log.getPass());
 				
 				persona.setTelefono(p.getTelefono());
-			//	personaDireccion = personaDireccionEJB.buscarPersonaDireccion(p.getId(), p.get)
+				
+				Direccion dir = p.getDireccion();
+				direccion.setCiudad(dir.getCiudad());
+				direccion.setId(dir.getId());
+				direccion.setDescripcion(dir.getDescripcion());
+				
 				persona.setEmail(p.getEmail());
 				persona.setGenero(p.getGenero());
 				
@@ -241,12 +238,16 @@ public class ControladorManejoUsuario implements Serializable {
 				persona.setFechaNacimiento(p.getFechaNacimiento());
 
 				Login log = p.getLogin();
+				login.setId(log.getId());
 				login.setNickname(log.getNickname());
 				login.setPass(log.getPass());
 
 				persona.setTelefono(p.getTelefono());
 				
-			//	personaDireccion = personaDireccionEJB.buscarPersonaDireccion(p.getId(), p.get)
+				Direccion dir = p.getDireccion();
+				direccion.setCiudad(dir.getCiudad());
+				direccion.setId(dir.getId());
+				direccion.setDescripcion(dir.getDescripcion());
 				
 				persona.setEmail(p.getEmail());
 				persona.setGenero(p.getGenero());
@@ -299,12 +300,16 @@ public class ControladorManejoUsuario implements Serializable {
 			p.setApellido(persona.getApellido());
 			p.setFechaNacimiento(persona.getFechaNacimiento());
 			
-			p.getLogin().setNickname(login.getNickname());
-			p.getLogin().setPass(login.getPass());
+			Login log = p.getLogin();
+			log.setNickname(login.getNickname());
+			log.setPass(login.getPass());
 			
 			p.setTelefono(persona.getTelefono());
 			
-		//	rDireccion = rDireccionEJB.buscarrDireccion(persona.getId(), persona.get)
+			Direccion dir = p.getDireccion();
+			dir.setCiudad(direccion.getCiudad());
+			dir.setDescripcion(direccion.getDescripcion());
+		 
 			p.setEmail(persona.getEmail());
 			
 			p.setGenero(persona.getGenero());
@@ -315,6 +320,8 @@ public class ControladorManejoUsuario implements Serializable {
 			p.setFechaAfiliacion(persona.getFechaAfiliacion());
 			p.setAfiliador(persona.getAfiliador());
 			personaEJB.editar(p);
+			direccionEJB.editar(p.getDireccion());
+			loginEJB.editar(p.getLogin());
 			Messages.addGlobalInfo("Editado Correctamente");
 			
 		}else{
@@ -325,15 +332,21 @@ public class ControladorManejoUsuario implements Serializable {
 			r.setApellido(persona.getApellido());
 			r.setFechaNacimiento(persona.getFechaNacimiento());
 			
-			r.setLogin(login);
+			Login log = r.getLogin();
+			log.setNickname(login.getNickname());
+			log.setPass(login.getPass());
+			
+			Direccion dir = r.getDireccion();
+			dir.setCiudad(direccion.getCiudad());
+			dir.setDescripcion(direccion.getDescripcion());
 			
 			r.setTelefono(persona.getTelefono());
-			
-		//	rDireccion = rDireccionEJB.buscarrDireccion(persona.getId(), persona.get)
 			
 			r.setEmail(persona.getEmail());
 			r.setGenero(persona.getGenero());
 			personaEJB.editar(r);
+			direccionEJB.editar(r.getDireccion());
+			loginEJB.editar(r.getLogin());
 			Messages.addGlobalInfo("Editado Correctamente");
 
 		}
@@ -529,22 +542,7 @@ public class ControladorManejoUsuario implements Serializable {
 	public void setDireccionEJB(BODireccionEJB direccionEJB) {
 		this.direccionEJB = direccionEJB;
 	}
-
-	/**
-	 * @return the personaDireccionEJB
-	 */
-	public BOPersonaDireccionEJB getPersonaDireccionEJB() {
-		return personaDireccionEJB;
-	}
-
-	/**
-	 * @param personaDireccionEJB
-	 *            the personaDireccionEJB to set
-	 */
-	public void setPersonaDireccionEJB(BOPersonaDireccionEJB personaDireccionEJB) {
-		this.personaDireccionEJB = personaDireccionEJB;
-	}
-
+	
 	/**
 	 * @return the estados
 	 */

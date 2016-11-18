@@ -11,7 +11,7 @@ import co.edu.eam.ingesoft.pa2.bos.BOPedidoEJB;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Pedido;
 
 @Named
-@FacesConverter(value="pedidoConverter", forClass=PedidoConverter.class)
+@FacesConverter(value="pedidoConverter", forClass=Pedido.class)
 public class PedidoConverter implements Converter {
 
 	@EJB

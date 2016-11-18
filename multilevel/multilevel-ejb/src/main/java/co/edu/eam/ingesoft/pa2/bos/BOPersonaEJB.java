@@ -32,7 +32,7 @@ public class BOPersonaEJB extends EJBGenerico<Persona> implements InterfaceEJBRe
 			throw new ExcepcionFuncional("No existe una persona con esta Identificación " + pk);
 		}
 	}
-
+	
 	@Override
 	public void editar(Persona entidad) {
 	 dao.editar(entidad);
@@ -74,6 +74,15 @@ public class BOPersonaEJB extends EJBGenerico<Persona> implements InterfaceEJBRe
 			}catch(Exception e){
 				return null;
 			}
+	}
+	
+	/**
+	 * Busca y mira si existe una persona
+	 * @author Brayan Giraldo
+	 * Correo : giraldo97@outlook.com
+	 */
+	public Persona buscarPersonaExist(Object id){
+		return dao.buscar(id);
 	}
 	
 }
