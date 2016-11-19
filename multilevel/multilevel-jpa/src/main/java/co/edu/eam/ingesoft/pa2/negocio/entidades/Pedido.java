@@ -40,7 +40,7 @@ public class Pedido implements Serializable{
 	 * 'N' Negado
 	 * 'P' Pendiente
 	 */
-	@Column(name="ESTADO", length=2, nullable=false)
+	@Column(name="ESTADO", length=1, nullable=false)
 	private char estado;
 	
 	@Column(name="FECHA_PEDIDO",nullable=false)

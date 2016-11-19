@@ -72,7 +72,7 @@
 						value="#{msj['registrarUsuario.fechaNacimiento']}" />
 					<p:calendar id="tfFechaNacimiento"
 						value="#{ControladorManejoUsuario.persona.fechaNacimiento}"
-						showOn="button" placeholder="Dia/Mes/Año" />
+						showOn="button" placeholder="Mes/Dia/Año" />
 
 					<br />
 
@@ -193,7 +193,8 @@
 					<p:calendar id="tfFechaAfiliacion"
 						value="#{ControladorManejoUsuario.persona.fechaAfiliacion}"
 						showOn="button"
-						rendered="#{ControladorManejoUsuario.cargarCampos()}" />
+						rendered="#{ControladorManejoUsuario.cargarCampos()}" 
+						placeholder="Mes/Dia/Año"/>
 					<br />
 
 					<br />

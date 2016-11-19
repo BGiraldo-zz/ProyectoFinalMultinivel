@@ -64,11 +64,7 @@ public class SesionBean implements Serializable {
 	 */
 	public String login() {
 
-		String passMd5 = MD5Util.code(pass);
-
 		Login l = loginEJB.buscarLoginUserPass(nickname, pass);
-		
-		Persona p = personaEJB.buscar(1);
 		
 		user = personaEJB.buscarPersonaLogin(l.getId());
 
@@ -89,6 +85,7 @@ public class SesionBean implements Serializable {
 			user = null;
 			accesos = null;
 			roles = null;
+			Messages.addGlobalError("No hay ningun usuario con el login indicado");
 		}
 		return "/login.jsf?faces-redirect=true";
 	}

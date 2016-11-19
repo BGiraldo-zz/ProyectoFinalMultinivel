@@ -20,44 +20,97 @@
 			<h:form id="form" prependId="false">
 
 				<h:panelGrid columns="3" id="panelDatos">
-                   
-               <h:outputText value="#{msj['pedido.pedido']}"
-						id="labelPedido" for="comboPedido" />
-					<p:selectOneMenu
-						 value="#{ControladorManejoPedidos.pedido}"
+
+					<h:outputText value="#{msj['pedido.pedido']}" id="labelPedido"
+						for="comboPedido" />
+					<p:selectOneMenu value="#{ControladorManejoPedidos.pedido}"
 						id="comboPedido" converter="#{pedidoConverter}" required="true">
 
-                        <f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
+						<f:selectItem itemValue="a" itemLabel="Seleccione una opción..." />
 						<f:selectItems value="#{ControladorManejoPedidos.pedidos}"
-							var="pet" itemLabel="#{pet.representante} : #{pet.precio}" itemValue="#{pet}" />
-	
+							var="pet" itemLabel="#{pet.representante} : #{pet.precio}"
+							itemValue="#{pet}" />
 					</p:selectOneMenu>
-					
-					<br/>
+
+					<br />
 
 				</h:panelGrid>
-				
+
+
+
+				<p:dialog header="Informe del Pedido" widgetVar="modalPedido"
+					modal="true" height="260" width="500">
+
+					<h:panelGrid columns="2" id="panelModal">
+
+						<h:outputText value="#{msj['pedido.estado']}" id="labelEstado"
+							for="tfEstado" />
+						<p:inputText value="Pendiente" id="tfEstado" placeholder="Estado" />
+
+						<p:outputLabel for="tfFechaP" value="#{msj['pedido.fechaPedido']}" />
+						<p:calendar id="tfFechaP"
+							value="#{ControladorManejoPedidos.pedido.fechaPedido}"
+							showOn="button" placeholder="Dia/Mes/Año" />
+
+						<p:outputLabel for="tfFechaE"
+							value="#{msj['pedido.fechaEntrega']}" />
+						<p:calendar id="tfFechaE"
+							value="#{ControladorManejoPedidos.pedido.fechaEntrega}"
+							showOn="button" placeholder="Dia/Mes/Año" />
+
+						<h:outputText value="#{msj['pedido.metodoPago']}"
+							id="labelMetodoPago" for="tfMetodoPago" />
+						<p:inputText value="#{ControladorManejoPedidos.pedido.metodoPago}"
+							id="tfMetodoPago" placeholder="Metodo de Pago" />
+
+						<h:outputText value="#{msj['pedido.precio']}" id="labelPrecio"
+							for="tfPrecio" />
+						<p:inputText value="#{ControladorManejoPedidos.pedido.precio}"
+							id="tfPrecio" placeholder="Precio del Pedido" />
+
+						<h:outputText value="#{msj['producto.puntos']}" id="labelPuntos"
+							for="tfPuntos" />
+						<p:inputText value="#{ControladorManejoPedidos.pedido.puntos}"
+							id="tfPuntos" placeholder="Puntos del Pedido" />
+
+						<h:outputText value="#{msj['pedido.representante']}"
+							id="labelRepresentante" for="tfRepresentante" />
+						<p:inputText
+							value="#{ControladorManejoPedidos.pedido.representante}"
+							id="tfRepresentante" placeholder="Representante"
+							converter="#{afiliadorConverter}" disabled="true" />
+
+					</h:panelGrid>
+
+				</p:dialog>
+
+
+
+
+
 				<br />
 
 				<h:panelGrid columns="4" id="panelBotones">
 
 					<p:commandButton
 						action="#{ControladorManejoPedidos.revisarPedido()}"
-						value="#{msj['pedido.revisar']}" update="panelDatos" />
+						value="#{msj['pedido.revisar']}"
+						onclick="PF('modalPedido').show();" update="panelModal" />
+
 					<p:commandButton
 						action="#{ControladorManejoPedidos.aprobarPedido()}"
-						value="#{msj['pedido.aprobar']}" update="panelDatos"/>
-					<p:commandButton
-						action="#{ControladorManejoPedidos.negarPedido()}"
-						value="#{msj['pedido.Negar']}" update="panelDatos"/>
-				
+						value="#{msj['pedido.aprobar']}" update="panelDatos" />
+
+					<p:commandButton action="#{ControladorManejoPedidos.negarPedido()}"
+						value="#{msj['pedido.Negar']}" update="panelDatos" />
+
 				</h:panelGrid>
 
 			</h:form>
 
 
 		</h:body>
-		
+
 	</ui:define>
 
 </ui:composition>

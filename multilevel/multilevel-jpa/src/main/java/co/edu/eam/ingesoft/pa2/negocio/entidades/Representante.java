@@ -52,6 +52,8 @@ public class Representante extends Persona implements Serializable {
 	@Temporal(value=TemporalType.DATE)
 	private Date fechaAfiliacion;
 
+    
+
 	/**
 	 * @param id
 	 * @param email
@@ -63,6 +65,7 @@ public class Representante extends Persona implements Serializable {
 	 * @param telefono
 	 * @param tipoUsuario
 	 * @param tipoDocumento
+	 * @param direccion
 	 * @param categoria
 	 * @param sueldoActual
 	 * @param acomuladoTotal
@@ -72,9 +75,10 @@ public class Representante extends Persona implements Serializable {
 	 */
 	public Representante(int id, String email, Login login, String nombre, String apellido, Date fechaNacimiento,
 			char genero, String telefono, TipoPersonaENUM tipoUsuario, TipoDocumentoENUM tipoDocumento,
-			CategoriaRepresentante categoria, double sueldoActual, int acomuladoTotal, EstadoRepresentanteENUM estado,
-			Representante afiliador, Date fechaAfiliacion) {
-		super(id, email, login, nombre, apellido, fechaNacimiento, genero, telefono, tipoUsuario, tipoDocumento);
+			Direccion direccion, CategoriaRepresentante categoria, double sueldoActual, int acomuladoTotal,
+			EstadoRepresentanteENUM estado, Representante afiliador, Date fechaAfiliacion) {
+		super(id, email, login, nombre, apellido, fechaNacimiento, genero, telefono, tipoUsuario, tipoDocumento,
+				direccion);
 		this.categoria = categoria;
 		this.sueldoActual = sueldoActual;
 		this.acomuladoTotal = acomuladoTotal;
@@ -83,6 +87,8 @@ public class Representante extends Persona implements Serializable {
 		this.fechaAfiliacion = fechaAfiliacion;
 	}
 
+	
+	
 	/**
 	 * @param id
 	 * @param email
@@ -94,16 +100,22 @@ public class Representante extends Persona implements Serializable {
 	 * @param telefono
 	 * @param tipoUsuario
 	 * @param tipoDocumento
+	 * @param direccion
 	 */
 	public Representante(int id, String email, Login login, String nombre, String apellido, Date fechaNacimiento,
-			char genero, String telefono, TipoPersonaENUM tipoUsuario, TipoDocumentoENUM tipoDocumento) {
-		super(id, email, login, nombre, apellido, fechaNacimiento, genero, telefono, tipoUsuario, tipoDocumento);
+			char genero, String telefono, TipoPersonaENUM tipoUsuario, TipoDocumentoENUM tipoDocumento,
+			Direccion direccion) {
+		super(id, email, login, nombre, apellido, fechaNacimiento, genero, telefono, tipoUsuario, tipoDocumento,
+				direccion);
 	}
+
 
 
 	public Representante(){
 		
 	}
+
+
 
 	/**
 	 * @return the categoria
@@ -112,12 +124,16 @@ public class Representante extends Persona implements Serializable {
 		return categoria;
 	}
 
+
+
 	/**
 	 * @param categoria the categoria to set
 	 */
 	public void setCategoria(CategoriaRepresentante categoria) {
 		this.categoria = categoria;
 	}
+
+
 
 	/**
 	 * @return the sueldoActual
@@ -126,12 +142,16 @@ public class Representante extends Persona implements Serializable {
 		return sueldoActual;
 	}
 
+
+
 	/**
 	 * @param sueldoActual the sueldoActual to set
 	 */
 	public void setSueldoActual(double sueldoActual) {
 		this.sueldoActual = sueldoActual;
 	}
+
+
 
 	/**
 	 * @return the acomuladoTotal
@@ -140,12 +160,16 @@ public class Representante extends Persona implements Serializable {
 		return acomuladoTotal;
 	}
 
+
+
 	/**
 	 * @param acomuladoTotal the acomuladoTotal to set
 	 */
 	public void setAcomuladoTotal(int acomuladoTotal) {
 		this.acomuladoTotal = acomuladoTotal;
 	}
+
+
 
 	/**
 	 * @return the estado
@@ -154,12 +178,16 @@ public class Representante extends Persona implements Serializable {
 		return estado;
 	}
 
+
+
 	/**
 	 * @param estado the estado to set
 	 */
 	public void setEstado(EstadoRepresentanteENUM estado) {
 		this.estado = estado;
 	}
+
+
 
 	/**
 	 * @return the afiliador
@@ -168,12 +196,16 @@ public class Representante extends Persona implements Serializable {
 		return afiliador;
 	}
 
+
+
 	/**
 	 * @param afiliador the afiliador to set
 	 */
 	public void setAfiliador(Representante afiliador) {
 		this.afiliador = afiliador;
 	}
+
+
 
 	/**
 	 * @return the fechaAfiliacion
@@ -182,12 +214,16 @@ public class Representante extends Persona implements Serializable {
 		return fechaAfiliacion;
 	}
 
+
+
 	/**
 	 * @param fechaAfiliacion the fechaAfiliacion to set
 	 */
 	public void setFechaAfiliacion(Date fechaAfiliacion) {
 		this.fechaAfiliacion = fechaAfiliacion;
 	}
+
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -206,6 +242,8 @@ public class Representante extends Persona implements Serializable {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
@@ -242,6 +280,7 @@ public class Representante extends Persona implements Serializable {
 			return false;
 		return true;
 	}
+
 
 	
 	
