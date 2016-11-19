@@ -16,10 +16,13 @@ import javax.validation.constraints.Size;
 		   @UniqueConstraint(columnNames={"nickname", "pass"})
 		})
 @NamedQueries({@NamedQuery(name=Login.BUSCAR_POR_USER_PASS,
-query="SELECT i FROM Representante i where i.login.id = (select u.id from Login u WHERE u.nickname = ?1 and u.pass = ?2)")})
+query="SELECT i FROM Representante i where i.login.id = (select u.id from Login u WHERE u.nickname = ?1 and u.pass = ?2)"),
+	@NamedQuery(name=Login.BUSCAR_POR_USUARIO_PASS, 
+	query="SELECT u FROM Login u WHERE u.nickname = ?1 and u.pass = ?2")})
 public class Login implements Serializable{
 	
 	public static final String BUSCAR_POR_USER_PASS = "Login.buscarUserPass";
+	public static final String BUSCAR_POR_USUARIO_PASS = "Login.buscarUsuarioPass";
 	
 	@Id
 	@Column(name="LOGIN_ID", nullable=false, length=12)
