@@ -15,7 +15,7 @@ import co.edu.eam.ingesoft.pa2.negocio.entidades.Inventario;
 
 @Stateless
 @LocalBean
-public class BOInventarioEJB extends EJBGenerico<Inventario> implements InterfaceEJBRemote<Inventario> {
+public class BOInventarioEJB extends EJBGenerico<Inventario>{
 
 	@Override
 	public Class getClase() {
@@ -61,7 +61,11 @@ public class BOInventarioEJB extends EJBGenerico<Inventario> implements Interfac
 		//pass = MD5Util.code(pass);
 		List<Inventario> lista = dao.ejecutarNamedQuery(Inventario.BUSCAR_INVENTARIO,ced);
 		
-		return lista;
+		if (lista.size()==0) {
+			return null;
+		}else{
+			return lista;
+		}
 		
 	}
 }

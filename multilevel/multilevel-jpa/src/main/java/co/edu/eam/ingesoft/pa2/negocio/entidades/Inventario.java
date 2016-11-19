@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="INVENTARIOS")
 @NamedQueries({@NamedQuery(name=Inventario.BUSCAR_INVENTARIO,
-query="SELECT i FROM Inventario i WHERE i.representante.id = ?1")})
+query="SELECT i FROM Inventario i WHERE i.representante.id=?1")})
 public class Inventario implements Serializable{
 
 	public static final String BUSCAR_INVENTARIO = "Inventario.buscarInventario";
@@ -27,20 +26,17 @@ public class Inventario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="REPRESENTANTE_ID", nullable=false)
 	private Representante representante;
-	
+
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false)
 	private Producto producto;
 
+	
 	@Column(name="CANTIDAD", length=12, nullable=false)
 	private double cantidad;
 	
 	@Column(name="PRECIO_BASE",nullable=true, length=10)
 	private double precioBase;
-
-	
-	
-	
 	
 	/**
 	 * @param id
@@ -58,11 +54,7 @@ public class Inventario implements Serializable{
 		this.precioBase = precioBase;
 	}
 
-	/**
-	 * 
-	 */
-	public Inventario() {
-	}
+	
 	
 	
 
@@ -80,7 +72,11 @@ public class Inventario implements Serializable{
 		this.id = id;
 	}
 
-	
+	/**
+	 * 
+	 */
+	public Inventario() {
+	}
 
 	/**
 	 * @return the representante
@@ -138,6 +134,5 @@ public class Inventario implements Serializable{
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-	
 	
 }

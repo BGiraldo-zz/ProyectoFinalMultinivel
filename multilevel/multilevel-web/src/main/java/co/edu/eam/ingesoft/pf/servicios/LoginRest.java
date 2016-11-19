@@ -19,6 +19,7 @@ import co.edu.eam.ingesoft.pa2.dto.RespuestaDTO;
 import co.edu.eam.ingesoft.pa2.implementacion.LoginEJB;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Login;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Persona;
+import co.edu.eam.ingesoft.pa2.negocio.entidades.Representante;
 
 
 
@@ -57,7 +58,7 @@ public class LoginRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public RespuestaDTO login(@FormParam(value = "usuario") String usuario,
 			@FormParam(value = "contrasenia") String contrasenia) {
-		Login u = loginEJB.buscarUsuario(usuario, contrasenia);
+		Representante u = loginEJB.buscarUsuario(usuario, contrasenia);
 		if (u != null) {
 			String token = UUID.randomUUID().toString();
 			tokens.put(token, u.getId());
