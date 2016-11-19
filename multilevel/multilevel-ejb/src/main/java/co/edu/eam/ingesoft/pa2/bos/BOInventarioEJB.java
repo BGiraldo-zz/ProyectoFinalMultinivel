@@ -61,11 +61,10 @@ public class BOInventarioEJB extends EJBGenerico<Inventario>{
 		//pass = MD5Util.code(pass);
 		List<Inventario> lista = dao.ejecutarNamedQuery(Inventario.BUSCAR_INVENTARIO,ced);
 		
-		if (lista.size()==0) {
-			return null;
-		}else{
+		if (lista!=null) {
 			return lista;
 		}
+		return null;
 		
 	}
 }

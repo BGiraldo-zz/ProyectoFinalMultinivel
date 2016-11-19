@@ -26,5 +26,10 @@ app.config(function($routeProvider) {
 //		controller : "inventarioController",
 //		controllerAs : "cur3",
 		templateUrl : "vistas/Pedido.html"
+	}).when("/Reportes", {
+		controller : "reporController",
+//		controllerAs : "cur3",
+		templateUrl : "vistas/reportes.html"
 	})
+	
 });
