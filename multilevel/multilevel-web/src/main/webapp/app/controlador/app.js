@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
 		templateUrl : "vistas/Compras.html"
 	})
 	.when("/Promociones", {
-//		controller : "inventarioController",
+		controller : "promoController",
 //		controllerAs : "cur1",
 		templateUrl : "vistas/Promociones.html"
 	}).when("/Afiliado", {

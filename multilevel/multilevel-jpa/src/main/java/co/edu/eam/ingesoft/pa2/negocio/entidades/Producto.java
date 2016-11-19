@@ -28,7 +28,7 @@ public class Producto implements Serializable {
 	private CategoriaProducto categoria;
 	
 	@ManyToOne
-	@JoinColumn(name="PROMOCION_ID", nullable=false)
+	@JoinColumn(name="PROMOCION_ID", nullable=true)
 	private Promocion promocion;
 
 	@Column(name = "NOMBRE", length = 60, nullable = false)

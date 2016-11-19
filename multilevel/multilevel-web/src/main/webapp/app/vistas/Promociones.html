@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-controller="promoController">
 
 	<div class="col-md-12">
 		<div class="row">
@@ -11,7 +11,7 @@
 						<th># Producto</th>
 						<th>Nombre</th>
 						<th>Precio</th>
-						<th>Cantidad</th>
+						
 						<th>Promocion</th>
 						<th>Fecha inicio</th>
 						<th>Fecha final</th>
@@ -20,14 +20,14 @@
 				</thead>
 				<tbody>
 
-					<tr ng-repeat="c in cursos">
-						<td>{{$index}}</td>
-						<td>{{c.idAsignatura.nombreAsignatura}}</td>
-						<td>
-							<button class="btn waves-effect waves-light" type="submit"
-								name="action" value="Calificar" ng-click="">Calificar								
-							</button>
-						</td>
+					<tr ng-repeat="c in listar">
+						<td>{{c.id}}</td>
+						<td>{{c.nombre}}</td>
+						<td>{{c.precioVenta}}</td>
+						<td>{{c.promocion.descuento}}</td>
+						<td>{{c.promocion.fechaInicial}}</td>
+						<td>{{c.promocion.fechaFinal}}</td>
+						
 					</tr>
 
 				</tbody>

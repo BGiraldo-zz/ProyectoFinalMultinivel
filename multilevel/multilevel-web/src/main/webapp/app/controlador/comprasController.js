@@ -81,7 +81,7 @@ app.controller("comprasController", function($scope, $http, httpservice,
 			$scope.acomprar.push({
 				cantidad : 1,
 				producto : pro,
-				precio : pro.precioVenta-(pro.promocion.descuento*100/pro.precioVenta)
+				precio : pro.precioVenta
 			});
 			
 		}
