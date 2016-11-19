@@ -45,7 +45,8 @@ app.controller("comprasController", function($scope, $http, httpservice,
 	//	});
 		
 		var pedidodto = {
-				pedido:$scope.acomprar
+				pedido:$scope.acomprar,
+				cedula: $sessionStorage.objeto.cedula
 		};
 		
 		$http({

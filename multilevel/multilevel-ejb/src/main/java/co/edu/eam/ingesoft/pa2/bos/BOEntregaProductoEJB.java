@@ -1,3 +1,4 @@
+
 package co.edu.eam.ingesoft.pa2.bos;
 
 import javax.ejb.LocalBean;
@@ -19,8 +20,8 @@ public class BOEntregaProductoEJB extends EJBGenerico<DetallePedido> implements 
 
 	@Override
 	public void crear(DetallePedido entidad) {
-		if (buscar(entidad.getPedido().getId()) != null) {
-			throw new ExcepcionFuncional("Ya existe una Entrega Producto con este codigo " + entidad.getPedido().getId());
+		if (buscar(entidad.getId()) != null) {
+			throw new ExcepcionFuncional("Ya existe una Entrega Producto con este codigo " + entidad.getId());
 		} else {
 			dao.crear(entidad);
 		}
@@ -34,19 +35,20 @@ public class BOEntregaProductoEJB extends EJBGenerico<DetallePedido> implements 
 
 	@Override
 	public void editar(DetallePedido entidad) {
-		if (buscar(entidad.getPedido().getId()) != null) {
+		if (buscar(entidad.getId()) != null) {
 			dao.editar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getPedido().getId());
+			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getId());
 		}
 	}
 
 	@Override
 	public void eliminar(DetallePedido entidad) {
-		if (buscar(entidad.getPedido().getId()) != null) {
+		if (buscar(entidad.getId()) != null) {
 			dao.borrar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getPedido().getId());
+			throw new ExcepcionFuncional("Aùn no existe una Entrega Producto con este codigo " + entidad.getId());
 		}
 	}
 }
+

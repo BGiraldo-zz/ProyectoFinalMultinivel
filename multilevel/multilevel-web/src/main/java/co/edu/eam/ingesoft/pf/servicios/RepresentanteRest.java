@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pf.servicios;
 
+
 import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -21,7 +22,7 @@ import co.edu.eam.ingesoft.pa2.dto.RespuestaDTO;
 import co.edu.eam.ingesoft.pa2.dto.pedidoDTO;
 import co.edu.eam.ingesoft.pa2.dto.pedidolDTO;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.DetallePedido;
-import co.edu.eam.ingesoft.pa2.negocio.entidades.DetallePedidoPK;
+
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Inventario;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Pedido;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Producto;
@@ -113,7 +114,7 @@ public class RepresentanteRest {
 			@FormParam(value = "cant") int cant) {
 
 		Calendar cal = Calendar.getInstance();
-		Date date = (Date) cal.getTime();
+		Date date = cal.getTime();
 		Representante re = reE.buscar(id);
 		Producto pro = proE.buscar(idpro);
 		long iid =  System.currentTimeMillis() / 10;
@@ -121,15 +122,9 @@ public class RepresentanteRest {
 		Pedido pe = new Pedido(idd, 'P', date, date, MetodoPagoENUM.CONTADO, pro.getPrecioVenta() * cant,
 				pro.getPuntos() * cant, re);
 		pedidoejb.crear(pe);
-		Pedido ped = pedidoejb.buscar(pe.getId());
 
-		DetallePedido de = new DetallePedido();
-		// pe, pro, cant, pro.getPuntos(), pro.getPrecioVenta()
-		de.setPedido(ped);
-		de.setProducto(pro);
-		de.setCantidad(cant);
-		de.setPuntos(pro.getPuntos());
-		de.setPrecioProducto(pro.getPrecioVenta());
+		int idd2 = (int) System.currentTimeMillis()/100;
+		DetallePedido de = new DetallePedido(idd2,pe, pro, cant, pro.getPrecioVenta());
 
 		depedejb.crear(de);
 
@@ -151,15 +146,19 @@ public class RepresentanteRest {
 		}
 
 		Calendar cal = Calendar.getInstance();
-		Date date = (Date) cal.getTime();
+		Date date = cal.getTime();
 		for (int i = 0; i < pedidollegue.getPedido().size(); i++) {
 
 			pedidoDTO.ItemDTO pee = pedidollegue.getPedido().get(i);
-			// Representante re = reE.buscar(pee.)
-			// Pedido pe = new Pedido(id,"P", date, null, MetodoPagoENUM.CONTADO
-			// , pee.getPrecio(),
-			// pee.getProducto().getPuntos()*pee.getCantidad(), representante)
-
+			 Representante re = reE.buscar(pedidollegue.getCedula());
+			 int idd2 = (int) System.currentTimeMillis()/100;
+			 Pedido pe = new Pedido(idd2, 'P', date, date, MetodoPagoENUM.CONTADO, pee.getProducto().getPrecioVenta() *pee.getCantidad(),
+						pee.getProducto().getPuntos() * pee.getCantidad(), re);
+				pedidoejb.crear(pe);
+				
+				int idd = (int) System.currentTimeMillis()/100;
+				DetallePedido de = new DetallePedido(idd,pe, pee.getProducto(), pee.getCantidad(), pee.getProducto().getPrecioVenta());
+				depedejb.crear(de);
 		}
 
 		return new RespuestaDTO(true);

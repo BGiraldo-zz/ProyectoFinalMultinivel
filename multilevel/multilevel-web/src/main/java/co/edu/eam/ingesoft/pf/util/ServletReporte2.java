@@ -2,7 +2,6 @@ package co.edu.eam.ingesoft.pf.util;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -12,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/reporte")
-public class ServletReporte extends HttpServlet {
-
+@WebServlet("/reporte2")
+public class ServletReporte2 extends HttpServlet {
+	
 	@Resource(lookup = "java:jboss/datasources/multinivelDS")
 	private javax.sql.DataSource ds;
 	

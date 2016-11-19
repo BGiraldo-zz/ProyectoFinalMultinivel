@@ -32,6 +32,15 @@ public class pedidoDTO {
 	}
 	
 	private List<ItemDTO> pedido;
+	private int cedula;
+
+	public int getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(int cedula) {
+		this.cedula = cedula;
+	}
 
 	public List<ItemDTO> getPedido() {
 		return pedido;

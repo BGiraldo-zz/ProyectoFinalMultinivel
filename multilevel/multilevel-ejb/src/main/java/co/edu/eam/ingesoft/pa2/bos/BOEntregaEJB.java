@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
@@ -7,6 +8,7 @@ import co.edu.eam.ingesoft.pa2.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.implementacion.InterfaceEJBRemote;
 import co.edu.eam.ingesoft.pa2.negocio.entidades.Pedido;
 
+@LocalBean
 @Stateless
 public class BOEntregaEJB extends EJBGenerico<Pedido> implements InterfaceEJBRemote<Pedido>{
 	@Override
