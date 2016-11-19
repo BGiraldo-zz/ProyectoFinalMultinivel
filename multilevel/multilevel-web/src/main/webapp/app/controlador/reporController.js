@@ -1,6 +1,8 @@
-app.controller("reporController", function($scope, $http, httpservice,
-		$window, $sessionStorage,$location) {
+app.controller("reporController", function($scope, httpservice,
+		$window, $sessionStorage) {
 
-	
+	$scope.abrirReporte = function() {
+		$window.location.href = "../reporte";
+	}
 	
 });

@@ -27,7 +27,7 @@ public class ServletReporte extends HttpServlet {
 				) {
 			ServletOutputStream salida=resp.getOutputStream();
 			GeneradorReporte generador=new GeneradorReporte(con);
-			byte[] byteStream=generador.generarReporte(null, "/reporte/reporte_mayores_sueldos_categoria.jrxml", "reporte_mayores_sueldos_categoria", salida);
+			byte[] byteStream=generador.generarReporte(null, "/reporte/tres-mas-afiliados.jrxml", "Reporte tres afiliados", salida);
 			resp.setHeader("Content-Disposition","filename=myReport.pdf");
 			resp.setContentType("application/pdf");
 			resp.setContentLength(byteStream.length);

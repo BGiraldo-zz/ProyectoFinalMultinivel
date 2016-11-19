@@ -12,15 +12,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="DETALLE_PEDIDOS")
-@IdClass(DetallePedidoPK.class)
 public class DetallePedido implements Serializable{
 
 	@Id
+	@Column(name="DETALLE_PEDIDO_ID",nullable=false, length = 12)
+	private int id;
+	
 	@ManyToOne
 	@JoinColumn(name="PEDIDO_ID", nullable=false)
 	private Pedido pedido;
 	
-	@Id
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false )
 	private Producto producto;
@@ -33,22 +34,38 @@ public class DetallePedido implements Serializable{
 	
 	@Column(name="PRECIO_PRODUCTO", length=12, nullable=false)
 	private double precioProducto;
-
+	
 	/**
 	 * @param id
-	 * @param entrega
+	 * @param pedido
 	 * @param producto
 	 * @param cantidad
 	 * @param puntos
 	 * @param precioProducto
 	 */
-	public DetallePedido(Pedido pedido, Producto producto, int cantidad, int puntos,
-			double precioProducto) {
+	public DetallePedido(int id, Pedido pedido, Producto producto, int cantidad, int puntos, double precioProducto) {
+		super();
+		this.id = id;
 		this.pedido = pedido;
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.puntos = puntos;
 		this.precioProducto = precioProducto;
+	}
+
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**

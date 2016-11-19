@@ -118,7 +118,8 @@ public class RepresentanteRest {
 		int idd = (int) System.currentTimeMillis()/10;
 		Pedido pe = new Pedido(idd,'P', date, date, MetodoPagoENUM.CONTADO, pro.getPrecioVenta()*cant, pro.getPuntos()*cant, re);
 		pedidoejb.crear(pe);
-		DetallePedido de = new DetallePedido(pe, pro, cant, pro.getPuntos(), pro.getPrecioVenta());
+		int idd2 = (int) System.currentTimeMillis()/100;
+		DetallePedido de = new DetallePedido(idd2,pe, pro, cant, pro.getPuntos(), pro.getPrecioVenta());
 		depedejb.crear(de);
 		
 		
