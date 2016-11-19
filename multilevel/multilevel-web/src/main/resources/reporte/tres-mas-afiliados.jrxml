@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tres-mas-afiliados" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f84a4df5-7d66-4fb6-8579-5d886ed93add">
+	<property name="ireport.zoom" value="1.0000000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT PE.PERSONA_ID,PE.NOMBRES,PE.APELLIDOS,(SELECT (COUNT(P.PERSONA_ID)-1)
+                                              FROM  PERSONAS P JOIN REPRESENTANTES R  ON P.PERSONA_ID = R.PERSONA_ID
+                                              START WITH P.NOMBRES=PE.NOMBRES CONNECT BY PRIOR P.PERSONA_ID = R.AFILIADOR_ID)CANTIDAD
+FROM PERSONAS PE JOIN REPRESENTANTES RE ON PE.PERSONA_ID = RE.PERSONA_ID
+WHERE RE.PERSONA_ID IN (SELECT REPR.AFILIADOR_ID FROM REPRESENTANTES REPR) AND RE.AFILIADOR_ID IS NULL
+GROUP BY PE.PERSONA_ID,PE.NOMBRES,PE.APELLIDOS ORDER BY CANTIDAD DESC]]>
+	</queryString>
+	<field name="PERSONA_ID" class="java.math.BigDecimal"/>
+	<field name="NOMBRES" class="java.lang.String"/>
+	<field name="APELLIDOS" class="java.lang.String"/>
+	<field name="CANTIDAD" class="java.math.BigDecimal"/>
+	<group name="Group1">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group3">
+		<groupHeader>
+			<band height="32">
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="0e4bc887-7154-4796-893d-f1de3a607d1d"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group4">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="c743686f-45e8-4037-a679-0fe1054e2ada"/>
+				<staticText>
+					<reportElement x="30" y="20" width="545" height="43" forecolor="#FFFFFF" uuid="71be7a5b-1839-4164-8a5d-5fabc8288709"/>
+					<textElement>
+						<font size="28" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ LOS TRES REPR. CON MAS AFILIADOS]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="135" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="130dfaa6-dd03-44ce-a535-820f861c6df6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="809e72a7-33f3-407d-bc6a-be9c00fb0529"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="135" y="0" width="135" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6ac1512f-b7ed-49f5-947e-29607a01b626"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="0" width="152" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="830a5e2e-aab6-4b32-851d-6687c75fe30b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="422" y="0" width="133" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="171b898f-393e-4744-8f55-960fa42bfe62"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AFILIADOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="55">
+			<textField>
+				<reportElement x="280" y="0" width="142" height="20" uuid="0b3c1a0e-60e5-4a50-9e1b-a8a05eed846a"/>
+				<textFieldExpression><![CDATA[$F{PERSONA_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="135" height="20" uuid="1fd3d510-1453-4961-a13b-1c83ac22aa04"/>
+				<textFieldExpression><![CDATA[$F{NOMBRES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="145" height="20" uuid="fa29e14e-8c3c-4ab8-a84c-01f3a23e84dd"/>
+				<textFieldExpression><![CDATA[$F{APELLIDOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="422" y="0" width="133" height="20" uuid="cf7ef0ce-40aa-41f6-947c-7bd440bad5f7"/>
+				<textFieldExpression><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="d7ee1395-578b-4b93-b97d-085ca7730dcb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="d7925e65-de31-4820-a391-e59c8863238b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="ad42df37-9e5e-49b2-8dd1-1a2f84c00d24"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

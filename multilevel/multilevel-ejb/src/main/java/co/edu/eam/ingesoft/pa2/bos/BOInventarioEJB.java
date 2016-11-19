@@ -1,5 +1,7 @@
 package co.edu.eam.ingesoft.pa2.bos;
 
+import java.io.InputStream;
+
 import javax.ejb.Stateless;
 
 import co.edu.eam.ingesoft.pa2.excepcion.ExcepcionFuncional;
@@ -18,8 +20,8 @@ public class BOInventarioEJB extends EJBGenerico<Inventario> implements Interfac
 
 	@Override
 	public void crear(Inventario entidad) {
-		if (buscar(entidad.getRepresentante().getId()) != null) {
-			throw new ExcepcionFuncional("Ya existe un Inventario con este codigo " + entidad.getRepresentante().getId());
+		if (buscar(entidad.getId()) != null) {
+			throw new ExcepcionFuncional("Ya existe un Inventario con este codigo " + entidad.getId());
 		} else {
 			dao.crear(entidad);
 		}
@@ -33,19 +35,19 @@ public class BOInventarioEJB extends EJBGenerico<Inventario> implements Interfac
 
 	@Override
 	public void editar(Inventario entidad) {
-		if (buscar(entidad.getRepresentante().getId()) != null) {
+		if (buscar(entidad.getId()) != null) {
 			dao.editar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe un Inventario con este codigo " + entidad.getRepresentante().getId());
+			throw new ExcepcionFuncional("Aùn no existe un Inventario con este codigo " + entidad.getId());
 		}
 	}
 
 	@Override
 	public void eliminar(Inventario entidad) {
-		if (buscar(entidad.getRepresentante().getId()) != null) {
+		if (buscar(entidad.getId()) != null) {
 			dao.borrar(entidad);
 		} else {
-			throw new ExcepcionFuncional("Aùn no existe un Inventario con este codigo " + entidad.getRepresentante().getId());
+			throw new ExcepcionFuncional("Aùn no existe un Inventario con este codigo " + entidad.getId());
 		}
 	}
 

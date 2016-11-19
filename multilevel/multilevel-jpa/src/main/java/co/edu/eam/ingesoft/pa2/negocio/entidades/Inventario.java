@@ -32,6 +32,9 @@ public class Inventario implements Serializable{
 	@JoinColumn(name="PRODUCTO_ID", nullable=false)
 	private Producto producto;
 	
+	@Column(name="PRECIO_BASE",nullable=true, length=10)
+	private double precioBase;
+	
 	@Column(name="CANTIDAD", length=12, nullable=false)
 	private double cantidad;
 	
@@ -52,8 +55,7 @@ public class Inventario implements Serializable{
 		this.precioBase = precioBase;
 	}
 
-	@Column(name="PRECIO_BASE",nullable=false, length=10)
-	private double precioBase;
+	
 	
 	
 

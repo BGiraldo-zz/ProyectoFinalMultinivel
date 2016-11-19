@@ -47,7 +47,7 @@ public class Pedido implements Serializable{
 	@Temporal(value=TemporalType.DATE)
 	private Date fechaPedido;
 	
-	@Column(name="FECHA_ENTREGA",nullable=false)
+	@Column(name="FECHA_ENTREGA",nullable=true)
 	@Temporal(value=TemporalType.DATE)
 	private Date fechaEntrega;
 	
