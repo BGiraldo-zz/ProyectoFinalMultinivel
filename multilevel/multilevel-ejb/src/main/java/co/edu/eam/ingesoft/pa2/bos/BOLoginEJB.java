@@ -59,10 +59,10 @@ public class BOLoginEJB extends EJBGenerico<Login> implements InterfaceEJBRemote
 	 */
 	public Login buscarLoginUserPass(String user, String pass) {
 		try {
-			Login login = dao.ejecutarQuery(Login.BUSCAR_POR_USER_PASS, user, pass);
+			Login login = dao.ejecutarQuery(Login.BUSCAR_POR_USUARIO_PASS, user, pass);
 			return login;
 		} catch (Exception nre) {
-			return null;
+			throw new ExcepcionFuncional("El usuario o la contraseña indicados son Incorrectos");
 		}
 	}
 

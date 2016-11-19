@@ -85,7 +85,6 @@ public class SesionBean implements Serializable {
 			user = null;
 			accesos = null;
 			roles = null;
-			Messages.addGlobalError("No hay ningun usuario con el login indicado");
 		}
 		return "/login.jsf?faces-redirect=true";
 	}

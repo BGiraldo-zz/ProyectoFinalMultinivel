@@ -5,6 +5,23 @@ body {
 	font-size: 14px;
 	padding: 0;
 	margin: 0;
+	background-image: url("../images/image0.jpg");
+}
+
+.imag {
+	position: absolute;
+	left: 20%;
+	top: 5%;
+}
+
+#formLogin {
+	position: absolute;
+	left: 30%;
+	top: 60%;
+}
+
+.forma{
+	background-color: #B9B9B9;
 }
 
 .header {
@@ -29,16 +46,15 @@ body {
 	margin-left: 35%;
 }
 
-#containerLog{
-	background-color: #B9B9B9;
-    height: 100x;
-    width: 210px;
-    position: absolute;
-    left: 40%; 
-    top : 40%;
-    
+#containerLog {
+	background-color: rgba(37, 32, 32, 0.43);
+	width: 500px;
+	position: absolute;
+	left: 32%;
+	top: 12%;
+	height: 500px;
 }
 
-.ali{
+.ali {
 	margin: 0 0 0 55%;
 }
