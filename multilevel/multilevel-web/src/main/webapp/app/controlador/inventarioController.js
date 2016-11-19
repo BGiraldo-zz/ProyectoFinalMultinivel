@@ -34,11 +34,11 @@ app.controller("inventarioController", function($scope, $http, httpservice,
 		});
 	}
 	
-	$scope.editarpro = function(idre,idpro,precio) {
+	$scope.editarpro = function(a,b) {
 		var xsrf = $.param({
-			idre : idre,
-			idpro : idpro,
-			precio:precio
+			re : $sessionStorage.objeto.cedula,
+			idpro :a,
+			precio:b
 		});
 		
 		$http({
@@ -64,10 +64,10 @@ app.controller("inventarioController", function($scope, $http, httpservice,
 	$scope.buscar=function(a) {
 		var encontro = false;
 		for (var int = 0; int < $scope.listaProductos.length; int++) {
-			console.log($scope.listaProductos[int][0]);
-			if($scope.listaProductos[int][0]==a){
+			console.log($scope.listaProductos[int].producto.id);
+			if($scope.listaProductos[int].producto.id==a){
 				encontro=true;
-				$scope.formData.precio = $sessionStorage.objt[int][2];
+				$scope.formData.precio = $sessionStorage.objt[int].precioBase;
 			}
 		}
 		if (encontro==false) {
@@ -78,20 +78,22 @@ app.controller("inventarioController", function($scope, $http, httpservice,
 	
 	$scope.editar=function(a,b) {
 		var encontro = false;
+		var proaedit = null;
 		for (var int = 0; int < $scope.listaProductos.length; int++) {
-			console.log($scope.listaProductos[int][0]);
-			if($scope.listaProductos[int][0]==a){
+			console.log($scope.listaProductos[int].producto.id);
+			if($scope.listaProductos[int].producto.id==a){
 				encontro=true;
-				$scope.formData.precio = $sessionStorage.objt[int][2];
+				
 			}
 		}
+		
 		if (encontro==false) {
 			alert('no existe un producto con ese id en este inventario');
 		}
 		if(encontro==true){
-			var precionuevo = b;
-			var id=a;
-			if (precionuevo<=0) {
+			
+			
+			if (b<=0) {
 				alert('no se puede colocar 0 en el precio')
 			}else{
 				$scope.editarpro(a,b);

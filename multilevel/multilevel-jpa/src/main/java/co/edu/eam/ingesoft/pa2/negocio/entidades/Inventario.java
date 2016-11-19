@@ -1,3 +1,5 @@
+
+
 package co.edu.eam.ingesoft.pa2.negocio.entidades;
 
 import java.io.Serializable;
@@ -5,7 +7,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="INVENTARIOS")
 @NamedQueries({@NamedQuery(name=Inventario.BUSCAR_INVENTARIO,
-query="SELECT i.producto.id,i.producto.nombre,i.cantidad,i.precioBase FROM Inventario i WHERE i.representante.id = ?1")})
+query="SELECT i FROM Inventario i WHERE i.representante.id=?1")})
 public class Inventario implements Serializable{
 
 	public static final String BUSCAR_INVENTARIO = "Inventario.buscarInventario";
@@ -31,13 +32,13 @@ public class Inventario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="PRODUCTO_ID", nullable=false)
 	private Producto producto;
-	
-	@Column(name="PRECIO_BASE",nullable=true, length=10)
-	private double precioBase;
+
 	
 	@Column(name="CANTIDAD", length=12, nullable=false)
 	private double cantidad;
 	
+	@Column(name="PRECIO_BASE",nullable=true, length=10)
+	private double precioBase;
 	
 	/**
 	 * @param id
@@ -136,7 +137,5 @@ public class Inventario implements Serializable{
 		this.producto = producto;
 	}
 	
-	
-	
-	
 }
+

@@ -10,8 +10,8 @@ app.config(function($routeProvider) {
 		controllerAs : "cur",
 		templateUrl : "vistas/cursos.html"
 	}).when("/Compras", {
-//		controller : "inventarioController",
-//		controllerAs : "cur0",
+	    controller : "comprasController",
+	    controllerAs : "cur0",
 		templateUrl : "vistas/Compras.html"
 	})
 	.when("/Promociones", {

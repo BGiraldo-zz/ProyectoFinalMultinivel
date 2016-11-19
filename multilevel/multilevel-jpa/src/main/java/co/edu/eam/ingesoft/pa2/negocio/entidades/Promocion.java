@@ -26,7 +26,7 @@ public class Promocion implements Serializable {
 	@Column(name="PROMOCION_ID", length=12, nullable=false)
 	private int id;
 	
-	@Column(name="DESCUENTO", length=3, nullable=false)
+	@Column(name="DESCUENTO", length=4, nullable=false)
 	private int descuento;
 	
 	@Column(name="FECHA_INICIAL", nullable=false)
